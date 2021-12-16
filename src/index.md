@@ -1,4 +1,4 @@
 ---
 title: Inicio
-layout: layout/redirect.njk
+layout: layout/default.njk
 ---

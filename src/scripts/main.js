@@ -23,3 +23,54 @@ ENABLE && (prodSearchContainer) && ReactDOM.render(<ProductSearch />, prodSearch
 // Instantiate API Swagger component
 const apiswaggerContainer = document.querySelector('#apiswagger-container');
 (apiswaggerContainer) && ReactDOM.render(<ApiDocSwagger/>, apiswaggerContainer);
+
+import { Swiper, Pagination, Autoplay} from "swiper";
+
+export default new class Hero {
+	constructor() {
+		this.hero = 'section-banner';
+		this.swiper = 'section-banner__swiper'
+		this.handler();
+	}
+
+	handler() {
+		const hero = document.querySelector(`.${this.hero}`)
+
+		if(!hero) return;
+		Swiper.use([Pagination, Autoplay])
+
+		const swiper = new Swiper(`.${this.swiper}`, {
+			slidesPerView: 1,
+			loop: true,
+			pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			autoplay: {
+				delay: 2500,
+				disableOnInteraction: false,
+			},
+		})
+	}
+}
+
+const swiper = new Swiper ('.section-news__swiper', {
+	slidesPerView: 1,
+	spaceBetween: 8,
+	autoplay: {
+		delay: 1500,
+		disableOnInteraction: false
+	},
+
+	breakpoints: {
+		360: {
+			slidesPerView: 2,
+			spaceBetween: 16,
+		},
+
+		640: {
+			slidesPerView: 'auto',
+			spaceBetween: 0
+		}
+	}
+})
