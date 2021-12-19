@@ -1,0 +1,44 @@
+---
+layout: layout/index.njk
+---
+<section class="section-news">
+    <div class="container mx-auto">
+        <div class="flex items-center mt-6 space-x-2 text-gray-600 news-landmark__pages">
+            <a href="/" class="underline outline-none focus:text-blue-800 active:text-blue-900 focus:no-underline focus:outline focus:outline-blue-800">Home</a>
+            <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.834 11.766a.8.8 0 0 1 0-1.132L8.47 8 5.834 5.366a.8.8 0 0 1 1.132-1.132l3.2 3.2a.8.8 0 0 1 0 1.132l-3.2 3.2a.8.8 0 0 1-1.132 0Z" fill="currentColor"/>
+            </svg>
+            <a href="/news.html" class="underline outline-none focus:text-blue-800 focus:outline focus:outline-blue-800 active:text-blue-900">News</a>
+            <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.834 11.766a.8.8 0 0 1 0-1.132L8.47 8 5.834 5.366a.8.8 0 0 1 1.132-1.132l3.2 3.2a.8.8 0 0 1 0 1.132l-3.2 3.2a.8.8 0 0 1-1.132 0Z" fill="currentColor"/>
+            </svg>
+            <a href="/news-eco.html" class="outline-none focus:text-blue-800 focus:outline focus:outline-blue-800 active:text-blue-900">Eco friendly products - new consumption trend!</a>
+        </div>
+        <div class="mx-auto xl:w-[83%]">
+            <div class="w-full my-6">
+                <img src="{{startImg}}" class="object-cover rounded w-full max-h-[482px] h-full" alt="{{title}}">
+            </div>
+            <div>
+                <h1 class="mb-3 text-2xl font-medium">{{h1}}</h1>
+                <p class="mb-6 text-gray-400 publication-date">{{date}}</p>
+            </div>
+            <div class="mt-6 prose text-gray-900 max-w-none">
+                {{ content | safe }}
+            </div>
+            <div class="flex flex-col-reverse mt-10 md:flex-row md:justify-between">
+                <button class="relative flex items-center justify-center h-12 px-10 mt-3 transition-all duration-300 rounded outline-none md:mt-0 active:bg-blue-900 focus:bg-blue-800 focus:outline focus:outline-blue-800 group justify-items-center ring-1 ring-blue-800 w-240">
+                    <svg class="mr-2 rotate-180" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.252 17.648a1.2 1.2 0 0 1 0-1.696L13.203 12 9.252 8.048a1.2 1.2 0 0 1 1.696-1.696l4.8 4.8a1.2 1.2 0 0 1 0 1.696l-4.8 4.8a1.2 1.2 0 0 1-1.696 0Z" class="text-blue-800 group-active:text-white group-focus:text-white" fill="currentColor"/>
+                    </svg>
+                    <a href="/pages/news.html" class="font-medium text-blue-800 transition-all duration-300 outline-none group-active:text-white focus:outline-none before:absolute group-focus:text-white before:inset-0" fill="currentColor">Previous Article</a>
+                </button>
+                <button class="relative flex items-center justify-center h-12 px-10 transition-all duration-300 rounded outline-none active:bg-blue-900 focus:bg-blue-800 focus:outline focus:outline-blue-800 group justify-items-center ring-1 ring-blue-800 w-240">
+                    <a href="/pages/news.html" class="font-medium text-blue-800 transition-all duration-300 outline-none group-active:text-white focus:outline-none before:absolute group-focus:text-white before:inset-0">Next Article</a>
+                    <svg class="ml-2" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.252 17.648a1.2 1.2 0 0 1 0-1.696L13.203 12 9.252 8.048a1.2 1.2 0 0 1 1.696-1.696l4.8 4.8a1.2 1.2 0 0 1 0 1.696l-4.8 4.8a1.2 1.2 0 0 1-1.696 0Z" class="text-blue-800 transition-all duration-300 group-active:text-white group-focus:text-white" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

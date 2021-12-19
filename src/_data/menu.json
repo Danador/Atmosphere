@@ -1,0 +1,25 @@
+{
+    "menu": [
+        {
+            "name" : "Home",
+            "link" : "/",
+            "onlyMobile": true
+        },
+        {
+            "name" : "Catalog",
+            "link" : "/catalog.html"
+        },
+        {
+            "name" : "News",
+            "link" : "/news/"
+        },
+        {
+            "name" : "Wish list",
+            "link" : "/"
+        },
+        {
+            "name" : "Contact us",
+            "link" : "/"
+        }
+    ]
+}

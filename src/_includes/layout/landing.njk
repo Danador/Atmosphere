@@ -33,28 +33,28 @@
     {% include './top-nav.njk' %}
 
     {# Hero #}
-    <div class="w-full flex mx-auto hero">
-      <div id="hero" class="mt-24 container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-        <div id="hero-label" class="flex flex-col w-full md:w-3/5 justify-center items-start text-center md:text-left">
+    <div class="flex w-full mx-auto hero">
+      <div id="hero" class="container flex flex-col flex-wrap items-center px-3 mx-auto mt-24 md:flex-row">
+        <div id="hero-label" class="flex flex-col items-start justify-center w-full text-center md:w-3/5 md:text-left">
           <span class="text-4xl text-white">{{ slogan }}<span>
           <div class="block my-2 ">
-            <a href="{{ hero_button_link | url}}" class="text-base text-white border-2 border-white hover:bg-primary p-2 rounded-lg no-underline hover:text-white">{{ site[locale]._t.contact_us }}</a>
+            <a href="{{ hero_button_link | url}}" class="p-2 text-base text-white no-underline border-2 border-white rounded-lg hover:bg-primary hover:text-white">{{ site[locale]._t.contact_us }}</a>
           </div>
         </div>
-        <div id="hero-visual" class="w-full md:w-2/5 py-6 text-center">
+        <div id="hero-visual" class="w-full py-6 text-center md:w-2/5">
           <span class="text-lg text-white">
-            <img class="w-2 md:w-2/5 z-50" src="{{ "/images/logo.png" | url }}">
+            <img class="z-50 w-2 md:w-2/5" src="{{ "/images/logo.png" | url }}">
           <span>
         </div>
       </div>
     </div>
 
-    <div class="container w-full flex flex-wrap mx-auto px-2 pt-8 ">
-      <div class="content w-full text-gray-700  p-2">
+    <div class="container flex flex-wrap w-full px-2 pt-8 mx-auto ">
+      <div class="w-full p-2 text-gray-700 content">
         {{ content | safe }}
       </div>
 
-      <div class="content w-full text-gray-700 bg-gray-100 shadow-md rounded-md p-2">
+      <div class="w-full p-2 text-gray-700 bg-gray-100 rounded-md shadow-md content">
         <a href="{{ "/en/pages/articles" | url}}"><h2 class="leading-normal break-words" >{{ site[locale]._t.articles }}</h2></a>
         {% for post in posts %}
           <article >
@@ -68,13 +68,11 @@
 
 
       {% if not (disableComments or false) %}
-      <div class="content w-full">
+      <div class="w-full content">
         <div id="disqus_thread"></div>
       </div>
       {% endif %}
     </div>
-
-    {% include './footer.njk' %}
 
     <script src="{{ '/assets/main.js' | url }}"></script>
 

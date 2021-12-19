@@ -1,0 +1,43 @@
+{
+    "product": [
+        {
+            "name" : "Wooden chest of drawers \"marble\"",
+            "link" : "#",
+            "price" : "127.56",
+            "oldPrice" : "183.99",
+            "image" : "/images/image/chess.png",
+            "new" : true,
+            "favorites" : false
+        },
+
+        {
+            "name" : "Wooden table clock",
+            "link" : "#",
+            "price" : "14.60",
+            "oldPrice" : "",
+            "image" : "/images/image/watch.png",
+            "new" : true,
+            "favorites" : false
+        },
+
+        {
+            "name" : "Pair of ceramic cups",
+            "link" : "#",
+            "price" : "14.99",
+            "oldPrice" : "",
+            "image" : "/images/image/cups.png",
+            "new" : true,
+            "favorites" : false
+        },
+
+        {
+            "name" : "Decorative baskets set",
+            "link" : "#",
+            "price" : "15.00",
+            "oldPrice" : "",
+            "image" : "/images/image/basckets.png",
+            "new" : false,
+            "favorites" : false
+        }
+    ]
+}

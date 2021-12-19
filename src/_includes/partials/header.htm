@@ -11,7 +11,7 @@
         </div>
 </section>
     <header class="sticky top-0 z-50 after:absolute border-b border-gray-200 after:inset-0 after:z-[-1] after:bg-white">
-        <div class="container mx-auto">
+        <div class="pl-2 pr-4 mx-auto md:container">
             <div x-data="{ openMenu: false , searchMenu: false }" class="flex items-center justify-between w-full section-header h-15">
                 <div class="flex items-center justify-center w-10 h-10 transition-colors duration-300 rounded-sm md:hidden hover:bg-gray-200">
                     <button @click="openMenu = !openMenu" class=" header__burger" :class="{'header__burger-open' : openMenu}">
@@ -36,22 +36,12 @@
                     </form>
                 </nav>
                 <nav :class="{'' : openMenu, '-translate-y-full md:-translate-y-0' : !openMenu}" class="z-[-1] border-t md:border-0 border-gray-200 md:flex top-full md:top-auto items-center header-menu transition-all duration-500 bg-white md:z-0 h-[calc(100vh-60px)] absolute md:static md:h-auto  inset-x-0">
-                    <ul class="grid lg:gap-x-15 header-list xl:gap-x-[88px] container md:max-w-full mx-auto section-header_menu md:grid-cols-4 text-gray-900">
-                        <li class="py-3 pl-4 pr-10 md:hidden">
-                            <a href="/" class="text-sm font-medium leading-4 text-blue-800">Home</a>
+                    <ul class="grid px-2 md:gap-x-10 lg:gap-x-15 header-list xl:gap-x-[88px] md md:max-w-full mx-auto section-header_menu md:grid-cols-4 text-gray-900">
+                        {% for item in menu.menu %}
+                        <li class="px-4 py-3 border-b border-gray-200 md:p-0 md:border-0 {% if item.onlyMobile %}md:hidden{% endif %}">
+                            <a href="{{ item.link }}" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">{{ item.name }}</a>
                         </li>
-                        <li class="py-3 pl-4 pr-10 border-t border-gray-200 md:p-0 md:border-0">
-                            <a href="/pages/catalog.html" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800">Catalog</a>
-                        </li>
-                        <li class="py-3 pl-4 pr-10 border-t border-gray-200 md:p-0 md:border-0">
-                            <a href="/pages/news.html" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800">News</a>
-                        </li>
-                        <li class="py-3 pl-4 pr-10 border-t border-gray-200 md:p-0 md:border-0">
-                            <a href="/" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800">Wish list</a>
-                        </li>
-                        <li class="py-3 pl-4 pr-10 border-t border-b border-gray-200 md:p-0 md:border-0">
-                            <a href="/" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">Contact us</a>
-                        </li>
+                        {% endfor %}
                     </ul>
                     <div class="container mx-auto mt-7 md:hidden">
                         <h2 class="text-lg px-0.5 font-medium leading-6 mb-4 text-gray-900 uppercase">my account</h2>
@@ -65,17 +55,20 @@
                     </div>
                 </nav>
                 <div class="grid items-center grid-cols-3 md:grid-cols-4 justify-items-center">
-                    <button @click="searchMenu = !searchMenu" class="flex items-center justify-center text-gray-900 transition-all duration-300 rounded outline-none search__button active:bg-gray-200 w-7 h-7 focus:outline-none md:hover:bg-gray-200 md:focus:text-blue-800 active:text-blue-800 md:hover:text-blue-700">
-                        <svg class="hidden md:block" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m24.5 24.5-7-7 7 7Zm-4.667-12.833a8.167 8.167 0 1 1-16.333 0 8.167 8.167 0 0 1 16.333 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <svg class="md:hidden" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m21 21-6-6 6 6Zm-4-11a7.001 7.001 0 0 1-11.95 4.95A7 7 0 1 1 17 10Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <button @click="searchMenu = !searchMenu" class="flex items-center justify-center text-gray-900 p-0.5 md:p-0 transition-all duration-300 rounded outline-none search__button active:bg-gray-200 w-7 h-7 focus:outline-none md:hover:bg-gray-200 md:focus:text-blue-800 active:text-blue-800 md:hover:text-blue-700">
+                        <svg class="w-full h-full md:stroke-2">
+                            <use xlink:href="/images/all-icons.svg#search"></use>
+                        </svg>
                     </button>
-                    <a href="/" class="flex items-center justify-center text-gray-900 transition-all duration-300 rounded outline-none active:bg-gray-200 w-7 h-7 focus:outline-none md:hover:bg-gray-200 md:focus:text-blue-800 active:text-blue-800 md:hover:text-blue-700">
-                        <svg class="hidden md:block" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.974 20.771A16.26 16.26 0 0 1 14 18.667c2.917 0 5.655.764 8.026 2.104M17.5 11.667a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm7 2.333a10.5 10.5 0 1 1-21 0 10.5 10.5 0 0 1 21 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <svg class="md:hidden" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.121 17.804A13.936 13.936 0 0 1 12 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <a href="/" class="flex items-center justify-center text-gray-900 p-0.5 md:p-0 transition-all duration-300 rounded outline-none active:bg-gray-200 w-7 h-7 focus:outline-none md:hover:bg-gray-200 md:focus:text-blue-800 active:text-blue-800 md:hover:text-blue-700">
+                        <svg class="w-full h-full md:stroke-2">
+                            <use xlink:href="/images/all-icons.svg#account"></use>
+                        </svg>
                     </a>
-                    <a href="/" class="flex items-center justify-center text-gray-900 transition-all duration-300 rounded outline-none active:bg-gray-200 w-7 h-7 focus:outline-none md:hover:bg-gray-200 md:focus:text-blue-800 active:text-blue-800 md:hover:text-blue-700">
-                        <svg class="hidden md:block" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.667 12.833V8.167a4.667 4.667 0 1 0-9.334 0v4.666m-3.5-2.333h16.334l1.166 14H4.667l1.166-14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        <svg class="md:hidden" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 11V7a4 4 0 1 0-8 0v4M5 9h14l1 12H4L5 9Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <a href="/" class="flex items-center justify-center text-gray-900 p-0.5 md:p-0 transition-all duration-300 rounded outline-none active:bg-gray-200 w-7 h-7 focus:outline-none md:hover:bg-gray-200 md:focus:text-blue-800 active:text-blue-800 md:hover:text-blue-700">
+                        <svg class="w-full h-full md:stroke-2">
+                            <use xlink:href="/images/all-icons.svg#cart"></use>
+                        </svg>
                     </a>
                     <a class="hidden font-medium text-blue-400 transition-all duration-300 outline-none md:block focus:outline-none hover:text-blue-500 whitespace-nowrap focus:text-blue-800 active:text-blue-800" href="/">Sign in</a>
                 </div>

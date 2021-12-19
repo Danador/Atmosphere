@@ -1,74 +1,42 @@
 <div class="container mx-auto text-gray-900">
     <h2 class="text-xl font-medium uppercase sm:text-3xl">popular products</h2>
     <div class="grid grid-cols-2 mt-10 gap-y-4 gap-x-2 lg:grid-cols-4 lg:gap-x-4">
-        <div class="grid w-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
-            <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
-                <div class="absolute inset-0 w-full h-full">
-                    <img class="object-cover w-full h-full mb-2 rounded-t" src="/assets/image/chess.png" alt="#">
+        {% for item in catalog.product %}
+            <div class="grid w-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+                <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+                    <div class="absolute inset-0 w-full h-full">
+                        <img class="object-cover w-full h-full mb-2 rounded-t" src="{{ item.image }}" alt="#">
+                    </div>
+                    {% if item.oldPrice %}
+                        <button class="absolute top-0 left-0 flex items-center justify-center transition-all duration-500 bg-red-700 rounded-tl rounded-br lg:group-focus-within:top-0 lg:group-focus-within:left-0 lg:group-hover:top-0 lg:group-hover:left-0 lg:-top-5 lg:-left-12 w-[52px] h-[22px] sm:w-15 sm:h-9">
+                            <p class="text-sm text-gray-100 sm:font-medium">Sale</p>
+                        </button>
+                    {% elif item.new %}
+                        <button class="absolute top-0 left-0 flex items-center justify-center transition-all duration-500 bg-green-900 rounded-tl rounded-br lg:group-focus-within:top-0 lg:group-focus-within:left-0 lg:group-hover:top-0 lg:group-hover:left-0 lg:-top-5 lg:-left-12 w-[52px] h-[22px] sm:w-15 sm:h-9">
+                            <p class="text-sm text-gray-100 sm:font-medium">New</p>
+                        </button>
+                    {% endif %}
+                    <button 
+                    x-data="{ favorites : {{ item.favorites }} }" 
+                    @click="favorites = !favorites" 
+                    class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+                        <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                        class="{% if item.favorites %}text-red-800{% else %}text-white{% endif %} transition-all" width="20" height="17"  style="fill:transparent" :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
                 </div>
-                <button class="absolute top-0 left-0 flex items-center justify-center transition-all duration-500 bg-red-700 rounded-tl rounded-br lg:group-focus-within:top-0 lg:group-focus-within:left-0 lg:group-hover:top-0 lg:group-hover:left-0 lg:-top-5 lg:-left-12 w-[52px] h-[22px] sm:w-15 sm:h-9">
-                    <p class="text-sm text-gray-100 sm:font-medium">Sale</p>
-                </button>
-                <button class="absolute top-0 right-0 flex items-center justify-center text-white transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
-                    <svg width="20" height="17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
-            </div>
-            <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
-                <a href="/" class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Wooden chest of drawers "marble"</a>
-                <div class="flex space-x-2 font-medium md:text-lg ">
-                    <p class="transition-all duration-300 group-active:text-blue-900">€127.56</p>
-                    <p class="text-gray-600 line-through transition-all duration-300 group-active:text-blue-900">€183.99</p>
+                <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+                    <a href="/" class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">{{ item.name }}</a>
+                    <div class="flex space-x-2 font-medium md:text-lg ">
+                        <p class="transition-all duration-300 group-active:text-blue-900">€{{ item.price }}</p>
+                        {% if item.oldPrice %}
+                            <p class="text-gray-600 line-through transition-all duration-300 group-active:text-blue-900">€{{item.oldPrice}}</p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="grid w-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
-            <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
-                <div class="absolute inset-0 w-full h-full">
-                    <img class="object-cover w-full h-full mb-2 rounded-t" src="/assets/image/watch.png" alt="#">
-                </div>
-                <button class="absolute top-0 left-0 flex items-center justify-center transition-all duration-500 bg-green-900 rounded-tl rounded-br lg:group-focus-within:top-0 lg:group-focus-within:left-0 lg:group-hover:top-0 lg:group-hover:left-0 lg:-top-5 lg:-left-12 w-[52px] h-[22px] sm:w-15 sm:h-9">
-                    <p class="text-sm text-gray-100 sm:font-medium">New</p>
-                </button>
-                <button class="absolute top-0 right-0 flex items-center justify-center text-white transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
-                    <svg width="20" height="17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
-            </div>
-            <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
-                <a href="/" class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Wooden table clock</a>
-                <p class="font-medium text-gray-900 transition-all duration-300 md:text-lg group-active:text-blue-900">€14.60</p>
-            </div>
-        </div>
-        <div class="grid w-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
-            <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
-                <div class="absolute inset-0 w-full h-full">
-                    <img class="object-cover w-full h-full mb-2 rounded-t" src="/assets/image/cups.png" alt="#">
-                </div>
-                <button class="absolute top-0 left-0 flex items-center justify-center transition-all duration-500 bg-green-900 rounded-tl rounded-br lg:group-focus-within:top-0 lg:group-focus-within:left-0 lg:group-hover:top-0 lg:group-hover:left-0 lg:-top-5 lg:-left-12 w-[52px] h-[22px] sm:w-15 sm:h-9">
-                    <p class="text-sm text-gray-100 sm:font-medium">New</p>
-                </button>
-                <button class="absolute top-0 right-0 flex items-center justify-center text-white transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
-                    <svg width="20" height="17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
-            </div>
-            <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
-                <a href="/" class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Pair of ceramic cups</a>
-                <p class="font-medium text-gray-900 transition-all duration-300 md:text-lg group-active:text-blue-900">€14.99</p>
-            </div>
-        </div>
-        <div class="grid w-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
-            <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
-                <div class="absolute inset-0 w-full h-full">
-                    <img class="object-cover w-full h-full mb-2 rounded-t" src="/assets/image/basckets.png" alt="#">
-                </div>
-                <button class="absolute top-0 right-0 flex items-center justify-center text-white transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
-                    <svg width="20" height="17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
-            </div>
-            <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
-                <a href="/" class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Decorative baskets set</a>
-                <p class="font-medium text-gray-900 transition-all duration-300 md:text-lg group-active:text-blue-900">€15.00</p>
-            </div>
-        </div>
+        {% endfor %}
     </div>
     <a href="/" class="mt-[52px] flex justify-center items-center focus:bg-blue-800 focus:text-white active:text-white active:bg-blue-900 active:ring-0 mx-auto w-[240px] h-12 ring-blue-800 rounded text-blue-800 font-medium ring-1 transition-all duration-300 hover:bg-blue-700 hover:text-white hover:ring-0 outline-none focus:outline-none">More produtcs</a>
 </div>

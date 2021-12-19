@@ -1,0 +1,39 @@
+{
+    "categories" : [
+        {
+            "name" : "Furniture",
+            "link" : "#",
+            "icon" : "furniture"
+        },
+
+        {
+            "name" : "Kitchenware",
+            "link" : "#",
+            "icon" : "kitchenware"
+        },
+
+        {
+            "name" : "Lighting",
+            "link" : "#",
+            "icon" : "lighting"
+        },
+
+        {
+            "name" : "Home decor",
+            "link" : "#",
+            "icon" : "home-decor"
+        },
+
+        {
+            "name" : "Home textiles",
+            "link" : "#",
+            "icon" : "home-textiles"
+        },
+
+        {
+            "name" : "Eco-friendly",
+            "link" : "#",
+            "icon" : "eco-friendly"
+        }
+    ]
+}

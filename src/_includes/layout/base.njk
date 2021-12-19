@@ -26,18 +26,16 @@
   <body>
     {% include './top-nav.njk' %}
 
-    <div class="container w-full flex flex-wrap mx-auto px-2 pt-8 lg:pt-16 mt-16">
-      <div class="content w-full">
+    <div class="container flex flex-wrap w-full px-2 pt-8 mx-auto mt-16 lg:pt-16">
+      <div class="w-full content">
         {{ content | safe }}
       </div>
       {% if not (disableComments or false) %}
-      <div class="content w-full">
+      <div class="w-full content">
         <div id="disqus_thread"></div>
       </div>
       {% endif %}
     </div>
-
-    {% include './footer.njk' %}
 
     <script src="{{ '/assets/main.js' | url }}"></script>
 

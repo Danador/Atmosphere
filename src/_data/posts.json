@@ -1,0 +1,115 @@
+{
+    "posts" : [
+        {
+            "text" : "What to expect from January 2021? What to expect from January 2021? What to expect from January 2021?",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/january.png",
+            "alt" : "calendar image-news"
+        },
+
+        {
+            "text" : "Christmas Sale! Hurry up to buy what you want!",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/christmas.png",
+            "alt" : "christmas image-news"
+        },
+
+        {
+            "text" : "Black Friday! Check out the best prices",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/black-friday.png",
+            "alt" : "pictures of cosmetics image-news"
+        },
+
+        {
+            "text" : "Eco friendly products - new consumption trend!",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/eco-products.png",
+            "alt" : "eco-products image-news"
+        },
+
+        {
+            "text" : "What do you know about Hygge lifestyle?",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/lifestyle.png",
+            "alt" : "lifestyle image-news"
+        },
+
+        {
+            "text" : "How to choose the perfect glass cups?",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/glasses.png",
+            "alt" : "glasses image-news"
+        },
+
+        {
+            "text" : "New brand of modern furniture, check it!",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/chair.png",
+            "alt" : "chair image-news"
+        },
+
+        {
+            "text" : "All the rules for the design of the workspace",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/table.png",
+            "alt" : "table image-news"
+        },
+
+        {
+            "text" : "New collection of ceramic home decor on our online store",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/flowers.png",
+            "alt" : "flowers image-news"
+        },
+
+        {
+            "text" : "10 interesting facts about handmade soy wax candles",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/candles.png",
+            "alt" : "candles image-news"
+        },
+
+        {
+            "text" : "New! Sets for tea ceremonies are already in the catalog of our online store",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/coffe.png",
+            "alt" : "coffe image-news"
+        },
+
+        {
+            "text" : "Simple interior design 2021",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/sofa.png",
+            "alt" : "sofa image-news"
+        },
+
+        {
+            "text" : "Attention! 20% discount on all kitchen utensils until December 1st",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/spoons.png",
+            "alt" : "spoons image-news"
+        },
+
+        {
+            "text" : "Choosing furniture for storage in the bathroom. Popular offers here!",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/cupboard.png",
+            "alt" : "cupboard image-news"
+        },
+
+        {
+            "text" : "Decor and interior items of the children's room that are worth paying attention to",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/globe.png",
+            "alt" : "globe image-news"
+        },
+
+        {
+            "text" : "We know you've been waiting for this: Big sale over 1000 items, discounts up to 60%",
+            "link" : "/news/posts/news-eco/",
+            "img" : "/images/image/sale.png",
+            "alt" : "sale image-news"
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+---
+title: Inicio
+layout: layout/index.njk
+---
+<section class="section-news">
+    <div class="container mx-auto">
+        <div class="flex items-center mt-6 space-x-2 text-gray-600 news-landmark__pages">
+            <a href="/" class="underline outline-none focus:text-blue-800 active:text-blue-900 focus:no-underline focus:outline focus:outline-blue-800">Home</a>
+            <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.834 11.766a.8.8 0 0 1 0-1.132L8.47 8 5.834 5.366a.8.8 0 0 1 1.132-1.132l3.2 3.2a.8.8 0 0 1 0 1.132l-3.2 3.2a.8.8 0 0 1-1.132 0Z" fill="currentColor"/>
+            </svg>
+            <a href="/news/" class="outline-none focus:text-blue-800 focus:outline focus:outline-blue-800 active:text-blue-900">News</a>
+        </div>
+        <div class="pt-3 mt-4 text-gray-900 news-articles">
+            <h1 class="text-3xl font-medium">News</h1>
+            <div class="grid w-full grid-cols-2 mt-10 sm:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-4 sm:gap-x-8 sm:gap-y-6 ">
+                {% for item in posts.posts %}
+                    <div class="relative grid group gap-y-2">
+                        <img class="w-full transition-all duration-500 rounded-lg outline-none group-active:opacity-80" src="{{ item.img }}" alt="{{ item.alt }}">
+                        <a href="{{ item.link }}" class="text-sm font-medium truncate transition-all duration-500 outline-none before:absolute before:inset-0 md:base md:group-hover:text-blue-800 focus:text-blue-800 group-active:text-blue-900/50 focus:outline-none">
+                            {{item.text}}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="grid items-center justify-center grid-cols-6 mx-auto text-gray-600 news-page_pagination gap-x-2 sm:gap-x-5 mt-7 max-w-max">
+                <button class="relative pagination-active__button w-6 sm:w-10 hover:bg-blue-700 h-6 sm:h-10 flex transition-all duration-300 justify-center items-center text-white bg-blue-800 rounded-sm active:bg-blue-900 group outline-none focus:rounded-[1px] focus:outline focus:outline-blue-800">
+                    <a href="/news/" class="font-medium outline-none before:absolute group-focus:outline-none before:inset-0">1</a>
+                </button>
+                <button class="transition-all duration-300 relative w-6 sm:w-10 h-6 sm:h-10 rounded-[1px] outline-none group focus:outline focus:outline-blue-800 active:text-blue-900 active:underline hover:text-blue-700 hover:underline">
+                    <a href="/news/" class="font-medium outline-none before:absolute group-focus:outline-none group-focus:text-blue-800 before:inset-0">2</a>
+                </button>
+                <button class="transition-all duration-300 relative w-6 sm:w-10 h-6 sm:h-10 rounded-[1px] outline-none group focus:outline focus:outline-blue-800 active:text-blue-900 active:underline hover:text-blue-700 hover:underline">
+                    <a href="/news/" class="font-medium outline-none before:absolute group-focus:outline-none group-focus:text-blue-800 before:inset-0">3</a>
+                </button>
+                <button class="transition-all duration-300 relative w-6 sm:w-10 h-6 sm:h-10 rounded-[1px] outline-none group focus:outline focus:outline-blue-800">
+                    <a href="/news/" class="font-medium outline-none before:absolute group-focus:outline-none group-focus:text-blue-800 before:inset-0">...</a>
+                </button>
+                <button class="transition-all duration-300 relative w-6 sm:w-10 h-6 sm:h-10 rounded-[1px] outline-none group focus:outline focus:outline-blue-800 active:text-blue-900 active:underline hover:text-blue-700 hover:underline">
+                    <a href="/news/" class="font-medium outline-none before:absolute group-focus:outline-none group-focus:text-blue-800 before:inset-0">12</a>
+                </button>
+                <button class="transition-all duration-300 relative rounded-[1px] outline-none group focus:ring-2 focus:ring-blue-800">
+                    <a href="/news/" class="before:absolute before:inset-0"></a>
+                    <svg class="sm:hidden" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 2a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v20a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2Z" fill="#E5E7EB"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.834 15.766a.8.8 0 0 1 0-1.132L12.47 12 9.834 9.366a.8.8 0 0 1 1.132-1.132l3.2 3.2a.8.8 0 0 1 0 1.132l-3.2 3.2a.8.8 0 0 1-1.132 0Z" class="text-gray-600 group-focus:text-blue-800 group-active:text-blue-900" fill="currentColor"/>
+                    </svg>
+                    <svg class="hidden sm:block" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="40" height="40" rx="2" fill="#E5E7EB"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M17.293 24.707C17.1056 24.5195 17.0002 24.2652 17.0002 24C17.0002 23.7349 17.1056 23.4806 17.293 23.293L20.586 20L17.293 16.707C17.1109 16.5184 17.0101 16.2658 17.0124 16.0036C17.0146 15.7414 17.1198 15.4906 17.3052 15.3052C17.4906 15.1198 17.7414 15.0146 18.0036 15.0124C18.2658 15.0101 18.5184 15.1109 18.707 15.293L22.707 19.293C22.8945 19.4806 22.9998 19.7349 22.9998 20C22.9998 20.2652 22.8945 20.5195 22.707 20.707L18.707 24.707C18.5195 24.8945 18.2652 24.9998 18 24.9998C17.7349 24.9998 17.4806 24.8945 17.293 24.707Z" class="text-gray-600 transition-colors duration-300 group-hover:text-blue-700 group-focus:text-blue-800 group-active:text-blue-900" fill="currentColor"/>
+                    </svg>                                
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

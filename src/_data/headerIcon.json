@@ -1,0 +1,9 @@
+{
+    "icon" : {
+        "name" : "searchbig",
+        "width" : "7",
+        "height" : "7",
+        "hidden" : true,
+        "block" : true
+    }
+}

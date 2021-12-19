@@ -1,0 +1,19 @@
+{
+    "payment":[
+        {
+            "name" : "visa"
+        },
+
+        {
+            "name" : "paypal"
+        },
+
+        {
+            "name" : "mastercard"
+        },
+
+        {
+            "name" : "maestro"
+        }
+    ]
+}
