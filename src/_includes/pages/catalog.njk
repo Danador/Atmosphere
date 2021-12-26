@@ -1,0 +1,108 @@
+---
+layout: layout/index.njk
+---
+{{ content|safe }}
+<section class="section-catalog">
+    <div class="container mx-auto">
+        {% include "partials/breadcrumbs.htm" %}
+        <div x-data="{ openCategory: false, openFilter: false}" class="mt-4">
+            <h1 class="mt-3 text-3xl font-medium text-gray-900 uppercase">{{h1}}</h1>
+            <div class="flex w-full mt-4 space-x-2 text-gray-600 sm:hidden h-11">
+                <button @click="openCategory = !openCategory" class="flex items-center w-1/2 h-full p-3 rounded ring-1 ring-gray-200">
+                    <svg class="mr-3" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 13.333c.916 0 1.666.75 1.666 1.667s-.75 1.667-1.666 1.667c-.917 0-1.667-.75-1.667-1.667s.75-1.667 1.667-1.667Zm0-5c.916 0 1.666.75 1.666 1.667s-.75 1.667-1.666 1.667c-.917 0-1.667-.75-1.667-1.667S9.083 8.333 10 8.333Zm0-5c.916 0 1.666.75 1.666 1.667S10.916 6.667 10 6.667c-.917 0-1.667-.75-1.667-1.667S9.083 3.333 10 3.333Zm-5 10c.916 0 1.666.75 1.666 1.667S5.916 16.667 5 16.667c-.917 0-1.667-.75-1.667-1.667s.75-1.667 1.667-1.667Zm0-5c.916 0 1.666.75 1.666 1.667S5.916 11.667 5 11.667c-.917 0-1.667-.75-1.667-1.667S4.083 8.333 5 8.333Zm0-5c.916 0 1.666.75 1.666 1.667S5.916 6.667 5 6.667c-.917 0-1.667-.75-1.667-1.667S4.083 3.333 5 3.333Zm10 10c.916 0 1.666.75 1.666 1.667s-.75 1.667-1.666 1.667c-.917 0-1.667-.75-1.667-1.667s.75-1.667 1.667-1.667Zm0-5c.916 0 1.666.75 1.666 1.667s-.75 1.667-1.666 1.667c-.917 0-1.667-.75-1.667-1.667s.75-1.667 1.667-1.667Zm0-5c.916 0 1.666.75 1.666 1.667S15.916 6.667 15 6.667c-.917 0-1.667-.75-1.667-1.667s.75-1.667 1.667-1.667Z" fill="#4B5563"/>
+                    </svg>
+                    <p>Category</p>
+                </button>
+                <button @click="openFilter = !openFilter" class="flex items-center w-1/2 h-full p-3 rounded ring-1 ring-gray-200">
+                    <svg class="mr-3" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="5" width="16" height="1.4" rx=".7" fill="#4B5563"/>
+                        <rect x="4" y="9" width="12" height="1.4" rx=".7" fill="#4B5563"/>
+                        <rect x="6" y="13" width="8" height="1.4" rx=".7" fill="#4B5563"/>
+                    </svg>
+                    <p>Filter</p>
+                </button>
+            </div>
+            <div class="flex items-center justify-between w-full mt-3 mb-5 space-x-2 text-gray-700 sm:justify-start sm:mt-4 sm:ml-auto sm:mr-0 sm:w-max">
+                <div class="flex">
+                    <p class="mr-2">Sort by:</p>
+                    <p>Price Low to High</p>
+                </div>
+                <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.293 7.293a1 1 0 0 1 1.414 0L10 10.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414Z" fill="#374151"/>
+                </svg>
+            </div>
+            <div class="flex justify-between mt-4">
+                {% include 'partials/left-menu.htm' %}
+                <div class="content-block w-full sm:w-[74%]">
+                    <div class="grid grid-cols-2 gap-y-4 gap-x-2 lg:grid-cols-3 lg:gap-x-4">
+                        {% for item in catalog %}
+                            <div class="grid w-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+                                <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+                                    <div class="absolute inset-0 w-full h-full">
+                                        <img class="object-cover w-full h-full mb-2 rounded-t" src="{{ item.image }}" alt="#">
+                                    </div>
+                                    {% if item.oldPrice %}
+                                        <button class="absolute top-0 left-0 flex items-center justify-center transition-all duration-500 bg-red-700 rounded-tl rounded-br lg:group-focus-within:top-0 lg:group-focus-within:left-0 lg:group-hover:top-0 lg:group-hover:left-0 lg:-top-5 lg:-left-12 w-[52px] h-[22px] sm:w-15 sm:h-9">
+                                            <p class="text-sm text-gray-100 sm:font-medium">Sale</p>
+                                        </button>
+                                    {% elif item.new %}
+                                        <button class="absolute top-0 left-0 flex items-center justify-center transition-all duration-500 bg-green-900 rounded-tl rounded-br lg:group-focus-within:top-0 lg:group-focus-within:left-0 lg:group-hover:top-0 lg:group-hover:left-0 lg:-top-5 lg:-left-12 w-[52px] h-[22px] sm:w-15 sm:h-9">
+                                            <p class="text-sm text-gray-100 sm:font-medium">New</p>
+                                        </button>
+                                    {% endif %}
+                                    <button 
+                                    x-data="{ favorites : {{ item.favorites }} }" 
+                                    @click="favorites = !favorites" 
+                                    class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+                                        <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                                        class="{% if item.favorites %}text-red-800{% else %}text-white{% endif %} transition-all" width="20" height="17"  style="fill:transparent" :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+                                    <a href="{{ item.link }}" class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">{{ item.name }}</a>
+                                    <div class="flex space-x-2 font-medium md:text-lg ">
+                                        <p class="transition-all duration-300 group-active:text-blue-900">€{{ item.price }}</p>
+                                        {% if item.oldPrice %}
+                                            <p class="text-gray-600 line-through transition-all duration-300 group-active:text-blue-900">€{{item.oldPrice}}</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="grid items-center justify-center grid-cols-6 mx-auto mt-10 text-gray-600 news-page_pagination gap-x-2 sm:gap-x-5 max-w-max">
+                        <button class="relative pagination-active__button w-6 sm:w-10 hover:bg-blue-700 h-6 sm:h-10 flex transition-all duration-300 justify-center items-center text-white bg-blue-800 rounded-sm active:bg-blue-900 group outline-none focus:rounded-[1px] focus:outline focus:outline-blue-800">
+                            <a href="/news.html" class="font-medium outline-none before:absolute group-focus:outline-none before:inset-0">1</a>
+                        </button>
+                        <button class="transition-all duration-300 relative w-6 sm:w-10 h-6 sm:h-10 rounded-[1px] outline-none group focus:outline focus:outline-blue-800 active:text-blue-900 active:underline hover:text-blue-700 hover:underline">
+                            <a href="/catalog_2.html" class="font-medium outline-none before:absolute group-focus:outline-none group-focus:text-blue-800 before:inset-0">2</a>
+                        </button>
+                        <button class="transition-all duration-300 relative w-6 sm:w-10 h-6 sm:h-10 rounded-[1px] outline-none group focus:outline focus:outline-blue-800 active:text-blue-900 active:underline hover:text-blue-700 hover:underline">
+                            <a href="/catalog_3.html" class="font-medium outline-none before:absolute group-focus:outline-none group-focus:text-blue-800 before:inset-0">3</a>
+                        </button>
+                        <button class="transition-all duration-300 relative w-6 sm:w-10 h-6 sm:h-10 rounded-[1px] outline-none group focus:outline focus:outline-blue-800">
+                            <a href="/catalog.html" class="font-medium outline-none before:absolute group-focus:outline-none group-focus:text-blue-800 before:inset-0">...</a>
+                        </button>
+                        <button class="transition-all duration-300 relative w-6 sm:w-10 h-6 sm:h-10 rounded-[1px] outline-none group focus:outline focus:outline-blue-800 active:text-blue-900 active:underline hover:text-blue-700 hover:underline">
+                            <a href="/catalog.html" class="font-medium outline-none before:absolute group-focus:outline-none group-focus:text-blue-800 before:inset-0">12</a>
+                        </button>
+                        <button class="transition-all duration-300 relative rounded-[1px] outline-none group focus:ring-2 focus:ring-blue-800">
+                            <a href="/catalog_2.html" class="before:absolute before:inset-0"></a>
+                            <svg class="sm:hidden" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 2a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v20a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2Z" fill="#E5E7EB"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.834 15.766a.8.8 0 0 1 0-1.132L12.47 12 9.834 9.366a.8.8 0 0 1 1.132-1.132l3.2 3.2a.8.8 0 0 1 0 1.132l-3.2 3.2a.8.8 0 0 1-1.132 0Z" class="text-gray-600 group-focus:text-blue-800 group-active:text-blue-900" fill="currentColor"/>
+                            </svg>
+                            <svg class="hidden sm:block" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="40" height="40" rx="2" fill="#E5E7EB"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M17.293 24.707C17.1056 24.5195 17.0002 24.2652 17.0002 24C17.0002 23.7349 17.1056 23.4806 17.293 23.293L20.586 20L17.293 16.707C17.1109 16.5184 17.0101 16.2658 17.0124 16.0036C17.0146 15.7414 17.1198 15.4906 17.3052 15.3052C17.4906 15.1198 17.7414 15.0146 18.0036 15.0124C18.2658 15.0101 18.5184 15.1109 18.707 15.293L22.707 19.293C22.8945 19.4806 22.9998 19.7349 22.9998 20C22.9998 20.2652 22.8945 20.5195 22.707 20.707L18.707 24.707C18.5195 24.8945 18.2652 24.9998 18 24.9998C17.7349 24.9998 17.4806 24.8945 17.293 24.707Z" class="text-gray-600 transition-colors duration-300 group-hover:text-blue-700 group-focus:text-blue-800 group-active:text-blue-900" fill="currentColor"/>
+                            </svg>                                
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

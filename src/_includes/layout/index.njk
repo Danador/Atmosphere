@@ -9,9 +9,9 @@
     <link rel="shortcut icon" href="/images/favicon/favicon.ico" type="image/x-icon">
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
-<body class="bg-gray-50">
+<body class="grid min-h-screen bg-gray-50 grid-areas-layout grid-cols-full grid-rows-layout">
     {% include 'partials/header.htm' %}
-    <main>
+    <main class="grid-in-main">
         {{ content | safe }}
     </main>
     {% include 'partials/footer.htm' %}

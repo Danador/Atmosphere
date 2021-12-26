@@ -1,6 +1,6 @@
 <section
         x-data="{ showBanner: true }"
-        class="overflow-hidden relative z-[51] md:z-0 transition-all duration-500 bg-gray-100"
+        class="grid-in-sale overflow-hidden relative z-[51] md:z-0 transition-all duration-500 bg-gray-100"
         :class="showBanner ? 'max-h-screen' : 'max-h-0'"
     >
         <div class="container flex items-center justify-between w-full mx-auto section-sale__block">
@@ -10,7 +10,7 @@
             </button>
         </div>
 </section>
-    <header class="sticky top-0 z-50 after:absolute border-b border-gray-200 after:inset-0 after:z-[-1] after:bg-white">
+    <header class="grid-in-header sticky top-0 z-50 after:absolute border-b border-gray-200 after:inset-0 after:z-[-1] after:bg-white">
         <div class="pl-2 pr-4 mx-auto md:container">
             <div x-data="{ openMenu: false , searchMenu: false }" class="flex items-center justify-between w-full section-header h-15">
                 <div class="flex items-center justify-center w-10 h-10 transition-colors duration-300 rounded-sm md:hidden hover:bg-gray-200">

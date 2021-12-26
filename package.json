@@ -16,6 +16,7 @@
         "@11ty/eleventy-plugin-syntaxhighlight": "^3.1.2",
         "@appbaseio/reactivesearch": "^3.22.0",
         "@elastic/elasticsearch": "^7.13.0",
+        "@savvywombat/tailwindcss-grid-areas": "^2.0.0",
         "alex": "^9.1.0",
         "algoliasearch": "^4.10.3",
         "autocomplete.js": "^0.38.0",

@@ -1,151 +1,151 @@
 {
-    "product": [
+    "catalog": [
         {
-            "name" : "Aroma candle",
-            "link" : "#",
-            "price" : "7.56",
-            "oldPrice" : "13.99",
-            "image" : "/images/image/aroma-candle.jpg",
+            "name" : "Oval hanging mirror",
+            "link" : "/catalog/categories/mirrors/products/oval-hanging-mirror/",
+            "price" : "74.56",
+            "oldPrice" : "113.99",
+            "image" : "/images/image/oval-mirror.jpeg",
             "new" : false,
             "favorites" : false
         },
 
         {
-            "name" : "Wooden table clock",
+            "name" : " Large simple mirror ",
             "link" : "#",
             "price" : "14.60",
             "oldPrice" : "",
-            "image" : "/images/image/watch.png",
-            "new" : true,
+            "image" : "/images/image/large-mirror.jpg",
+            "new" : false,
             "favorites" : false
         },
 
         {
-            "name" : "Pair of ceramic cups",
+            "name" : "Decorative mirror",
             "link" : "#",
             "price" : "14.99",
             "oldPrice" : "",
-            "image" : "/images/image/cups.png",
-            "new" : true,
-            "favorites" : false
-        },
-
-        {
-            "name" : "Decorative baskets set",
-            "link" : "#",
-            "price" : "15.00",
-            "oldPrice" : "",
-            "image" : "/images/image/basckets.png",
+            "image" : "/images/image/decorative-mirror.jpg",
             "new" : false,
             "favorites" : false
         },
 
         {
-            "name" : "Eco products set for hygiene",
+            "name" : "Backlit mirror",
+            "link" : "#",
+            "price" : "15.00",
+            "oldPrice" : "",
+            "image" : "/images/image/backlit-mirror.jpg",
+            "new" : false,
+            "favorites" : false
+        },
+
+        {
+            "name" : "Golden mirror",
             "link" : "#",
             "price" : "18.50",
             "oldPrice" : "",
-            "image" : "/images/image/eco-products.png",
+            "image" : "/images/image/golden-mirror.jpg",
             "new" : false,
             "favorites" : false
         },
 
         {
-            "name" : "Wooden table lamp",
+            "name" : "Mirror in a dark frame",
             "link" : "#",
             "price" : "19.99",
             "oldPrice" : "",
-            "image" : "/images/image/table-lamp.jpg",
+            "image" : "/images/image/mirror-dark-frame.jpg",
             "new" : false,
             "favorites" : false
         },
 
         {
-            "name" : "\"Emerald Dream\" Sofa",
+            "name" : "Table makeup mirror",
             "link" : "#",
-            "price" : "83.99",
-            "oldPrice" : "139.80",
-            "image" : "/images/image/banner-img/sofa.jpg",
+            "price" : "30.99",
+            "oldPrice" : "53.99",
+            "image" : "/images/image/table-makeup-mirror.jpg",
             "new" : false,
             "favorites" : false
         },
 
         {
-            "name" : "Set of linen towels",
+            "name" : "Antique mirrors",
             "link" : "#",
             "price" : "32.97",
             "oldPrice" : "",
-            "image" : "/images/image/linen-towels.jpg",
+            "image" : "/images/image/antique-mirrors.jpeg",
             "new" : false,
             "favorites" : false
         },
 
         {
-            "name" : "Large desktop wooden globe",
+            "name" : "Pair of oval bathroom mirrors",
             "link" : "#",
             "price" : "42.25",
             "oldPrice" : "",
-            "image" : "/images/image/wooden-globe.jpg",
+            "image" : "/images/image/oval-bathroom-mirrors.jpg",
             "new" : false,
             "favorites" : false
         },
 
         {
-            "name" : "Sewing and pattern kit",
+            "name" : "Large mirror with stand",
             "link" : "#",
-            "price" : "15.00",
+            "price" : "43.00",
             "oldPrice" : "",
-            "image" : "/images/image/sewing-pattern.jpg",
+            "image" : "/images/image/large-mirror-stand.jpg",
             "new" : false,
             "favorites" : false
         },
 
         {
-            "name" : "Compact eco-friendly cutlery set",
+            "name" : "Round mirror with wood trim",
             "link" : "#",
-            "price" : "2.50",
+            "price" : "52.50",
             "oldPrice" : "",
-            "image" : "/images/image/cutlery-set.jpg",
+            "image" : "/images/image/mirror-wood-trim.jpg",
             "new" : false,
             "favorites" : false
         },
 
         {
-            "name" : "Pair of decorative vases",
+            "name" : "Square black mirror",
             "link" : "#",
-            "price" : "30.99",
+            "price" : "57.99",
             "oldPrice" : "",
-            "image" : "/images/image/decorative-vases.jpg",
+            "image" : "/images/image/square-black-mirror.png",
             "new" : false,
             "favorites" : false
         },
 
         {
-            "name" : "Eco-friendly wooden tray",
+            "name" : "Round mirror in a wooden frame",
             "link" : "#",
-            "price" : "5.00",
+            "price" : "60.00",
             "oldPrice" : "",
-            "image" : "/images/image/wooden-tray.jpg",
+            "image" : "/images/image/mirror-wooden-frame.jpg",
             "new" : false,
             "favorites" : false
         },
 
         {
-            "name" : "Stylish designer saucepan",
+            "name" : "Huge round black mirror",
             "link" : "#",
-            "price" : "42.50",
+            "price" : "62.50",
             "oldPrice" : "",
-            "image" : "/images/image/saucepan.jpg",
+            "image" : "/images/image/round-black-mirror.jpg",
             "new" : false,
             "favorites" : false
         },
 
         {
-            "name" : "Tea set for 3 persons",
+            "name" : "Rectanguler mirror in frame",
             "link" : "#",
-            "price" : "43.99",
+            "price" : "69.99",
             "oldPrice" : "",
-            "image" : "/images/image/tea-set.jpg",
+            "image" : "/images/image/rectanguler-mirror-frame.jpg",
             "new" : false,
             "favorites" : false
         }

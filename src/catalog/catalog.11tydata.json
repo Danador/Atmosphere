@@ -1,0 +1,154 @@
+{
+    "layout" : "pages/catalog.njk",
+    "catalog": [
+        {
+            "name" : "Aroma candle",
+            "link" : "#",
+            "price" : "7.56",
+            "oldPrice" : "13.99",
+            "image" : "/images/image/aroma-candle.jpg",
+            "new" : false,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "Wooden table clock",
+            "link" : "#",
+            "price" : "14.60",
+            "oldPrice" : "",
+            "image" : "/images/image/watch.png",
+            "new" : true,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "Pair of ceramic cups",
+            "link" : "#",
+            "price" : "14.99",
+            "oldPrice" : "",
+            "image" : "/images/image/cups.png",
+            "new" : true,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "Decorative baskets set",
+            "link" : "#",
+            "price" : "15.00",
+            "oldPrice" : "",
+            "image" : "/images/image/basckets.png",
+            "new" : false,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "Eco products set for hygiene",
+            "link" : "#",
+            "price" : "18.50",
+            "oldPrice" : "",
+            "image" : "/images/image/eco-products.png",
+            "new" : false,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "Wooden table lamp",
+            "link" : "#",
+            "price" : "19.99",
+            "oldPrice" : "",
+            "image" : "/images/image/table-lamp.jpg",
+            "new" : false,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "\"Emerald Dream\" Sofa",
+            "link" : "#",
+            "price" : "83.99",
+            "oldPrice" : "139.80",
+            "image" : "/images/image/banner-img/sofa.jpg",
+            "new" : false,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "Set of linen towels",
+            "link" : "#",
+            "price" : "32.97",
+            "oldPrice" : "",
+            "image" : "/images/image/linen-towels.jpg",
+            "new" : false,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "Large desktop wooden globe",
+            "link" : "#",
+            "price" : "42.25",
+            "oldPrice" : "",
+            "image" : "/images/image/wooden-globe.jpg",
+            "new" : false,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "Sewing and pattern kit",
+            "link" : "#",
+            "price" : "15.00",
+            "oldPrice" : "",
+            "image" : "/images/image/sewing-pattern.jpg",
+            "new" : false,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "Compact eco-friendly cutlery set",
+            "link" : "#",
+            "price" : "2.50",
+            "oldPrice" : "",
+            "image" : "/images/image/cutlery-set.jpg",
+            "new" : false,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "Pair of decorative vases",
+            "link" : "#",
+            "price" : "30.99",
+            "oldPrice" : "",
+            "image" : "/images/image/decorative-vases.jpg",
+            "new" : false,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "Eco-friendly wooden tray",
+            "link" : "#",
+            "price" : "5.00",
+            "oldPrice" : "",
+            "image" : "/images/image/wooden-tray.jpg",
+            "new" : false,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "Stylish designer saucepan",
+            "link" : "#",
+            "price" : "42.50",
+            "oldPrice" : "",
+            "image" : "/images/image/saucepan.jpg",
+            "new" : false,
+            "favorites" : false
+        },
+    
+        {
+            "name" : "Tea set for 3 persons",
+            "link" : "#",
+            "price" : "43.99",
+            "oldPrice" : "",
+            "image" : "/images/image/tea-set.jpg",
+            "new" : false,
+            "favorites" : false
+        }
+    ]
+}

@@ -1,5 +1,5 @@
 {
-    "categories" : [
+    "categoriesIndex" : [
         {
             "name" : "Furniture",
             "link" : "#",
@@ -35,5 +35,53 @@
             "link" : "#",
             "icon" : "eco-friendly"
         }
+    ],
+
+    "categoriesCatalog" : [
+        {
+            "name" : "Furniture",
+            "link" : "#"
+        },
+
+        {
+            "name" : "Kitchenware",
+            "link" : "#"
+        },
+
+        {
+            "name" : "Lighting",
+            "link" : "#"
+        },
+
+        {
+            "name" : "Home decor",
+            "link" : "#"
+        },
+
+        {
+            "name" : "Home textiles",
+            "link" : "#"
+        },
+
+        {
+            "name" : "Eco-friendly",
+            "link" : "#"
+        },
+
+        {
+            "name" : "Mirrors",
+            "link" : "/catalog/categories/mirrors/"
+        },
+
+        {
+            "name" : "Plants",
+            "link" : "#"
+        },
+
+        {
+            "name" : "Storage",
+            "link" : "#"
+        }
+
     ]
 }

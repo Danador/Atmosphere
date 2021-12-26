@@ -1,0 +1,396 @@
+<div class="left-menu sm:w-[21%]">
+    <div class="categories-menu container sm:p-0 fixed top-0 left-0 z-[100] w-full h-full sm:h-auto py-8 text-gray-900 transition-all duration-500 -translate-y-full bg-gray-50 sm:static sm:translate-y-0 sm:bg-transparent"
+    :class="{'' : openCategory, '-translate-y-full sm:translate-y-0' : !openCategory}"
+    >
+        <div class="flex justify-between w-full">
+            <h2 class="text-xl font-medium text-gray-900">Categories </h2>
+            <button class="sm:hidden" @click="openCategory = false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 6L18 18M6 18L18 6L6 18Z" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg> 
+            </button>
+        </div>
+        <ul class="grid mt-3 text-blue-800 gap-y-3">
+            {% for item in collections.categories %}
+                <li class="relative flex items-center w-full h-12 bg-white rounded-sm sm:h-auto group ring-1 active:ring-blue-800 ring-gray-200 sm:ring-0 sm:bg-transparent">
+                    <div class="flex items-center justify-center w-12 h-12 bg-gray-200 sm:hidden group-active:bg-blue-800">
+                        <svg class="w-6 h-6 text-blue-800 group-active:text-white">
+                            <use xlink:href="/images/all-icons.svg#{{ item.data.icon }}"></use>
+                        </svg>
+                    </div>
+                    <a href="{{ item.url | url }}" class="p-4 font-medium text-blue-800 outline-none sm:p-0 group-active:text-blue-900 before:absolute before:inset-0 hover:underline focus:outline-dotted focus:outline-blue-800 hover:text-blue-700 active:text-blue-900 active:underline active:outline-none">{{ item.data.anchor }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="container overflow-y-auto sm:mt-7 sm:p-0 fixed top-0 left-0 z-[100] w-full h-full sm:h-auto py-8 text-gray-900 transition-all duration-500 -translate-y-full bg-gray-50 sm:static sm:translate-y-0 sm:bg-transparent"
+    :class="{'' : openFilter, '-translate-y-full sm:translate-y-0' : !openFilter}"
+    >
+        <div class="flex justify-between w-full">
+            <h2 class="text-xl font-medium text-gray-900">Filters</h2>
+            <button class="sm:hidden" @click="openFilter = false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 6L18 18M6 18L18 6L6 18Z" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg> 
+            </button>
+        </div>
+        <button class="flex my-5 ml-auto mr-0 w-max sm:hidden">
+            <p class="text-gray-600 underline">Reset all</p>
+        </button>
+        <ul class="grid -mx-4 sm:m-0">
+            <li x-data="{ open: false}" class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button 
+                            @click="open = !open"  
+                            class="flex items-center justify-between w-full price__button" 
+                    >
+                        <p class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Price</p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}" class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div 
+                        class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                        :class="{'max-h-screen' : open, 'max-h-0 invisible opacity-0' : !open}"
+                    >
+                        <div class="flex justify-between w-full">
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>min</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>max</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                        </div>
+                        <div class="flex items-center mt-4">
+                            <label class="relative flex w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
+                            </label>
+                            <p class="ml-2 text-xs text-gray-600 md:text-sm lg:text-base">Show only discount products</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li x-data="{ open: false}"  class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button 
+                            @click="open = !open"  
+                            class="flex items-center justify-between w-full width__button"
+                    >
+                        <p  :class="{'text-gray-900' : open}" class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Width</p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}" class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div 
+                        class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                        :class="{'max-h-screen' : open, 'max-h-0 invisible opacity-0' : !open}"
+                    >
+                        <div class="flex justify-between w-full">
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>min</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>max</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li x-data="{ open: false}" class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button 
+                            @click="open = !open"  
+                            class="flex items-center justify-between w-full height__button"
+                    >
+                        <p  :class="{'text-gray-900' : open}" class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Height</p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}" class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div 
+                        class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                        :class="{'max-h-screen' : open, 'max-h-0 invisible opacity-0' : !open}"
+                    >
+                        <div class="flex justify-between w-full">
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>min</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>max</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li x-data="{ open: false}" class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button 
+                            @click="open = !open" 
+                            class="flex items-center justify-between w-full depth__button"
+                    >
+                        <p  :class="{'text-gray-900' : open}" class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Depth</p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}" class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div 
+                        class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                        :class="{'max-h-screen' : open, 'max-h-0 invisible opacity-0' : !open}"
+                    >
+                        <div class="flex justify-between w-full">
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>min</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>max</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li x-data="{ open: false}" class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button 
+                            @click="open = !open" 
+                            class="flex items-center justify-between w-full weight__button"
+                    >
+                        <p  :class="{'text-gray-900' : open}" class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Weight</p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}" class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div 
+                            class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                            :class="{'max-h-screen' : open, 'max-h-0 invisible opacity-0' : !open}"
+                        >
+                            <div class="flex justify-between w-full">
+                                <label class=" text-gray-600 w-[48%]">
+                                    <p>min</p>
+                                    <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                                </label>
+                                <label class=" text-gray-600 w-[48%]">
+                                    <p>max</p>
+                                    <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                                </label>
+                            </div>
+                    </div>
+                </div>
+            </li>
+            <li x-data="{ open: false}" class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button 
+                    @click="open = !open"  
+                    class="flex items-center justify-between w-full materials__button"
+                    >
+                        <p  :class="{'text-gray-900' : open}" class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Materials</p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}" class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div 
+                        class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                        :class="{'max-h-screen' : open, 'max-h-0 invisible opacity-0' : !open}"
+                    >
+                        <div class="grid mt-4 gap-y-4">
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Glass</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Metal</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Aluminium</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Wood</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Plastic</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Fabric</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Cotton</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Polyester</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Wool</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li x-data="{ open: false}" class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button 
+                            @click="open = !open"  
+                            class="flex items-center justify-between w-full colors__button"
+                    >
+                        <p  :class="{'text-gray-900' : open}" class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Colors</p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}" class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div 
+                        class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                        :class="{'max-h-screen' : open , 'max-h-0 invisible opacity-0' : !open }"
+                    >
+                        <div class="grid mt-3 text-xs grid-cols-[repeat(auto-fit,minmax(36px,1fr))] gap-x-3 gap-y-4">
+                            <label class="relative h-14 w-9 group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="flex items-center justify-center text-white transition-all rounded cursor-pointer peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 bg-white/40 group-hover:shadow-md h-9 w-9 ring-1 ring-gray-300 peer-checked:text-black">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <p class="absolute bottom-0 text-gray-600 -translate-x-1/2 left-1/2 peer-checked:text-gray-900">White</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="flex items-center justify-center text-gray-300 transition-all bg-gray-300 rounded cursor-pointer peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 peer-checked:text-white group-hover:shadow-md h-9 w-9 ring-1 ring-gray-300">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Gray</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="flex items-center justify-center text-black transition-all bg-black rounded cursor-pointer peer-checked:text-white peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 group-hover:shadow-md h-9 w-9 ring-1 ring-black">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Black</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="flex items-center justify-center text-purple-900 transition-all bg-purple-900 rounded cursor-pointer peer-checked:text-white peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 group-hover:shadow-md h-9 w-9 ring-1 ring-purple-900">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Purple</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="flex items-center justify-center text-blue-900 transition-all bg-blue-900 rounded cursor-pointer peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-8000 group-hover:shadow-md h-9 peer-checked:text-white w-9 ring-1 ring-blue-900">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Blue</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="flex items-center justify-center text-yellow-300 transition-all bg-yellow-300 rounded cursor-pointer peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 group-hover:shadow-md h-9 w-9 peer-checked:text-white ring-1 ring-yellow-300">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Blue</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="flex items-center justify-center text-yellow-600 transition-all bg-yellow-600 rounded cursor-pointer peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 group-hover:shadow-md peer-checked:text-white h-9 w-9 ring-1 ring-yellow-600">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Orange</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="flex items-center justify-center text-red-700 transition-all bg-red-700 rounded cursor-pointer peer-checked:text-white peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 group-hover:shadow-md h-9 w-9 ring-1 ring-red-700">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Red</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span class="flex items-center justify-center text-yellow-900 transition-all bg-yellow-900 rounded cursor-pointer peer-checked:text-white peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 group-hover:shadow-md h-9 w-9 ring-1 ring-yellow-900">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Brown</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

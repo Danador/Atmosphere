@@ -1,0 +1,59 @@
+{% set maxReviews = 3 %}
+{% import "partials/rating.njk" as elRating %}
+{% macro reviewItem(img, name, surname, date, rating, recommended, review) %}
+    <div>
+        <div class="flex items-center space-x-4">
+            <img class="object-cover w-12 h-12 rounded-full" src="{{ img }}" alt="{{ name }} {{ surname }}">
+            <div class="grid gap-y-2">
+                <div class="grid grid-flow-col gap-x-4">
+                    <p class="font-medium text-gray-900">{{ name }} {{ surname }}</p>
+                    <p class="text-gray-600">{{ date }}</p>
+                </div>
+                {{ elRating.rating(rating) }}
+            </div>
+        </div>
+        {% if recommended==true %}
+            <div class="font-medium text-gray-900">
+                {{ name }} recommended this item
+            </div>
+        {% endif %}
+        <div class="mt-1">
+            {{ review }}
+        </div>
+    </div>
+{% endmacro %}
+{% macro reviews(reviews) %}
+<div class="flex justify-between w-full mt-10">
+    <div class="w-[54%]">
+        <h2 class="mb-5 text-2xl font-medium uppercase">Customer Reviews</h2>
+        <div class="grid gap-y-5">
+            {% for item in reviews.slice(0, maxReviews) %}
+                {{ reviewItem(item.img, item.name, item.surname, item.date, item.rating, item.recommended, item.review) }}
+            {% endfor %}
+        </div>
+        {% if reviews.length > maxReviews %}
+        <button class="flex items-end h-6 text-blue-800">
+            <span>Read more reviews</span>
+            <svg class="w-4 h-4 mb-0.5">
+                <use xlink:href="/images/all-icons.svg#arrow-right"></use>
+            </svg>
+        </button>
+        {% endif %}
+    </div>
+    <div class="w-[33%]"></div>
+</div>
+{% endmacro %}
+
+{% macro reviewModal(reviews) %}
+<div class="flex justify-between w-full mt-10">
+    <div class="w-[54%]">
+        <h2 class="mb-5 text-2xl font-medium uppercase">Customer Reviews</h2>
+        <div class="grid gap-y-5">
+            {% for item in reviews %}
+                {{ reviewItem(item.img, item.name, item.surname, item.date, item.rating, item.recommended, item.review) }}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="w-[33%]"></div>
+</div>
+{% endmacro %}

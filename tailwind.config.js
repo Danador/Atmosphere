@@ -5,6 +5,7 @@ module.exports = {
   darkMode: 'class', // or 'media' or 'class'
   plugins: [
     require('@tailwindcss/typography'),
+    require('@savvywombat/tailwindcss-grid-areas')
   ],
   variants: {
     extend: {},
@@ -24,6 +25,14 @@ module.exports = {
         md: '2rem',
         '2xl': '80px',
       },
+    },
+    gridTemplateAreas: {
+      'layout': [
+        'sale',
+        'header',
+        'main',
+        'footer',
+      ],
     },
     extend: {
       typography: (theme) => ({
@@ -85,7 +94,8 @@ module.exports = {
         'a1': 'auto 1fr',
         '1a': '1fr auto',
         'a1a': 'auto 1fr auto',
-        full: '100%'
+        full: '100%',
+        'layout': 'auto auto 1fr auto',
       },
       colors: {
         transparent: 'transparent',

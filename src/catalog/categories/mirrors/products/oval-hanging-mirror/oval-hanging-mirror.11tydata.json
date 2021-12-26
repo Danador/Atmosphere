@@ -1,0 +1,109 @@
+{
+    "name" : "Oval hanging mirror",
+    "averageRating" : "3.7",
+    "rating" : "118",
+    "price" : "74.56",
+    "oldPrice" : "113.99",
+    "new" : false,
+    "favorites" : false,
+    "height" : "39",
+    "width" : "10",
+    "depth" : "2",
+    "weight" : "1,5",
+
+    "imagesProduct" : [
+        {
+            "path" : "/images/image/oval-mirror.jpeg"
+        },
+
+        {
+            "path" : "/images/image/oval-mirror.jpeg"
+        },
+
+        {
+            "path" : "/images/image/oval-mirror.jpeg"
+        },
+
+        {
+            "path" : "/images/image/oval-mirror.jpeg"
+        },
+
+        {
+            "path" : "/images/image/oval-mirror.jpeg"
+        },
+
+        {
+            "path" : "/images/image/oval-mirror.jpeg"
+        },
+
+        {
+            "path" : "/images/image/oval-mirror.jpeg"
+        }
+    ],
+
+    "colors" : [
+        {
+            "name" : "Silver",
+            "color" : "/images/background/silver.jpg"
+        },
+
+        {
+            "name" : "Gold",
+            "color" : "/images/background/gold.jpg"
+        }
+    ],
+
+    "materials": [
+        {
+            "nameMaterial" : "Iron",
+            "percentageMaterial" : "100"
+        },
+
+        {
+            "nameMaterial" : "Brass",
+            "percentageMaterial" : "100"
+        }
+    ],
+
+    "reviews" : [
+        {
+            "name" : "Жопий",
+            "surname" : "Иванович",
+            "img" : "https://thispersondoesnotexist.com/image",
+            "date" : "23.16.2632",
+            "rating" : "5",
+            "recommended" : true,
+            "review" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi."
+        },
+
+        {
+            "name" : "Шлюшка",
+            "surname" : "Вадимовна",
+            "img" : "https://thispersondoesnotexist.com/image",
+            "date" : "09.12.1356",
+            "rating" : "2",
+            "recommended" : false,
+            "review" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi."
+        },
+
+        {
+            "name" : "Шалава",
+            "surname" : "Тупкина",
+            "img" : "https://thispersondoesnotexist.com/image",
+            "date" : "09.12.1353",
+            "rating" : "3",
+            "recommended" : false,
+            "review" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi."
+        },
+
+        {
+            "name" : "Гадя",
+            "surname" : "Петрович",
+            "img" : "https://thispersondoesnotexist.com/image",
+            "date" : "03.01.998",
+            "rating" : "3",
+            "recommended" : false,
+            "review" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi."
+        }
+    ]
+}
