@@ -1,8 +1,9 @@
 ---
 layout: layout/index.njk
 ---
-{% import "partials/rating.njk" as elRating %}
-{% import "partials/reviews.njk" as elReviews %}
+{% import "partials/rating.njk" as elStar %}
+{% import "partials/customer-reviews.njk" as elReviews %}
+{% import "partials/customer-ratings.njk" as elRatings %}
 <section class="section-catalog">
     <div class="container mx-auto">
         <div class="flex items-center mt-6 space-x-2 text-gray-600 news-landmark__pages">
@@ -46,7 +47,7 @@ layout: layout/index.njk
                 <div class="w-[40%]">
                         <h1 class="text-3xl font-medium uppercase">{{ name }}</h1>
                         <div class="flex mt-3 space-x-4"> 
-                            {{ elRating.rating(averageRating) }}
+                            {{ elStar.rating(averageRating) }}
                             <div class="grid grid-flow-col text-gray-600 gap-x-4">
                                 <p>({{ averageRating }})</p>
                                 <p class="underline">{{ rating }} ratings</p>
@@ -72,6 +73,35 @@ layout: layout/index.njk
                                     </label>
                                 {% endfor %}
                             </div>
+                        </div>
+                        <div class="grid grid-flow-col mt-12 gap-x-2 w-max">
+                            <button class="flex items-center justify-center bg-gray-200 rounded-sm w-9 h-9">
+                                <svg class="w-6 h-6 text-gray-600">
+                                    <use xlink:href="/images/all-icons.svg#minus"></use>
+                                </svg>
+                            </button>
+                            <label class="relative text-center w-max group">
+                                <input type="number" step="1" min="1" value="1" class="text-center border border-gray-300 rounded-sm peer w-9 h-9">
+                            </label>
+                            <button class="flex items-center justify-center bg-blue-800 rounded-sm w-9 h-9">
+                                <svg class="w-6 h-6 text-white">
+                                    <use xlink:href="/images/all-icons.svg#plus"></use>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="grid grid-flow-col mt-10 w-max gap-x-2">
+                            <button class="relative flex items-center justify-center h-12 text-white transition-colors duration-300 bg-blue-800 rounded outline-none hover:bg-blue-700 focus:outline focus:outline-blue-800 active:bg-blue-900 focus:outline-offset-1 w-60">
+                                <a href="#" class="before:absolute before:inset-0">Add to cart</a>
+                            </button>
+                            <button 
+                            x-data="{ favorites : {{ item.favorites }} }" 
+                            @click="favorites = !favorites"
+                            class="flex items-center justify-center w-12 h-12 transition-all duration-500 rounded bg-gray-400/40">
+                                <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                                class="{% if item.favorites %}text-red-800{% else %}text-white{% endif %} transition-all" width="20" height="17"  style="fill:transparent" :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
                         </div>
                  </div>
             </div>
@@ -144,10 +174,13 @@ layout: layout/index.njk
                     </div>
                 </div>
             </div>
-            {{ elReviews.reviews(reviews) }}
+            <div class="flex justify-between w-full mt-10">
+                {{ elReviews.reviews(reviews) }}
+                {{ elRatings.rating(averageRating, rating) }}
+            </div>
+            <button class="flex items-center justify-center h-12 mt-10 font-medium text-blue-800 transition-colors duration-300 rounded outline-none hover:text-white hover:bg-blue-700 active:ring-blue-900 active:text-white active:bg-blue-900 active:outline-none hover:ring-blue-700 focus:outline focus:outline-blue-800 focus:bg-blue-800 focus:text-white focus:outline-offset-2 w-60 ring-1 ring-blue-800">
+                <a href="#" class="before:absolute before:inset-0">Write a review</a>
+            </button>
         </div>
     </div>
 </section>
-
-{{ elReviews.reviewsModal(reviews) }}
-{{ elReviews.reviewsForm(img, name, fds) }}

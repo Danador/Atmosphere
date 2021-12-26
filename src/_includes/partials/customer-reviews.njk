@@ -22,8 +22,8 @@
         </div>
     </div>
 {% endmacro %}
+
 {% macro reviews(reviews) %}
-<div class="flex justify-between w-full mt-10">
     <div class="w-[54%]">
         <h2 class="mb-5 text-2xl font-medium uppercase">Customer Reviews</h2>
         <div class="grid gap-y-5">
@@ -32,16 +32,22 @@
             {% endfor %}
         </div>
         {% if reviews.length > maxReviews %}
-        <button class="flex items-end h-6 text-blue-800">
-            <span>Read more reviews</span>
-            <svg class="w-4 h-4 mb-0.5">
-                <use xlink:href="/images/all-icons.svg#arrow-right"></use>
-            </svg>
-        </button>
+            <button @click="allReviews = !allReviews" class="flex items-end h-6 text-blue-800">
+                <span>Read more reviews</span>
+                <svg class="w-4 h-4 mb-0.5">
+                    <use xlink:href="/images/all-icons.svg#arrow-right"></use>
+                </svg>
+            </button>
         {% endif %}
+        <div :class="{ 'invisible opacity-0' : !allReviews}" class="transition-all fixed inset-0 invisible opacity-0 hidden z-[99] md:block bg-black/30"></div>
+        <nav :class="{'' : allReviews, '-translate-y-full md:-translate-y-0 md:translate-x-full' : !allReviews}" class="md:right-0 md:top-0 search-menu px-4 md:py-10 md:pl-10 md:pr-20 z-[-1] -translate-y-full md:-translate-y-0 md:translate-x-full border-t md:border-0 border-gray-200 top-full transition-all duration-500 bg-white md:z-[100] h-[calc(100vh-60px)] md:h-full md:w-1/2 absolute md:fixed inset-x-0 md:inset-auto">
+            <div class="grid gap-y-5">
+                {% for item in reviews %}
+                    {{ reviewItem(item.img, item.name, item.surname, item.date, item.rating, item.recommended, item.review) }}
+                {% endfor %}
+            </div>
+        </nav>
     </div>
-    <div class="w-[33%]"></div>
-</div>
 {% endmacro %}
 
 {% macro reviewModal(reviews) %}

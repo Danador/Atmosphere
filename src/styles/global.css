@@ -54,4 +54,13 @@ html {
   .header__burger-open.header__burger::after{
     @apply -rotate-45 translate-y-1/2 bottom-1/2;
   }
+
+  input[type='number'] {
+    -moz-appearance:textfield;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+  }
   
