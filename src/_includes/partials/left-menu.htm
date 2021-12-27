@@ -1,28 +1,28 @@
 <div class="left-menu sm:w-[21%]">
-    <div class="categories-menu container sm:p-0 fixed top-0 left-0 z-[100] w-full h-full sm:h-auto py-8 text-gray-900 transition-all duration-500 -translate-y-full bg-gray-50 sm:static sm:translate-y-0 sm:bg-transparent"
+<div class="categories-menu container sm:p-0 fixed top-0 left-0 z-[100] w-full h-full sm:h-auto py-8 text-gray-900 transition-all duration-500 -translate-y-full bg-gray-50 sm:static sm:translate-y-0 sm:bg-transparent"
     :class="{'' : openCategory, '-translate-y-full sm:translate-y-0' : !openCategory}"
     >
-        <div class="flex justify-between w-full">
-            <h2 class="text-xl font-medium text-gray-900">Categories </h2>
-            <button class="sm:hidden" @click="openCategory = false">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6 6L18 18M6 18L18 6L6 18Z" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg> 
-            </button>
-        </div>
-        <ul class="grid mt-3 text-blue-800 gap-y-3">
-            {% for item in collections.categories %}
-                <li class="relative flex items-center w-full h-12 bg-white rounded-sm sm:h-auto group ring-1 active:ring-blue-800 ring-gray-200 sm:ring-0 sm:bg-transparent">
-                    <div class="flex items-center justify-center w-12 h-12 bg-gray-200 sm:hidden group-active:bg-blue-800">
-                        <svg class="w-6 h-6 text-blue-800 group-active:text-white">
-                            <use xlink:href="/images/all-icons.svg#{{ item.data.icon }}"></use>
-                        </svg>
-                    </div>
-                    <a href="{{ item.url | url }}" class="p-4 font-medium text-blue-800 outline-none sm:p-0 group-active:text-blue-900 before:absolute before:inset-0 hover:underline focus:outline-dotted focus:outline-blue-800 hover:text-blue-700 active:text-blue-900 active:underline active:outline-none">{{ item.data.anchor }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+    <div class="flex justify-between w-full">
+    <h2 class="text-xl font-medium text-gray-900">Categories </h2>
+        <button class="sm:hidden" @click="openCategory = false">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 6L18 18M6 18L18 6L6 18Z" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg> 
+        </button>
     </div>
+    <ul class="grid mt-3 text-blue-800 gap-y-3">
+        {% for item in collections.categories %}
+            <li class="relative flex items-center w-full h-12 bg-white rounded-sm sm:h-auto group ring-1 active:ring-blue-800 ring-gray-200 sm:ring-0 sm:bg-transparent">
+                <div class="flex items-center justify-center w-12 h-12 bg-gray-200 sm:hidden group-active:bg-blue-800">
+                    <svg class="w-6 h-6 text-blue-800 group-active:text-white">
+                        <use xlink:href="/images/all-icons.svg#{{ item.data.icon }}"></use>
+                    </svg>
+                </div>
+                <a href="{{ item.url | url }}" class="p-4 font-medium text-blue-800 outline-none sm:p-0 group-active:text-blue-900 before:absolute before:inset-0 hover:underline focus:outline-dotted focus:outline-blue-800 hover:text-blue-700 active:text-blue-900 active:underline active:outline-none">{{ item.data.anchor }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
     <div class="container overflow-y-auto sm:mt-7 sm:p-0 fixed top-0 left-0 z-[100] w-full h-full sm:h-auto py-8 text-gray-900 transition-all duration-500 -translate-y-full bg-gray-50 sm:static sm:translate-y-0 sm:bg-transparent"
     :class="{'' : openFilter, '-translate-y-full sm:translate-y-0' : !openFilter}"
     >
