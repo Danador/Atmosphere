@@ -14,7 +14,7 @@ const ENABLE = false;
 
 // TODO: Find a better way to render the dom 
 const searchContainer = document.querySelector('#search-container');
-ENABLE && (searchContainer) && ReactDOM.render(<Search/>, searchContainer);
+ENABLE && (searchContainer) && ReactDOM.render(<Search />, searchContainer);
 
 // Instantiate Product component
 const prodSearchContainer = document.querySelector('#productsearch-container');
@@ -22,9 +22,10 @@ ENABLE && (prodSearchContainer) && ReactDOM.render(<ProductSearch />, prodSearch
 
 // Instantiate API Swagger component
 const apiswaggerContainer = document.querySelector('#apiswagger-container');
-(apiswaggerContainer) && ReactDOM.render(<ApiDocSwagger/>, apiswaggerContainer);
+(apiswaggerContainer) && ReactDOM.render(<ApiDocSwagger />, apiswaggerContainer);
 
-import { Swiper, Pagination, Autoplay} from "swiper";
+import { Swiper, Pagination, Autoplay, Thumbs, EffectFade } from "swiper";
+Swiper.use([Pagination, Autoplay, Thumbs, EffectFade])
 
 export default new class Hero {
 	constructor() {
@@ -36,8 +37,8 @@ export default new class Hero {
 	handler() {
 		const hero = document.querySelector(`.${this.hero}`)
 
-		if(!hero) return;
-		Swiper.use([Pagination, Autoplay])
+		if (!hero) return;
+
 
 		const swiper = new Swiper(`.${this.swiper}`, {
 			slidesPerView: 1,
@@ -54,7 +55,7 @@ export default new class Hero {
 	}
 }
 
-const swiper = new Swiper ('.section-news__swiper', {
+const swiper = new Swiper('.section-news__swiper', {
 	slidesPerView: 1,
 	spaceBetween: 8,
 	autoplay: {
@@ -72,5 +73,19 @@ const swiper = new Swiper ('.section-news__swiper', {
 			slidesPerView: 'auto',
 			spaceBetween: 0
 		}
+	}
+})
+
+const swiperProductThumbs = new Swiper('.swiper-product-page-thumbs', {
+	slidesPerView: 'auto',
+	spaceBetween: 16,
+	watchSlidesProgress: true
+})
+
+const swiperProduct = new Swiper('.swiper-product-page', {
+	slidesPerView: 1,
+	effect: "fade",
+	thumbs: {
+		swiper: swiperProductThumbs
 	}
 })

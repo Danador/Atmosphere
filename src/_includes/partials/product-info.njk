@@ -1,0 +1,157 @@
+{% import "partials/rating.njk" as elRating %}
+
+{% macro buttonFavorites(favorites, productsPage) %}
+<button x-data="{ favorites : {{ favorites }} }" @click="favorites = !favorites"
+    class="flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 {% if productsPage %}rounded{% else %}absolute top-0 right-0 rounded-bl lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0{% endif %} bg-gray-400/40">
+    <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+        class="{% if favorites %}text-red-800{% else %}text-white{% endif %} transition-all" width="20" height="17"
+        style="fill:transparent" :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+</button>
+{% endmacro %}
+
+{% macro infoImage(oldPrice, new, imagesProduct) %}
+<div class="w-[54%]">
+    <div>
+        <div class="relative">
+            <div class="swiper swiper-product-page">
+                <div class="swiper-wrapper">
+                    {% for item in imagesProduct %}
+                    <div class="swiper-slide">
+                        <img class="w-full max-h-[524px] object-cover" src="{{ item.path }}" alt="#">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <button
+                class="z-10 absolute top-7 left-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-br w-[52px] h-[22px] sm:w-24 sm:h-8 {% if oldPrice %}bg-red-700{% elif new %}bg-green-900{% endif %}">
+                <p class="text-sm text-gray-100 md:text-base">{% if oldPrice %}Sale{% elif new %}New{% endif %}</p>
+            </button>
+        </div>
+        <div class="flex h-24 mt-4 overflow-hidden swiper-product-page-thumbs swiper">
+            <div class="swiper-wrapper">
+                {% for item in imagesProduct %}
+                <div class="relative w-24 transition-colors bg-center bg-cover swiper-slide ring-inset ring-1"
+                    style="background-image: url({{ item.path }});"></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro infoGeneral(name, rating, reviews, review, price, oldPrice, colors, favorites) %}
+<div class="w-[40%]">
+    <h1 class="text-3xl font-medium uppercase">{{ name }}</h1>
+    {{ elRating.ratingGeneral(rating, reviews, review) }}
+    <div class="grid grid-flow-col text-3xl mt-7 w-max gap-x-4">
+        <p class="text-gray-900">€{{ price }}</p>
+        <p class="text-gray-600">€{{ oldPrice }}</p>
+    </div>
+    <div class="mt-7">
+        <p class="font-medium text-gray-900">Colors</p>
+        <div class="grid grid-flow-col mt-2 w-max gap-x-2">
+            {% for item in colors %}
+            <label class="relative text-center w-max group">
+                <input class="appearance-none sr-only peer" type="checkbox">
+                <span style="background-image: url('{{ item.color }}'); background-size: cover;"
+                    class="flex items-center justify-center text-transparent transition-all rounded cursor-pointer peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline peer-focus-visible:outline-blue-800 group-hover:shadow-md h-9 w-9 ring-gray-300 peer-checked:text-white">
+                    <svg class="w-6 h-6">
+                        <use xlink:href="/images/all-icons.svg#check-mark"></use>
+                    </svg>
+                </span>
+                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">{{ item.name }}</p>
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="grid grid-flow-col mt-12 gap-x-2 w-max">
+        <button class="flex items-center justify-center bg-gray-200 rounded-sm w-9 h-9">
+            <svg class="w-6 h-6 text-gray-600">
+                <use xlink:href="/images/all-icons.svg#minus"></use>
+            </svg>
+        </button>
+        <label class="relative text-center w-max group">
+            <input type="number" step="1" min="1" value="1"
+                class="text-center border border-gray-300 rounded-sm peer w-9 h-9">
+        </label>
+        <button class="flex items-center justify-center bg-blue-800 rounded-sm w-9 h-9">
+            <svg class="w-6 h-6 text-white">
+                <use xlink:href="/images/all-icons.svg#plus"></use>
+            </svg>
+        </button>
+    </div>
+    <div class="grid grid-flow-col mt-10 w-max gap-x-2">
+        <button
+            class="relative flex items-center justify-center h-12 text-white transition-colors duration-300 bg-blue-800 rounded outline-none hover:bg-blue-700 focus:outline focus:outline-blue-800 active:bg-blue-900 focus:outline-offset-1 w-60">
+            <a href="#" class="before:absolute before:inset-0">Add to cart</a>
+        </button>
+        {{ buttonFavorites(favorites, true) }}
+    </div>
+</div>
+{% endmacro %}
+
+{% macro infoMaterials(height, width, depth, weight, materials) %}
+<div class="relative w-[54%] py-3 text-gray-900 mt-7">
+    <div class="flex w-full pb-3 text-xl border-b-2 border-gray-200 space-x-11">
+        <button>
+            <h2 class="font-medium">Details</h2>
+        </button>
+        <button>
+            <h2 class="font-medium">Shipping & Returns</h2>
+        </button>
+    </div>
+    <div class="flex justify-between w-full mt-5">
+        <div class="w-[44%]">
+            <h3 class="font-medium text-gray-900">Product measurements:</h3>
+            <div class="flex mt-2 space-x-3">
+                <ul class="grid text-gray-600 gap-y-2">
+                    <li>
+                        <p>Height</p>
+                    </li>
+                    <li>
+                        <p>Width</p>
+                    </li>
+                    <li>
+                        <p>Depth</p>
+                    </li>
+                    <li>
+                        <p>Weight</p>
+                    </li>
+                </ul>
+                <ul class="grid text-gray-900 gap-y-2">
+                    <li>
+                        <p>{{ height }} cm</p>
+                    </li>
+                    <li>
+                        <p>{{ width }} cm</p>
+                    </li>
+                    <li>
+                        <p>{{ depth }} cm</p>
+                    </li>
+                    <li>
+                        <p>{{ weight }} kg</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="w-[30%]">
+            <h3 class="font-medium text-gray-900">Materials:</h3>
+            <div class="mt-2">
+                <ul class="text-gray-600">
+                    {% for item in materials %}
+                    <li class="grid grid-cols-2 gap-x-3 w-max">
+                        <p>{{ item.nameMaterial }}</p>
+                        <p class="text-gray-900">{{ item.percentageMaterial }}%</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}
