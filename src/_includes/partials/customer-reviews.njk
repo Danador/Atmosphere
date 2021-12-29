@@ -24,7 +24,7 @@
 {% endmacro %}
 
 {% macro reviews(reviews) %}
-<div x-data="{ allReviews: false }" class="w-[54%]">
+<div x-data="{ allReviews: false, writeReviews: false }" class="w-[54%]">
     <h2 class="mb-5 text-2xl font-medium uppercase">Customer Reviews</h2>
     <div class="grid gap-y-5">
         {% for item in reviews.slice(0, maxReviews) %}
@@ -44,6 +44,29 @@
     <nav :class="{'' : allReviews, '-translate-y-full md:-translate-y-0 md:translate-x-full' : !allReviews}"
         class="md:right-0 md:top-0 search-menu px-4 md:py-10 md:pl-10 md:pr-20 z-[-1] -translate-y-full md:-translate-y-0 md:translate-x-full border-t md:border-0 border-gray-200 top-full transition-all duration-500 bg-white md:z-[100] h-[calc(100vh-60px)] md:h-full md:w-1/2 absolute md:fixed inset-x-0 md:inset-auto overflow-y-auto">
         <div class="grid gap-y-5">
+            <div class="flex justify-between w-full text-gray-900">
+                <p class="text-2xl uppercase">Customer reviews & ratings</p>
+                <button type="button" @click="allReviews = !allReviews"
+                    class="hidden w-8 h-8 transition-colors duration-500 rounded md:block hover:bg-gray-200">
+                    <svg class="w-8 h-8">
+                        <use xlink:href="/images/all-icons.svg#close"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex">
+                <img class="w-24 h-24 rounded" src="{{ path }}" alt="#">
+                <div>
+                    <p>{{ name }}</p>
+                    <p>Model number: {{ modelNumber }}</p>
+                </div>
+            </div>
+            <div>
+                {{ elRating.ratingCustomer(rating, reviews, recommendedTrue, recommended, ratings) }}
+                <button
+                    class="relative flex items-center justify-center h-12 mt-10 font-medium text-blue-800 transition-colors duration-300 rounded outline-none hover:text-white hover:bg-blue-700 active:ring-blue-900 active:text-white active:bg-blue-900 active:outline-none hover:ring-blue-700 focus:outline focus:outline-blue-800 focus:bg-blue-800 focus:text-white focus:outline-offset-2 w-60 ring-1 ring-blue-800">
+                    <a href="#" class="before:absolute before:inset-0">Write a review</a>
+                </button>
+            </div>
             {% for item in reviews %}
             {% if item.review %}
             {{ reviewItem(item.img, item.name, item.surname, item.date, item.rating, item.recommended, item.review) }}
@@ -51,6 +74,7 @@
             {% endfor %}
         </div>
     </nav>
+
 </div>
 {% endmacro %}
 
