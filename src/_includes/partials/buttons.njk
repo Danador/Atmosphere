@@ -1,0 +1,13 @@
+{% macro buttonFavorites(favorites, productsPage) %}
+<button x-data="{ favorites : {{ favorites }} }" @click="favorites = !favorites"
+    class="flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 {% if productsPage %}rounded{% else %}absolute top-0 right-0 rounded-bl lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0{% endif %} bg-gray-400/40">
+    <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+        class="{% if favorites %}text-red-800{% else %}text-white{% endif %} transition-all" width="20" height="17"
+        style="fill:transparent" :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+</button>
+{% endmacro %}

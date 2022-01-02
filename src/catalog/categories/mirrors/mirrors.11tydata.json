@@ -1,153 +1,139 @@
 {
     "catalog": [
         {
-            "name" : "Oval hanging mirror",
-            "link" : "/catalog/categories/mirrors/products/oval-hanging-mirror/",
-            "price" : "74.56",
-            "oldPrice" : "113.99",
-            "image" : "/images/image/oval-mirror.jpeg",
-            "new" : false,
-            "favorites" : false
+            "name": "Oval hanging mirror",
+            "link": "/catalog/categories/mirrors/products/oval-hanging-mirror/",
+            "price": "74.56",
+            "oldPrice": "113.99",
+            "image": "/images/image/oval-mirror.jpeg",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : " Large simple mirror ",
-            "link" : "#",
-            "price" : "14.60",
-            "oldPrice" : "",
-            "image" : "/images/image/large-mirror.jpg",
-            "new" : false,
-            "favorites" : false
+            "name": " Large simple mirror ",
+            "link": "#",
+            "price": "14.60",
+            "oldPrice": "",
+            "image": "/images/image/large-mirror.jpg",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : "Decorative mirror",
-            "link" : "#",
-            "price" : "14.99",
-            "oldPrice" : "",
-            "image" : "/images/image/decorative-mirror.jpg",
-            "new" : false,
-            "favorites" : false
+            "name": "Decorative mirror",
+            "link": "#",
+            "price": "14.99",
+            "oldPrice": "",
+            "image": "/images/image/decorative-mirror.jpg",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : "Backlit mirror",
-            "link" : "#",
-            "price" : "15.00",
-            "oldPrice" : "",
-            "image" : "/images/image/backlit-mirror.jpg",
-            "new" : false,
-            "favorites" : false
+            "name": "Backlit mirror",
+            "link": "#",
+            "price": "15.00",
+            "oldPrice": "",
+            "image": "/images/image/backlit-mirror.jpg",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : "Golden mirror",
-            "link" : "#",
-            "price" : "18.50",
-            "oldPrice" : "",
-            "image" : "/images/image/golden-mirror.jpg",
-            "new" : false,
-            "favorites" : false
+            "name": "Golden mirror",
+            "link": "#",
+            "price": "18.50",
+            "oldPrice": "",
+            "image": "/images/image/golden-mirror.jpg",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : "Mirror in a dark frame",
-            "link" : "#",
-            "price" : "19.99",
-            "oldPrice" : "",
-            "image" : "/images/image/mirror-dark-frame.jpg",
-            "new" : false,
-            "favorites" : false
+            "name": "Mirror in a dark frame",
+            "link": "#",
+            "price": "19.99",
+            "oldPrice": "",
+            "image": "/images/image/mirror-dark-frame.jpg",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : "Table makeup mirror",
-            "link" : "#",
-            "price" : "30.99",
-            "oldPrice" : "53.99",
-            "image" : "/images/image/table-makeup-mirror.jpg",
-            "new" : false,
-            "favorites" : false
+            "name": "Table makeup mirror",
+            "link": "#",
+            "price": "30.99",
+            "oldPrice": "53.99",
+            "image": "/images/image/table-makeup-mirror.jpg",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : "Antique mirrors",
-            "link" : "#",
-            "price" : "32.97",
-            "oldPrice" : "",
-            "image" : "/images/image/antique-mirrors.jpeg",
-            "new" : false,
-            "favorites" : false
+            "name": "Antique mirrors",
+            "link": "#",
+            "price": "32.97",
+            "oldPrice": "",
+            "image": "/images/image/antique-mirrors.jpeg",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : "Pair of oval bathroom mirrors",
-            "link" : "#",
-            "price" : "42.25",
-            "oldPrice" : "",
-            "image" : "/images/image/oval-bathroom-mirrors.jpg",
-            "new" : false,
-            "favorites" : false
+            "name": "Pair of oval bathroom mirrors",
+            "link": "#",
+            "price": "42.25",
+            "oldPrice": "",
+            "image": "/images/image/oval-bathroom-mirrors.jpg",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : "Large mirror with stand",
-            "link" : "#",
-            "price" : "43.00",
-            "oldPrice" : "",
-            "image" : "/images/image/large-mirror-stand.jpg",
-            "new" : false,
-            "favorites" : false
+            "name": "Large mirror with stand",
+            "link": "#",
+            "price": "43.00",
+            "oldPrice": "",
+            "image": "/images/image/large-mirror-stand.jpg",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : "Round mirror with wood trim",
-            "link" : "#",
-            "price" : "52.50",
-            "oldPrice" : "",
-            "image" : "/images/image/mirror-wood-trim.jpg",
-            "new" : false,
-            "favorites" : false
+            "name": "Round mirror with wood trim",
+            "link": "#",
+            "price": "52.50",
+            "oldPrice": "",
+            "image": "/images/image/mirror-wood-trim.jpg",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : "Square black mirror",
-            "link" : "#",
-            "price" : "57.99",
-            "oldPrice" : "",
-            "image" : "/images/image/square-black-mirror.png",
-            "new" : false,
-            "favorites" : false
+            "name": "Square black mirror",
+            "link": "#",
+            "price": "57.99",
+            "oldPrice": "",
+            "image": "/images/image/square-black-mirror.png",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : "Round mirror in a wooden frame",
-            "link" : "#",
-            "price" : "60.00",
-            "oldPrice" : "",
-            "image" : "/images/image/mirror-wooden-frame.jpg",
-            "new" : false,
-            "favorites" : false
+            "name": "Round mirror in a wooden frame",
+            "link": "#",
+            "price": "60.00",
+            "oldPrice": "",
+            "image": "/images/image/mirror-wooden-frame.jpg",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : "Huge round black mirror",
-            "link" : "#",
-            "price" : "62.50",
-            "oldPrice" : "",
-            "image" : "/images/image/round-black-mirror.jpg",
-            "new" : false,
-            "favorites" : false
+            "name": "Huge round black mirror",
+            "link": "#",
+            "price": "62.50",
+            "oldPrice": "",
+            "image": "/images/image/round-black-mirror.jpg",
+            "new": false,
+            "favorites": false
         },
-
         {
-            "name" : "Rectanguler mirror in frame",
-            "link" : "#",
-            "price" : "69.99",
-            "oldPrice" : "",
-            "image" : "/images/image/rectanguler-mirror-frame.jpg",
-            "new" : false,
-            "favorites" : false
+            "name": "Rectanguler mirror in frame",
+            "link": "#",
+            "price": "69.99",
+            "oldPrice": "",
+            "image": "/images/image/rectanguler-mirror-frame.jpg",
+            "new": false,
+            "favorites": false
         }
     ]
 }

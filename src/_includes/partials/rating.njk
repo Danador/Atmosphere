@@ -19,8 +19,8 @@
 
 
 {% macro ratingCustomer(rating, reviews, recommendedTrue, recommended, ratings) %}
-<div class="w-[33%] py-3 -mt-3">
-    <h2 class="mb-5 text-2xl font-medium uppercase">Customer ratings</h2>
+<div class="py-3 -mt-3">
+    <h2 class="mb-5 text-2xl font-medium uppercase whitespace-nowrap">Customer ratings</h2>
     <div class="flex items-center space-x-3">
         <p class="text-lg font-medium text-gray-900">{{ rating| round(1) }}</p>
         <div class="w-max">
@@ -58,7 +58,7 @@
     <div class="grid grid-flow-col text-gray-600 gap-x-4">
         <p>({{ rating | round(1) }})</p>
         <p class="underline">{{ reviews.length }} ratings</p>
-        <p class="underline">{{ review }} reviews</p>
+        <p class="underline">{{ review.length }} reviews</p>
     </div>
 </div>
 {% endmacro %}

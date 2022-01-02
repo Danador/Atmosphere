@@ -1,6 +1,7 @@
 ---
 layout: layout/index.njk
 ---
+{% import "partials/card-product.njk" as elCard %}
 {% import "partials/product-info.njk" as elInfo %}
 {% import "partials/customer-reviews.njk" as elReviews %}
 {% import "partials/rating.njk" as elRating %}
@@ -26,12 +27,12 @@ layout: layout/index.njk
                 class="outline-none focus:text-blue-800 active:text-blue-900 focus:outline focus:outline-blue-80">Oval
                 hanging mirror</a>
         </div>
-        <div class="w-full mt-6 ">
-            <div class="flex justify-between w-full">
+        <div class="grid w-full mt-6 grid-cols-full">
+            <div class="grid grid-cols-[696px,auto] gap-x-15">
                 {{ elInfo.infoImage(oldPrice, new, imagesProduct) }}
                 {{ elInfo.infoGeneral(name, rating, reviews, review, price, oldPrice, colors, favorites) }}
             </div>
-            <div x-data="{ open: false }" class="w-[54%] mt-8 text-sm text-gray-900">
+            <div x-data="{ open: false }" class="mt-8 text-sm text-gray-900 w-[696px]">
                 <div class="mt-3">{{ content | safe }}</div>
                 <button class="mt-3" @click="open = ! open">
                     <div class="flex items-center space-x-1 text-blue-800">
@@ -42,15 +43,34 @@ layout: layout/index.njk
                     </div>
                 </button>
             </div>
-            {{ elInfo.infoMaterials(height, width, depth, weight, materials) }}
-            <div class="flex justify-between w-full mt-10">
-                {{ elReviews.reviews(reviewArray) }}
+            <div class="w-[696px]">
+                {{ elInfo.infoMaterials(height, width, depth, weight, materials) }}
+            </div>
+            <div class="grid grid-cols-[2fr,1fr] gap-x-15 max-w-[90%] mt-10">
+                {{ elReviews.reviews(rating, imagesProduct, name, modelNumber, reviews, review, recommendedTrue,
+                recommended, ratings) }}
                 {{ elRating.ratingCustomer(rating, reviews, recommendedTrue, recommended, ratings) }}
             </div>
-            <button
-                class="relative flex items-center justify-center h-12 mt-10 font-medium text-blue-800 transition-colors duration-300 rounded outline-none hover:text-white hover:bg-blue-700 active:ring-blue-900 active:text-white active:bg-blue-900 active:outline-none hover:ring-blue-700 focus:outline focus:outline-blue-800 focus:bg-blue-800 focus:text-white focus:outline-offset-2 w-60 ring-1 ring-blue-800">
-                <a href="#" class="before:absolute before:inset-0">Write a review</a>
-            </button>
+            <div class="grid mt-7 gap-y-4">
+                <div class="py-3">
+                    <h2 class="text-2xl font-medium text-gray-900">You might also like</h2>
+                    <div class="grid grid-cols-4 mt-5 gap-x-4">
+                        {% for item in alsoLike %}
+                        {{ elCard.cardProduct(item.image, item.new, item.favorites, item.link, item.name, item.price,
+                        item.oldPrice) }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="py-3">
+                    <h2 class="text-2xl font-medium text-gray-900">Recently Viewed</h2>
+                    <div class="grid grid-cols-4 mt-5 gap-x-4">
+                        {% for item in recentlyWied %}
+                        {{ elCard.cardProduct(item.image, item.new, item.favorites, item.link, item.name, item.price,
+                        item.oldPrice) }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

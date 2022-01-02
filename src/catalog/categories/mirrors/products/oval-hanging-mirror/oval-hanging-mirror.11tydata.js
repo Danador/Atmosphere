@@ -2,7 +2,7 @@ const file = require("./oval-hanging-mirror.11tydata.json");
 
 const product = file.reviews
 
-const review = product.filter(item => item.review).length;
+const review = product.filter(item => item.review);
 
 const reviewArray = product.filter(item => item.review);
 

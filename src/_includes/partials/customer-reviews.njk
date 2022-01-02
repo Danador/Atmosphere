@@ -1,4 +1,5 @@
-{% set maxReviews = 3 %}
+{% set maximagesProduct = 1 %}
+{% set maxReview = 3 %}
 {% import "partials/rating.njk" as elRating %}
 {% macro reviewItem(img, name, surname, date, rating, recommended, review) %}
 <div>
@@ -23,29 +24,35 @@
 </div>
 {% endmacro %}
 
-{% macro reviews(reviews) %}
-<div x-data="{ allReviews: false, writeReviews: false }" class="w-[54%]">
+{% macro reviews(rating, imagesProduct, name, modelNumber, reviews, review, recommendedTrue, recommended, ratings) %}
+<div x-data="{ allReviews: false, writeReviews: false }">
     <h2 class="mb-5 text-2xl font-medium uppercase">Customer Reviews</h2>
     <div class="grid gap-y-5">
-        {% for item in reviews.slice(0, maxReviews) %}
-        {{ reviewItem(item.img, item.name, item.surname, item.date, item.rating, item.recommended, item.review) }}
+        {% for item in review.slice(0, maxReview) %}
+        {{ reviewItem(item.img, item.name, item.surname, item.date, item.rating, item.recommended, item.review)
+        }}
         {% endfor %}
     </div>
-    {% if reviews.length > maxReviews %}
-    <button @click="allReviews = !allReviews" class="flex items-end h-6 text-blue-800">
+    {% if reviews.length > maxReview %}
+    <button @click="allReviews = !allReviews" class="flex items-end h-6 mt-5 text-blue-800">
         <span>Read more reviews</span>
         <svg class="w-4 h-4 mb-0.5">
             <use xlink:href="/images/all-icons.svg#arrow-right"></use>
         </svg>
     </button>
     {% endif %}
+    <button @click="writeReviews = !writeReviews"
+        class="relative flex items-center justify-center h-12 mt-5 font-medium text-blue-800 transition-colors duration-300 rounded outline-none hover:text-white hover:bg-blue-700 active:ring-blue-900 active:text-white active:bg-blue-900 active:outline-none hover:ring-blue-700 focus:outline focus:outline-blue-800 focus:bg-blue-800 focus:text-white focus:outline-offset-2 w-60 ring-1 ring-blue-800">
+        <span>Write a review</span>
+    </button>
     <div :class="{ 'invisible opacity-0' : !allReviews}"
-        class="transition-all fixed inset-0 invisible opacity-0 hidden z-[99] md:block bg-black/30"></div>
+        class="transition-all fixed inset-0 invisible opacity-0 hidden z-[99] md:block bg-black/30">
+    </div>
     <nav :class="{'' : allReviews, '-translate-y-full md:-translate-y-0 md:translate-x-full' : !allReviews}"
         class="md:right-0 md:top-0 search-menu px-4 md:py-10 md:pl-10 md:pr-20 z-[-1] -translate-y-full md:-translate-y-0 md:translate-x-full border-t md:border-0 border-gray-200 top-full transition-all duration-500 bg-white md:z-[100] h-[calc(100vh-60px)] md:h-full md:w-1/2 absolute md:fixed inset-x-0 md:inset-auto overflow-y-auto">
         <div class="grid gap-y-5">
             <div class="flex justify-between w-full text-gray-900">
-                <p class="text-2xl uppercase">Customer reviews & ratings</p>
+                <p class="text-2xl font-medium uppercase">Customer reviews & ratings</p>
                 <button type="button" @click="allReviews = !allReviews"
                     class="hidden w-8 h-8 transition-colors duration-500 rounded md:block hover:bg-gray-200">
                     <svg class="w-8 h-8">
@@ -53,34 +60,121 @@
                     </svg>
                 </button>
             </div>
-            <div class="flex">
-                <img class="w-24 h-24 rounded" src="{{ path }}" alt="#">
+            <div class="flex space-x-6">
+                {% for item in imagesProduct.slice(0, maximagesProduct) %}
+                <img class="w-[92px] object-cover h-[92px] rounded" src="{{ item.path }}" alt="#">
+                {% endfor %}
                 <div>
                     <p>{{ name }}</p>
                     <p>Model number: {{ modelNumber }}</p>
                 </div>
             </div>
-            <div>
-                {{ elRating.ratingCustomer(rating, reviews, recommendedTrue, recommended, ratings) }}
+            <div class="w-full">
+                <div class="w-[63%]">
+                    {{ elRating.ratingCustomer(rating, reviews, recommendedTrue, recommended, ratings) }}
+                </div>
                 <button
-                    class="relative flex items-center justify-center h-12 mt-10 font-medium text-blue-800 transition-colors duration-300 rounded outline-none hover:text-white hover:bg-blue-700 active:ring-blue-900 active:text-white active:bg-blue-900 active:outline-none hover:ring-blue-700 focus:outline focus:outline-blue-800 focus:bg-blue-800 focus:text-white focus:outline-offset-2 w-60 ring-1 ring-blue-800">
+                    class="relative flex items-center justify-center h-12 font-medium text-blue-800 transition-colors duration-300 rounded outline-none mt-7 hover:text-white hover:bg-blue-700 active:ring-blue-900 active:text-white active:bg-blue-900 active:outline-none hover:ring-blue-700 focus:outline focus:outline-blue-800 focus:bg-blue-800 focus:text-white focus:outline-offset-2 w-60 ring-1 ring-blue-800">
                     <a href="#" class="before:absolute before:inset-0">Write a review</a>
                 </button>
             </div>
-            {% for item in reviews %}
-            {% if item.review %}
-            {{ reviewItem(item.img, item.name, item.surname, item.date, item.rating, item.recommended, item.review) }}
-            {% endif %}
-            {% endfor %}
+            <div class="flex justify-between w-full text-gray-600">
+                <p>{{ reviews.length }} reviews</p>
+                <button class="flex items-center space-x-2">
+                    <p>Sort by:</p>
+                    <p>Newest to oldest</p>
+                    <svg class="w-5 h-5">
+                        <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="grid gap-y-5">
+                {% for item in reviews %}
+                {% if item.review %}
+                {{ reviewItem(item.img, item.name, item.surname, item.date, item.rating, item.recommended, item.review)
+                }}
+                {% endif %}
+                {% endfor %}
+                <button
+                    class="relative flex items-center justify-center h-12 mt-8 font-medium text-blue-800 transition-colors duration-300 rounded outline-none hover:text-white hover:bg-blue-700 active:ring-blue-900 active:text-white active:bg-blue-900 active:outline-none hover:ring-blue-700 focus:outline focus:outline-blue-800 focus:bg-blue-800 focus:text-white focus:outline-offset-2 w-60 ring-1 ring-blue-800">
+                    <span>Read more</span>
+                </button>
+            </div>
         </div>
     </nav>
-
+    <div :class="{ 'invisible opacity-0' : !writeReviews}"
+        class="transition-all fixed inset-0 invisible opacity-0 hidden z-[99] md:block bg-black/30">
+    </div>
+    <nav :class="{'' : writeReviews, '-translate-y-full md:-translate-y-0 md:translate-x-full' : !writeReviews}"
+        class="md:right-0 md:top-0 search-menu px-4 md:py-10 md:pl-10 md:pr-20 z-[-1] -translate-y-full md:-translate-y-0 md:translate-x-full border-t md:border-0 border-gray-200 top-full transition-all duration-500 bg-white md:z-[100] h-[calc(100vh-60px)] md:h-full md:w-1/2 absolute md:fixed inset-x-0 md:inset-auto overflow-y-auto">
+        <div class="grid gap-y-5">
+            <div class="flex justify-between w-full text-gray-900">
+                <p class="text-2xl font-medium uppercase">review add</p>
+                <button type="button" @click="writeReviews = !writeReviews"
+                    class="hidden w-8 h-8 transition-colors duration-500 rounded md:block hover:bg-gray-200">
+                    <svg class="w-8 h-8">
+                        <use xlink:href="/images/all-icons.svg#close"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex space-x-6">
+                {% for item in imagesProduct.slice(0, maximagesProduct) %}
+                <img class="w-[92px] object-cover h-[92px] rounded" src="{{ item.path }}" alt="#">
+                {% endfor %}
+                <div>
+                    <p>{{ name }}</p>
+                    <p>Model number: {{ modelNumber }}</p>
+                </div>
+            </div>
+            <form class="grid gap-y-6" action="" method="post">
+                <label class="grid gap-y-2">
+                    <span class="font-medium">Rate this product</span>
+                    <label class="grid grid-flow-col gap-x-1 w-max">
+                        {% for item in range(0, 5) %}
+                        <button class="text-gray-300 active:text-yellow-300">
+                            <svg class="w-6 h-6">
+                                <use xlink:href="/images/all-icons.svg#star"></use>
+                            </svg>
+                        </button>
+                        {% endfor %}
+                    </label>
+                </label>
+                <label class="grid gap-y-2">
+                    <span class="font-medium">Would you recommend this product?</span>
+                    <label class="grid grid-flow-col label__buttons gap-x-7 w-max">
+                        <label class="flex items-center space-x-2">
+                            <label class="relative flex group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="block w-4 h-4 transition-all duration-300 rounded-full cursor-pointer peer-disabled:shadow-none peer-disabled:cursor-default input_radio ring-2 group-hover:shadow-md peer-checked:ring-blue-800 peer-checked:bg-white ring-gray-600 before:bg-blue-800 peer-checked:before:w-2 peer-checked:before:h-2 before:transition-all before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:absolute before:duration-300 before:rounded-full"></span>
+                            </label>
+                            <span class="text-gray-600">Yes</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <label class="relative flex group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="block w-4 h-4 transition-all duration-300 rounded-full cursor-pointer peer-disabled:shadow-none peer-disabled:cursor-default input_radio ring-2 group-hover:shadow-md peer-checked:ring-blue-800 peer-checked:bg-white ring-gray-600 before:bg-blue-800 peer-checked:before:w-2 peer-checked:before:h-2 before:transition-all before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:absolute before:duration-300 before:rounded-full"></span>
+                            </label>
+                            <span class="text-gray-600">No</span>
+                        </label>
+                    </label>
+                </label>
+                <label class="grid gap-y-2">
+                    <span class="font-medium">Share your experience</span>
+                    <input class="w-full h-32 px-4 py-3 rounded outline-none ring-2 ring-gray-400"
+                        placeholder="What do you like or dislike? What shouls other shoppers know before buying?"
+                        type="text">
+                </label>
+            </form>
+        </div>
+    </nav>
 </div>
 {% endmacro %}
 
 {% macro reviewModal(reviews) %}
 <div class="flex justify-between w-full mt-10">
-    <div class="w-[54%]">
+    <div>
         <h2 class="mb-5 text-2xl font-medium uppercase">Customer Reviews</h2>
         <div class="grid gap-y-5">
             {% for item in reviews %}
