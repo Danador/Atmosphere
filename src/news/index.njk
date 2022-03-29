@@ -11,9 +11,9 @@ h1: News
             <div class="grid w-full grid-cols-2 mt-10 sm:grid-cols-3 lg:grid-cols-4 gap-x-2 gap-y-4 sm:gap-x-8 sm:gap-y-6 ">
                 {% for item in posts.posts %}
                     <div class="relative grid group gap-y-2 bg-gray-50">
-                        <img class="w-full transition-all duration-500 rounded-lg outline-none group-active:opacity-80" src="{{ item.img }}" alt="{{ item.alt }}">
-                        <a data-text="{{item.text}}" href="{{ item.link }}" class="text-sm after:absolute after:inset-x-0 after:bg-gray-50 after:whitespace-normal after:rounded-b-lg after:transition-opacity after:duration-500 after:z-10 after:opacity-0 hover:after:opacity-100 after:content-[attr(data-text)] font-medium truncate transition-all duration-500 outline-none before:absolute before:inset-0 md:base md:group-hover:text-blue-800 focus:text-blue-800 group-active:text-blue-900/50 focus:outline-none">
-                            {{item.text}}
+                        <img class="w-full transition-all duration-500 rounded-lg outline-none group-active:opacity-80" src="{{ item.img | url }}" alt="{{ item.alt }}">
+                        <a data-text="{{ item.text }}" href="{{ item.link }}" class="text-sm after:absolute after:inset-x-0 after:bg-gray-50 after:whitespace-normal after:rounded-b-lg after:transition-opacity after:duration-500 after:z-10 after:opacity-0 hover:after:opacity-100 after:content-[attr(data-text)] font-medium truncate transition-all duration-500 outline-none before:absolute before:inset-0 md:base md:group-hover:text-blue-800 focus:text-blue-800 group-active:text-blue-900/50 focus:outline-none">
+                            {{ item.text }}
                         </a>
                     </div>
                 {% endfor %}
