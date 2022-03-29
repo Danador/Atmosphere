@@ -1,4 +1,4 @@
-{% macro buttonFavorites(favorites, productsPage) %}
+{#{% macro buttonFavorites(favorites, productsPage) %}
 <button x-data="{ favorites : {{ favorites }} }" @click="favorites = !favorites"
     class="flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 {% if productsPage %}rounded{% else %}absolute top-0 right-0 rounded-bl lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0{% endif %} bg-gray-400/40">
     <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
@@ -10,4 +10,4 @@
             stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
     </svg>
 </button>
-{% endmacro %}
+{% endmacro %}#}

@@ -2,7 +2,7 @@
 layout: layout/index.njk
 ---
 {% import "partials/card-product.njk" as elCard %}
-{% from "partials/buttons.njk" import buttonFavorites %}
+{#{% from "partials/buttons.njk" import buttonFavorites %}#}
 {{ content|safe }}
 <section class="section-catalog">
     <div class="container mx-auto">
@@ -48,8 +48,7 @@ layout: layout/index.njk
                 <div class="content-block w-full sm:w-[74%]">
                     <div class="grid grid-cols-2 gap-y-4 gap-x-2 lg:grid-cols-3 lg:gap-x-4">
                         {% for item in catalog %}
-                        {{ elCard.cardProduct(item.image, item.new, item.favorites, item.link, item.name, item.price,
-                        item.oldPrice) }}
+                            {{ elCard.cardProduct(item.image, item.new, item.favorites, item.link, item.name, item.price, item.oldPrice) }}
                         {% endfor %}
                     </div>
                     <div

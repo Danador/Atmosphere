@@ -71,3 +71,35 @@ input::-webkit-inner-spin-button {
 .swiper-product-page-thumbs .swiper-slide-thumb-active {
   @apply ring-blue-800;
 }
+
+/* Rating star */
+
+.rating-set {
+  @apply p-0 m-0 border-none;
+}
+
+/* Group */
+
+/* Star */
+
+/* Options */
+
+.rating__star:nth-of-type(1) {
+  z-index: 5;
+}
+
+.rating__star:nth-of-type(2) {
+  z-index: 4;
+}
+
+.rating__star:nth-of-type(3) {
+  z-index: 3;
+}
+
+.rating__star:nth-of-type(4) {
+  z-index: 2;
+}
+
+.rating__star:nth-of-type(5) {
+  z-index: 1;
+}

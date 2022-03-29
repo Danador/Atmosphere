@@ -89,3 +89,14 @@ const swiperProduct = new Swiper('.swiper-product-page', {
 		swiper: swiperProductThumbs
 	}
 })
+
+const swiperLike = new Swiper ('.swiper-from-recomended', {
+	slidesPerView: 'auto',
+	breakpoints: {
+
+		640: {
+			slidesPerView: 4,
+			spaceBetween: 16,
+		}
+	}
+})
