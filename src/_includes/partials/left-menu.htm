@@ -6,7 +6,7 @@
             <button class="transition-colors duration-500 rounded sm:hidden hover:bg-gray-200"
                 @click="openCategory = false">
                 <svg class="w-8 h-8">
-                    <use xlink:href="/images/all-icons.svg#close"></use>
+                    <use xlink:href="{{ '/images/all-icons.svg#close' | url }}"></use>
                 </svg>
             </button>
         </div>
@@ -16,7 +16,7 @@
                 class="relative flex items-center w-full h-12 bg-white rounded-sm sm:h-auto group ring-1 active:ring-blue-800 ring-gray-200 sm:ring-0 sm:bg-transparent">
                 <div class="flex items-center justify-center w-12 h-12 bg-gray-200 sm:hidden group-active:bg-blue-800">
                     <svg class="w-6 h-6 text-blue-800 group-active:text-white">
-                        <use xlink:href="/images/all-icons.svg#{{ item.data.icon }}"></use>
+                        <use xlink:href="{{ '/images/all-icons.svg#' ~ item.data.icon | url }}"></use>
                     </svg>
                 </div>
                 <a href="{{ item.url | url }}"
@@ -33,7 +33,7 @@
             <button class="transition-colors duration-500 rounded sm:hidden hover:bg-gray-200"
                 @click="openFilter = false">
                 <svg class="w-8 h-8">
-                    <use xlink:href="/images/all-icons.svg#close"></use>
+                    <use xlink:href="{{ '/images/all-icons.svg#close' | url }}"></use>
                 </svg>
             </button>
         </div>
@@ -48,7 +48,7 @@
                         <p class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Price</p>
                         <svg :class="{'rotate-180 sm:text-blue-800' : open}"
                             class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
-                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                            <use xlink:href="{{ '/images/all-icons.svg#arrow-top' | url }}"></use>
                         </svg>
                     </button>
                     <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
@@ -89,7 +89,7 @@
                             class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Width</p>
                         <svg :class="{'rotate-180 sm:text-blue-800' : open}"
                             class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
-                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                            <use xlink:href="{{ '/images/all-icons.svg#arrow-top' | url }}"></use>
                         </svg>
                     </button>
                     <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
@@ -115,7 +115,7 @@
                             class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Height</p>
                         <svg :class="{'rotate-180 sm:text-blue-800' : open}"
                             class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
-                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                            <use xlink:href="{{ '/images/all-icons.svg#arrow-top' | url }}"></use>
                         </svg>
                     </button>
                     <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
@@ -141,7 +141,7 @@
                             class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Depth</p>
                         <svg :class="{'rotate-180 sm:text-blue-800' : open}"
                             class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
-                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                            <use xlink:href="{{ '/images/all-icons.svg#arrow-top' | url }}"></use>
                         </svg>
                     </button>
                     <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
@@ -167,7 +167,7 @@
                             class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Weight</p>
                         <svg :class="{'rotate-180 sm:text-blue-800' : open}"
                             class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
-                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                            <use xlink:href="{{ '/images/all-icons.svg#arrow-top' | url }}"></use>
                         </svg>
                     </button>
                     <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
@@ -194,7 +194,7 @@
                         </p>
                         <svg :class="{'rotate-180 sm:text-blue-800' : open}"
                             class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
-                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                            <use xlink:href="{{ '/images/all-icons.svg#arrow-top' | url }}"></use>
                         </svg>
                     </button>
                     <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
@@ -320,7 +320,7 @@
                             class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Colors</p>
                         <svg :class="{'rotate-180 sm:text-blue-800' : open}"
                             class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
-                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                            <use xlink:href="{{ '/images/all-icons.svg#arrow-top' | url }}"></use>
                         </svg>
                     </button>
                     <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"

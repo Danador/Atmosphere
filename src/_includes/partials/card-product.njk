@@ -2,7 +2,7 @@
 <div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
     <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
         <div class="absolute inset-0 w-full h-full"
-            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('{{ image }}');">
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('{{ image | url }}');">
         </div>
         {% if oldPrice %}
         <button

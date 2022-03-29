@@ -6,7 +6,7 @@
                 <a href="{{ item.link }}" class="w-full px-4 font-medium text-blue-800 outline-none peer sm:px-0 sm:py-4 before:absolute before:inset-0">{{ item.name }}</a>
                 <div class="bg-gray-200 transition-all duration-300 peer-hover:bg-blue-800 peer-hover:text-white peer-focus:bg-blue-800 peer-focus-within:text-white peer-active:bg-blue-900 peer-active:text-white peer-active:outline-none flex justify-center items-center h-12 w-12 rounded-tl rounded-bl sm:rounded-none text-blue-800 sm:h-[200px] sm:w-full">
                     <svg class="w-6 h-6 sm:w-20 sm:h-20">
-                        <use xlink:href="/images/all-icons.svg#{{ item.icon }}"></use>
+                        <use xlink:href="{{ '/images/all-icons.svg#' ~ item.icon | url }}"></use>
                     </svg>
                 </div>
             </div>

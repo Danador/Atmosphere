@@ -2,14 +2,14 @@
 <div class="relative grid items-center grid-cols-5 w-max gap-x-1">
     {% for item in range(0, 5) %}
     <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
-        <use xlink:href="/images/all-icons.svg#star"></use>
+        <use xlink:href="{{ '/images/all-icons.svg#star' | url }}"></use>
     </svg>
     {% endfor %}
     <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: {{ (rating| round(1) / 5) * 100 }}%;">
         <div class="grid items-center grid-cols-5 gap-x-1 w-max">
             {% for item in range(0, 5) %}
             <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
-                <use xlink:href="/images/all-icons.svg#star"></use>
+                <use xlink:href="{{ '/images/all-icons.svg#star' | url }}"></use>
             </svg>
             {% endfor %}
         </div>

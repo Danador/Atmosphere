@@ -46,7 +46,7 @@
                             {% for item in payment.payment %}
                                 <button class="my-1.5 {% if item.name=='paypal' %} w-15 {% elif item.name%} w-14 {% endif %} mr-2 transition-all duration-500 outline-2 outline-transparent outline-dotted focus:outline-blue-900 rounded overflow-hidden group">
                                     <svg class="text-gray-200 transition-colors duration-300 h-9 group-hover:text-gray-300 group-active:text-gray-400">
-                                        <use xlink:href="/images/all-icons.svg#{{ item.name }}"></use>
+                                        <use xlink:href="{{ '/images/all-icons.svg#' ~ item.name | url }}"></use>
                                     </svg>
                                 </button>
                             {% endfor %}

@@ -37,7 +37,7 @@
     <button @click="allReviews = !allReviews" class="flex items-end h-6 mt-5 text-blue-800">
         <span>Read more reviews</span>
         <svg class="w-4 h-4 mb-0.5">
-            <use xlink:href="/images/all-icons.svg#arrow-right"></use>
+            <use xlink:href="{{ '/images/all-icons.svg#arrow-right' | url }}"></use>
         </svg>
     </button>
     {% endif %}
@@ -56,13 +56,13 @@
                 <button type="button" @click="allReviews = !allReviews"
                     class="w-8 h-8 transition-colors duration-500 rounded hover:bg-gray-200">
                     <svg class="w-8 h-8">
-                        <use xlink:href="/images/all-icons.svg#close"></use>
+                        <use xlink:href="{{ '/images/all-icons.svg#close' | url }}"></use>
                     </svg>
                 </button>
             </div>
             <div class="flex space-x-6">
                 {% for item in imagesProduct.slice(0, maximagesProduct) %}
-                <img class="w-[92px] object-cover h-[92px] rounded" src="{{ item.path }}" alt="#">
+                <img class="w-[92px] object-cover h-[92px] rounded" src="{{ item.path | url }}" alt="#">
                 {% endfor %}
                 <div>
                     <p>{{ name }}</p>
@@ -84,7 +84,7 @@
                     <p>Sort by:</p>
                     <p>Newest to oldest</p>
                     <svg class="w-5 h-5">
-                        <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        <use xlink:href="{{ '/images/all-icons.svg#arrow-top' | url}}"></use>
                     </svg>
                 </button>
             </div>
@@ -113,7 +113,7 @@
                 <button type="button" @click="writeReviews = !writeReviews"
                     class="w-8 h-8 transition-colors duration-500 rounded hover:bg-gray-200">
                     <svg class="w-8 h-8">
-                        <use xlink:href="/images/all-icons.svg#close"></use>
+                        <use xlink:href="{{ '/images/all-icons.svg#close' | url }}"></use>
                     </svg>
                 </button>
             </div>
@@ -129,7 +129,7 @@
             <form class="grid gap-y-6 form-review" action="" method="post">
                 <fieldset class="grid gap-y-2 form-review__rating">
                     <legend class="font-medium">Rate this product</legend>
-                    <div class="outline-offset-2 focus-within:outline focus-within:outline-2 focus-within:outline-blue-800 relative h-8 rating md:h-6 aspect-[5.5/1] bg-contain rating__group" style="background-image: url(/images/icons/rating-off.svg);">
+                    <div class="outline-offset-2 focus-within:outline focus-within:outline-2 focus-within:outline-blue-800 relative h-8 rating md:h-6 aspect-[5.5/1] bg-contain rating__group" style="background-image: url({{ '/images/icons/rating-off.svg' | url }});">
                         {% for item in range(0, 5) %}
                             <input
                                 class="absolute inset-0 h-full bg-contain outline-none opacity-0 appearance-none cursor-pointer checked:opacity-100 hover:opacity-100 rating__star"
@@ -137,7 +137,7 @@
                                 name="rating"
                                 aria-label="one"
                                 value="{{ loop.index }}"
-                                style="background-image: url(/images/icons/rating-on.svg); width: calc((100% / 5) * {{ loop.index }});"
+                                style="background-image: url({{ '/images/icons/rating-on.svg' | url }}); width: calc((100% / 5) * {{ loop.index }});"
                             >
                         {% endfor %}
                     </div>

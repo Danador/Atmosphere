@@ -20,7 +20,7 @@
         <div class="swiper-wrapper">
             {% for item in imagesProduct %}
             <div class="relative w-24 transition-colors bg-center bg-cover swiper-slide ring-inset ring-1"
-                style="background-image: url({{ item.path }});"></div>
+                style="background-image: url({{ item.path | url }});"></div>
             {% endfor %}
         </div>
     </div>
@@ -46,10 +46,10 @@
             {% for item in colors %}
             <label class="relative text-center w-max group">
                 <input class="appearance-none sr-only peer" type="checkbox">
-                <span style="background-image: url('{{ item.color }}'); background-size: cover;"
+                <span style="background-image: url('{{ item.color | url }}'); background-size: cover;"
                     class="flex items-center justify-center text-transparent transition-all rounded cursor-pointer peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline peer-focus-visible:outline-blue-800 group-hover:shadow-md h-9 w-9 ring-gray-300 peer-checked:text-white">
                     <svg class="w-6 h-6">
-                        <use xlink:href="/images/all-icons.svg#check-mark"></use>
+                        <use xlink:href="{{ '/images/all-icons.svg#check-mark' | url }}"></use>
                     </svg>
                 </span>
                 <p class="mt-1 text-gray-600 peer-checked:text-gray-900">{{ item.name }}</p>
@@ -60,7 +60,7 @@
     <div class="grid grid-flow-col mt-12 gap-x-2 w-max">
         <button class="flex items-center justify-center bg-gray-200 rounded-sm w-9 h-9">
             <svg class="w-6 h-6 text-gray-600">
-                <use xlink:href="/images/all-icons.svg#minus"></use>
+                <use xlink:href="{{ '/images/all-icons.svg#minus' | url }}"></use>
             </svg>
         </button>
         <label class="relative text-center w-max group">
@@ -69,7 +69,7 @@
         </label>
         <button class="flex items-center justify-center bg-blue-800 rounded-sm w-9 h-9">
             <svg class="w-6 h-6 text-white">
-                <use xlink:href="/images/all-icons.svg#plus"></use>
+                <use xlink:href="{{ '/images/all-icons.svg#plus' | url }}"></use>
             </svg>
         </button>
     </div>
