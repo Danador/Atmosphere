@@ -1,4 +1,4 @@
-Sitemap: https://creasoft-dev.github.io//sitemap.xml
+Sitemap: https://danador.github.io//sitemap.xml
 
 User-agent: *
 Disallow:

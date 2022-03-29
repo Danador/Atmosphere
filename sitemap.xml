@@ -2,122 +2,86 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/posts/2020-07-10-first-post/</loc>
-        <lastmod>2020-07-10T00:00:00.000Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/catalog/categories/eco-friendly/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/es/posts/2020/2020-07-10-primer-articulo/</loc>
-        <lastmod>2020-07-10T00:00:00.000Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/catalog/categories/furniture/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/radar/techniques/domain-driven-design/</loc>
-        <lastmod>2020-07-25T00:00:00.000Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/catalog/categories/home-decor/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/radar/tools/typescript/</loc>
-        <lastmod>2020-07-25T00:00:00.000Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/catalog/categories/home-textiles/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/apibro/apiredoc/</loc>
-        <lastmod>2021-11-15T02:55:06.611Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/catalog/categories/kitchenware/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/apibro/apiswagger/</loc>
-        <lastmod>2021-11-15T02:55:06.611Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/catalog/categories/lighting/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/apibro/</loc>
-        <lastmod>2021-11-15T02:55:06.611Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/catalog/categories/mirrors/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/</loc>
-        <lastmod>2021-11-15T02:55:06.611Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/catalog/categories/mirrors/products/oval-hanging-mirror/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/pages/about/</loc>
-        <lastmod>2021-11-15T02:55:06.611Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/catalog/categories/plants/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/pages/articles/</loc>
-        <lastmod>2021-11-15T02:55:06.611Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/catalog/categories/storage/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/pages/search/</loc>
-        <lastmod>2021-11-15T02:55:06.615Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/catalog/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/products/</loc>
-        <lastmod>2021-11-15T02:55:06.615Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/products/repo/myproduct/</loc>
-        <lastmod>2021-11-15T02:55:06.615Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/news/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 
     <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/radar/</loc>
-        <lastmod>2021-11-15T02:55:06.615Z</lastmod>
-        <changefreq></changefreq>
-    </url>
-
-    <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/radar/techniques/</loc>
-        <lastmod>2021-11-15T02:55:06.615Z</lastmod>
-        <changefreq></changefreq>
-    </url>
-
-    <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/en/radar/tools/</loc>
-        <lastmod>2021-11-15T02:55:06.615Z</lastmod>
-        <changefreq></changefreq>
-    </url>
-
-    <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/es/</loc>
-        <lastmod>2021-11-15T02:55:06.615Z</lastmod>
-        <changefreq></changefreq>
-    </url>
-
-    <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/es/pages/acerca/</loc>
-        <lastmod>2021-11-15T02:55:06.615Z</lastmod>
-        <changefreq></changefreq>
-    </url>
-
-    <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/es/pages/articulos/</loc>
-        <lastmod>2021-11-15T02:55:06.615Z</lastmod>
-        <changefreq></changefreq>
-    </url>
-
-    <url>
-        <loc>https://creasoft-dev.github.io//fundamenty/</loc>
-        <lastmod>2021-11-15T02:55:06.619Z</lastmod>
+        <loc>https://danador.github.io//Atmosphere/news/posts/news-eco/</loc>
+        <lastmod>2022-03-29T13:56:23.020Z</lastmod>
         <changefreq></changefreq>
     </url>
 

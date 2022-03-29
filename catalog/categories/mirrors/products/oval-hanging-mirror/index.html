@@ -1,0 +1,2645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Atmosphere/assets/main.css"/>
+    <title>Atmosphere</title>
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico" type="image/x-icon">
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+<body class="grid min-h-screen bg-gray-50 grid-areas-layout grid-cols-full grid-rows-layout">
+    <section
+        x-data="{ showBanner: true }"
+        class="grid-in-sale overflow-hidden relative z-[51] md:z-0 transition-all duration-500 bg-gray-100"
+        :class="showBanner ? 'max-h-screen' : 'max-h-0'"
+    >
+        <div class="container flex items-center justify-between w-full mx-auto section-sale__block">
+            <p>Let's celebrate <b>Black Friday</b> together! From <b>Nov.27th</b> to <b>Dec.3rd</b>, use the <b>BF2020</b> coupon to get a <b>50% discount</b> on all products.</p>
+            <button @click="showBanner = !showBanner" class="w-5 h-5 transition-all duration-300 outline-none closure focus:outline-none focus:text-blue-800 active:text-blue-800 hover:text-blue-700">
+                <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m5 5 10 10M5 15 15 5 5 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+        </div>
+</section>
+    <header class="grid-in-header sticky top-0 z-50 after:absolute border-b border-gray-200 after:inset-0 after:z-[-1] after:bg-white">
+        <div class="pl-2 pr-4 mx-auto md:container">
+            <div x-data="{ openMenu: false , searchMenu: false }" class="flex items-center justify-between w-full section-header h-15">
+                <div class="flex items-center justify-center w-10 h-10 transition-colors duration-300 rounded-sm md:hidden hover:bg-gray-200">
+                    <button @click="openMenu = !openMenu" class=" header__burger" :class="{'header__burger-open' : openMenu}">
+                        <span></span>
+                    </button>
+                </div>
+                <a href="/" class="font-medium transition-all duration-300 outline-none focus:outline-none hover:text-blue-400 focus:text-blue-800 active:text-blue-800 leading-5 nav_link tracking-[0.16em]">ATMOSPHERE</a>
+                <div :class="{ 'invisible opacity-0' : !searchMenu}" class="transition-all fixed inset-0 invisible opacity-0 hidden z-[99] md:block bg-black/30"></div>
+                <nav :class="{'' : searchMenu, '-translate-y-full md:-translate-y-0 md:translate-x-full' : !searchMenu}" class="md:right-0 md:top-0 search-menu px-4 md:py-10 md:pl-10 md:pr-20 z-[-1] -translate-y-full md:-translate-y-0 md:translate-x-full border-t md:border-0 border-gray-200 top-full transition-all duration-500 bg-white md:z-[100] h-[calc(100vh-60px)] md:h-full md:w-1/2 absolute md:fixed inset-x-0 md:inset-auto">
+                    <div class="flex justify-between w-full text-gray-900 ">
+                        <p class="text-2xl font-medium uppercase">search</p>
+                        <button type="button" @click="searchMenu = !searchMenu" class="hidden w-8 h-8 transition-colors duration-500 rounded md:block hover:bg-gray-200">
+                            <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m8 8 16 16M8 24 24 8 8 24Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </div>
+                    <form method="get" action="#" x-ref="searchForm" class="relative flex items-center justify-center w-full mt-4 rounded h-11 ring-1 ring-gray-400 search-field">
+                        <svg class="absolute inset-y-0 left-0 p-3 pointer-events-none w-11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m17.5 17.5-5-5 5 5Zm-3.333-9.167a5.833 5.833 0 1 1-11.666 0 5.833 5.833 0 0 1 11.666 0Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <input class="w-full pr-4 pl-11 peer focus:outline-none search-input" type="text" placeholder="Search" name="search">
+                        <button type="button" x-on:click="$refs.searchForm.reset()" class="absolute inset-y-0 right-0 p-3 transition-all peer-placeholder-shown:invisible peer-placeholder-shown:opacity-0 w-11">
+                            <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m5 5 10 10M5 15 15 5 5 15Z" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </form>
+                </nav>
+                <nav :class="{'' : openMenu, '-translate-y-full md:-translate-y-0' : !openMenu}" class="z-[-1] border-t md:border-0 border-gray-200 md:flex top-full md:top-auto items-center header-menu transition-all duration-500 bg-white md:z-0 h-[calc(100vh-60px)] absolute md:static md:h-auto  inset-x-0">
+                    <ul class="grid px-2 md:gap-x-10 lg:gap-x-15 header-list xl:gap-x-[88px] md md:max-w-full mx-auto section-header_menu md:grid-cols-4 text-gray-900">
+                        
+                        <li class="px-4 py-3 border-b border-gray-200 md:p-0 md:border-0 md:hidden">
+                            <a href="/" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">Home</a>
+                        </li>
+                        
+                        <li class="px-4 py-3 border-b border-gray-200 md:p-0 md:border-0 ">
+                            <a href="/catalog/" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">Catalog</a>
+                        </li>
+                        
+                        <li class="px-4 py-3 border-b border-gray-200 md:p-0 md:border-0 ">
+                            <a href="/news/" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">News</a>
+                        </li>
+                        
+                        <li class="px-4 py-3 border-b border-gray-200 md:p-0 md:border-0 ">
+                            <a href="/" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">Wish list</a>
+                        </li>
+                        
+                        <li class="px-4 py-3 border-b border-gray-200 md:p-0 md:border-0 ">
+                            <a href="/" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">Contact us</a>
+                        </li>
+                        
+                    </ul>
+                    <div class="container mx-auto mt-7 md:hidden">
+                        <h2 class="text-lg px-0.5 font-medium leading-6 mb-4 text-gray-900 uppercase">my account</h2>
+                        <a href="/" class="flex items-center justify-center w-full text-white bg-blue-800 rounded h-11">
+                            <p class="text-lg font-medium leading-6">Sign in</p>
+                        </a>
+                        <div class="flex justify-center mt-4">
+                            <p class="text-gray-600">Don't have an account?</p>
+                            <a href="/" class="ml-1 text-blue-800 underline">Sign up</a>
+                        </div>
+                    </div>
+                </nav>
+                <div class="grid items-center grid-cols-3 md:grid-cols-4 justify-items-center">
+                    <button @click="searchMenu = !searchMenu" class="flex items-center justify-center text-gray-900 p-0.5 md:p-0 transition-all duration-300 rounded outline-none search__button active:bg-gray-200 w-7 h-7 focus:outline-none md:hover:bg-gray-200 md:focus:text-blue-800 active:text-blue-800 md:hover:text-blue-700">
+                        <svg class="w-full h-full md:stroke-2">
+                            <use xlink:href="/images/all-icons.svg#search"></use>
+                        </svg>
+                    </button>
+                    <a href="/" class="flex items-center justify-center text-gray-900 p-0.5 md:p-0 transition-all duration-300 rounded outline-none active:bg-gray-200 w-7 h-7 focus:outline-none md:hover:bg-gray-200 md:focus:text-blue-800 active:text-blue-800 md:hover:text-blue-700">
+                        <svg class="w-full h-full md:stroke-2">
+                            <use xlink:href="/images/all-icons.svg#account"></use>
+                        </svg>
+                    </a>
+                    <a href="/" class="flex items-center justify-center text-gray-900 p-0.5 md:p-0 transition-all duration-300 rounded outline-none active:bg-gray-200 w-7 h-7 focus:outline-none md:hover:bg-gray-200 md:focus:text-blue-800 active:text-blue-800 md:hover:text-blue-700">
+                        <svg class="w-full h-full md:stroke-2">
+                            <use xlink:href="/images/all-icons.svg#cart"></use>
+                        </svg>
+                    </a>
+                    <a class="hidden font-medium text-blue-400 transition-all duration-300 outline-none md:block focus:outline-none hover:text-blue-500 whitespace-nowrap focus:text-blue-800 active:text-blue-800" href="/">Sign in</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="grid-in-main">
+        
+
+
+
+<section class="section-info">
+    <div class="container mx-auto">
+        <div class="flex items-center mt-6 space-x-2 text-gray-600 news-landmark__pages">
+            <a href="/"
+                class="underline outline-none focus:text-blue-800 active:text-blue-900 focus:no-underline focus:outline focus:outline-blue-800">Home</a>
+            <svg class="w-4 h-4">
+                <use xlink:href="/images/all-icons.svg#arrow-right"></use>
+            </svg>
+            <a href="/catalog/"
+                class="underline outline-none focus:text-blue-800 active:text-blue-900 focus:no-underline focus:outline focus:outline-blue-80">Catalog</a>
+            <svg class="w-4 h-4">
+                <use xlink:href="/images/all-icons.svg#arrow-right"></use>
+            </svg>
+            <a href="/catalog/categories/mirrors/"
+                class="underline outline-none focus:text-blue-800 active:text-blue-900 focus:no-underline focus:outline focus:outline-blue-80">Mirrors</a>
+            <svg class="w-4 h-4">
+                <use xlink:href="/images/all-icons.svg#arrow-right"></use>
+            </svg>
+            <a href="#"
+                class="outline-none focus:text-blue-800 active:text-blue-900 focus:outline focus:outline-blue-80">Oval
+                hanging mirror</a>
+        </div>
+        <div class="grid w-full grid-cols-full">
+            
+<div class="w-full mt-6 md:w-1/2">
+    <div class="relative w-full">
+        <div class="swiper swiper-product-page">
+            <div class="w-full swiper-wrapper">
+                
+                <div class="swiper-slide">
+                    <img class="w-full max-h-[524px] object-cover" src="/images/image/oval-mirror.jpeg" alt="#">
+                </div>
+                
+                <div class="swiper-slide">
+                    <img class="w-full max-h-[524px] object-cover" src="/images/image/oval-mirror.jpeg" alt="#">
+                </div>
+                
+                <div class="swiper-slide">
+                    <img class="w-full max-h-[524px] object-cover" src="/images/image/oval-mirror.jpeg" alt="#">
+                </div>
+                
+                <div class="swiper-slide">
+                    <img class="w-full max-h-[524px] object-cover" src="/images/image/oval-mirror.jpeg" alt="#">
+                </div>
+                
+                <div class="swiper-slide">
+                    <img class="w-full max-h-[524px] object-cover" src="/images/image/oval-mirror.jpeg" alt="#">
+                </div>
+                
+                <div class="swiper-slide">
+                    <img class="w-full max-h-[524px] object-cover" src="/images/image/oval-mirror.jpeg" alt="#">
+                </div>
+                
+                <div class="swiper-slide">
+                    <img class="w-full max-h-[524px] object-cover" src="/images/image/oval-mirror.jpeg" alt="#">
+                </div>
+                
+                <div class="swiper-slide">
+                    <img class="w-full max-h-[524px] object-cover" src="/images/image/oval-mirror.jpeg" alt="#">
+                </div>
+                
+            </div>
+        </div>
+        <button
+            class="z-10 absolute top-7 left-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-br w-[52px] h-[22px] sm:w-24 sm:h-8 bg-red-700">
+            <p class="text-sm text-gray-100 md:text-base">Sale</p>
+        </button>
+    </div>
+    <div class="flex h-24 mt-4 overflow-hidden swiper-product-page-thumbs swiper">
+        <div class="swiper-wrapper">
+            
+            <div class="relative w-24 transition-colors bg-center bg-cover swiper-slide ring-inset ring-1"
+                style="background-image: url(/images/image/oval-mirror.jpeg);"></div>
+            
+            <div class="relative w-24 transition-colors bg-center bg-cover swiper-slide ring-inset ring-1"
+                style="background-image: url(/images/image/oval-mirror.jpeg);"></div>
+            
+            <div class="relative w-24 transition-colors bg-center bg-cover swiper-slide ring-inset ring-1"
+                style="background-image: url(/images/image/oval-mirror.jpeg);"></div>
+            
+            <div class="relative w-24 transition-colors bg-center bg-cover swiper-slide ring-inset ring-1"
+                style="background-image: url(/images/image/oval-mirror.jpeg);"></div>
+            
+            <div class="relative w-24 transition-colors bg-center bg-cover swiper-slide ring-inset ring-1"
+                style="background-image: url(/images/image/oval-mirror.jpeg);"></div>
+            
+            <div class="relative w-24 transition-colors bg-center bg-cover swiper-slide ring-inset ring-1"
+                style="background-image: url(/images/image/oval-mirror.jpeg);"></div>
+            
+            <div class="relative w-24 transition-colors bg-center bg-cover swiper-slide ring-inset ring-1"
+                style="background-image: url(/images/image/oval-mirror.jpeg);"></div>
+            
+            <div class="relative w-24 transition-colors bg-center bg-cover swiper-slide ring-inset ring-1"
+                style="background-image: url(/images/image/oval-mirror.jpeg);"></div>
+            
+        </div>
+    </div>
+</div>
+
+            
+<div class="w-full mt-6 md:mt-0">
+    <h1 class="text-xl font-medium uppercase sm:text-3xl">Oval hanging mirror</h1>
+    
+<div class="flex mt-3 space-x-1 sm:space-x-4">
+    
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 74%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+    <div class="grid grid-flow-col text-gray-600 gap-x-1 sm:gap-x-4">
+        <p class="text-sm sm:text-base">(3.7)</p>
+        <p class="text-sm underline sm:text-base">12 ratings</p>
+        <p class="text-sm underline sm:text-base">9 reviews</p>
+    </div>
+</div>
+
+    <div class="grid grid-flow-col text-3xl mt-7 w-max gap-x-4">
+        <p class="text-gray-900">€74.56</p>
+        <p class="text-gray-600">€113.99</p>
+    </div>
+</div>
+
+            
+<div class="w-full mt-6 md:mt-0">
+    <div>
+        <p class="font-medium text-gray-900">Colors</p>
+        <div class="grid grid-flow-col mt-2 w-max gap-x-2">
+            
+            <label class="relative text-center w-max group">
+                <input class="appearance-none sr-only peer" type="checkbox">
+                <span style="background-image: url('/images/background/silver.jpg'); background-size: cover;"
+                    class="flex items-center justify-center text-transparent transition-all rounded cursor-pointer peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline peer-focus-visible:outline-blue-800 group-hover:shadow-md h-9 w-9 ring-gray-300 peer-checked:text-white">
+                    <svg class="w-6 h-6">
+                        <use xlink:href="/images/all-icons.svg#check-mark"></use>
+                    </svg>
+                </span>
+                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Silver</p>
+            </label>
+            
+            <label class="relative text-center w-max group">
+                <input class="appearance-none sr-only peer" type="checkbox">
+                <span style="background-image: url('/images/background/gold.jpg'); background-size: cover;"
+                    class="flex items-center justify-center text-transparent transition-all rounded cursor-pointer peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline peer-focus-visible:outline-blue-800 group-hover:shadow-md h-9 w-9 ring-gray-300 peer-checked:text-white">
+                    <svg class="w-6 h-6">
+                        <use xlink:href="/images/all-icons.svg#check-mark"></use>
+                    </svg>
+                </span>
+                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Gold</p>
+            </label>
+            
+        </div>
+    </div>
+    <div class="grid grid-flow-col mt-12 gap-x-2 w-max">
+        <button class="flex items-center justify-center bg-gray-200 rounded-sm w-9 h-9">
+            <svg class="w-6 h-6 text-gray-600">
+                <use xlink:href="/images/all-icons.svg#minus"></use>
+            </svg>
+        </button>
+        <label class="relative text-center w-max group">
+            <input type="number" step="1" min="1" value="1"
+                class="text-center border border-gray-300 rounded-sm peer w-9 h-9">
+        </label>
+        <button class="flex items-center justify-center bg-blue-800 rounded-sm w-9 h-9">
+            <svg class="w-6 h-6 text-white">
+                <use xlink:href="/images/all-icons.svg#plus"></use>
+            </svg>
+        </button>
+    </div>
+    <div>
+        <button class="relative flex items-center justify-center h-12 mt-10 text-white transition-colors duration-300 bg-blue-800 rounded outline-none hover:bg-blue-700 focus:outline focus:outline-blue-800 active:bg-blue-900 focus:outline-offset-1 w-60">
+            <span>Add to cart</span>
+        </button>
+    </div>
+</div>
+
+        </div>
+        <div x-data="{ open: false }" class="mt-8 text-sm text-gray-900">
+            <div class="mt-3 max-w-[696px]"><p>Gold-tone iron and brass large mirror featuring an oval shaped design and a gold coloured brass-plated piped frame. Top off your room with a touch of simple refinement with the  Oval Mirror. The gold iron frame features a bronzed finish, and two rose of bead detailing make this mirror a classic beauty. Add light and dimension to almost any space with this timeless accent mirror.</p>
+</div>
+            <button class="mt-3" @click="open = ! open">
+                <div class="flex items-center space-x-1 text-blue-800">
+                    <p>Read full description</p>
+                    <svg class="w-4 h-4">
+                        <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                    </svg>
+                </div>
+            </button>
+        </div>
+        <div class="max-w-[696px]">
+            
+<div class="relative py-3 text-gray-900 mt-7">
+    <div class="grid grid-cols-2">
+        <button class="col-span-2 p-4 -mx-4 border-t-2 border-gray-200">
+            <h2 class="text-xl font-medium text-left">Details</h2>
+        </button>
+        <button class="col-span-2 row-start-3 p-4 mt-4 -mx-4 border-t-2 border-gray-200">
+            <h2 class="text-xl font-medium text-left">Shipping & Returns</h2>
+        </button>
+        <div class="grid w-full col-span-2 mt-4 md:pt-3 md:mt-5 md:flex md:justify-between">
+            <div class="md:w-[44%]">
+                <h3 class="font-medium text-gray-900">Product measurements:</h3>
+                <div class="flex mt-2 space-x-3">
+                    <ul class="grid text-gray-600 gap-y-2">
+                        <li>
+                            <p>Height</p>
+                        </li>
+                        <li>
+                            <p>Width</p>
+                        </li>
+                        <li>
+                            <p>Depth</p>
+                        </li>
+                        <li>
+                            <p>Weight</p>
+                        </li>
+                    </ul>
+                    <ul class="grid text-gray-900 gap-y-2">
+                        <li>
+                            <p>39 cm</p>
+                        </li>
+                        <li>
+                            <p>10 cm</p>
+                        </li>
+                        <li>
+                            <p>2 cm</p>
+                        </li>
+                        <li>
+                            <p>1,5 kg</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="md:w-[30%] mt-4 md:mt-0">
+                <h3 class="font-medium text-gray-900">Materials:</h3>
+                <div class="mt-2">
+                    <ul class="text-gray-600">
+                        
+                        <li class="grid grid-cols-2 gap-x-3 w-max">
+                            <p>Iron</p>
+                            <p class="text-gray-900">100%</p>
+                        </li>
+                        
+                        <li class="grid grid-cols-2 gap-x-3 w-max">
+                            <p>Brass</p>
+                            <p class="text-gray-900">100%</p>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+</section>
+<section class="section-review">
+    <div class="container mx-auto">
+        <div class="grid lg:grid-cols-[2fr,1fr] sm:gap-x-15 w-full sm:max-w-[90%] mt-10">
+            
+<div x-data="{ allReviews: false, writeReviews: false }">
+    <h2 class="mb-5 text-2xl font-medium uppercase">Customer Reviews</h2>
+    <div class="grid grid-cols-full gap-y-5">
+        
+        
+<div class="w-full">
+    <div class="grid items-center grid-flow-col w-max gap-x-1 md:gap-x-4">
+        <img class="object-cover rounded-full w-9 h-9 md:w-12 md:h-12" src="https://thispersondoesnotexist.com/image" alt="Жопий Иванович">
+        <div>
+            <div class="grid grid-flow-col gap-x-2">
+                <p class="font-medium text-gray-900">Жопий Иванович</p>
+                <p class="text-gray-600">23.16.2632</p>
+            </div>
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 100%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="font-medium text-gray-900">
+        <span>Жопий recommended this item</span>
+    </div>
+    
+    <div class="mt-1 text-sm md:text-base">
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi.</span>
+    </div>
+</div>
+
+        
+        
+<div class="w-full">
+    <div class="grid items-center grid-flow-col w-max gap-x-1 md:gap-x-4">
+        <img class="object-cover rounded-full w-9 h-9 md:w-12 md:h-12" src="https://thispersondoesnotexist.com/image" alt="Жопий Иванович">
+        <div>
+            <div class="grid grid-flow-col gap-x-2">
+                <p class="font-medium text-gray-900">Жопий Иванович</p>
+                <p class="text-gray-600">23.16.2632</p>
+            </div>
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 100%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="mt-1 text-sm md:text-base">
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi.</span>
+    </div>
+</div>
+
+        
+        
+<div class="w-full">
+    <div class="grid items-center grid-flow-col w-max gap-x-1 md:gap-x-4">
+        <img class="object-cover rounded-full w-9 h-9 md:w-12 md:h-12" src="https://thispersondoesnotexist.com/image" alt="Шлюшка Вадимовна">
+        <div>
+            <div class="grid grid-flow-col gap-x-2">
+                <p class="font-medium text-gray-900">Шлюшка Вадимовна</p>
+                <p class="text-gray-600">09.12.1356</p>
+            </div>
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 40%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="mt-1 text-sm md:text-base">
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi.</span>
+    </div>
+</div>
+
+        
+    </div>
+    
+    <button @click="allReviews = !allReviews" class="flex items-end h-6 mt-5 text-blue-800">
+        <span>Read more reviews</span>
+        <svg class="w-4 h-4 mb-0.5">
+            <use xlink:href="/images/all-icons.svg#arrow-right"></use>
+        </svg>
+    </button>
+    
+    <button @click="writeReviews = !writeReviews"
+        class="relative flex items-center justify-center w-full h-12 mt-5 font-medium text-blue-800 transition-colors duration-300 rounded outline-none hover:text-white hover:bg-blue-700 active:ring-blue-900 active:text-white active:bg-blue-900 active:outline-none hover:ring-blue-700 focus:outline focus:outline-blue-800 focus:bg-blue-800 focus:text-white focus:outline-offset-2 sm:w-60 ring-1 ring-blue-800">
+        <span>Write a review</span>
+    </button>
+    <div :class="{ 'invisible opacity-0' : !allReviews}"
+        class="transition-all fixed inset-0 invisible opacity-0 hidden z-[99] md:block bg-black/30">
+    </div>
+    <div :class="{'' : allReviews, '-translate-y-full md:-translate-y-0 md:translate-x-full' : !allReviews}"
+        class="md:right-0 top-0 px-4 md:py-10 md:pl-10 md:pr-20 z-[60] -translate-y-full md:-translate-y-0 md:translate-x-full border-gray-200 transition-all duration-500 bg-white md:z-[100] h-full md:w-1/2 fixed inset-x-0 md:left-auto overflow-y-auto">
+        <div class="grid gap-y-5">
+            <div class="flex justify-between w-full text-gray-900">
+                <p class="text-2xl font-medium uppercase">Customer reviews & ratings</p>
+                <button type="button" @click="allReviews = !allReviews"
+                    class="w-8 h-8 transition-colors duration-500 rounded hover:bg-gray-200">
+                    <svg class="w-8 h-8">
+                        <use xlink:href="/images/all-icons.svg#close"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex space-x-6">
+                
+                <img class="w-[92px] object-cover h-[92px] rounded" src="/images/image/oval-mirror.jpeg" alt="#">
+                
+                <div>
+                    <p>Oval hanging mirror</p>
+                    <p>Model number: 501480005082</p>
+                </div>
+            </div>
+            <div class="w-full">
+                <div class="w-full">
+                    
+<div class="py-3 mt-4 lg:-mt-3">
+    <h2 class="mb-5 text-2xl font-medium uppercase whitespace-nowrap">Customer ratings</h2>
+    <div class="flex items-center space-x-3">
+        <p class="text-lg font-medium text-gray-900">3.7</p>
+        <div class="w-max">
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 74%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+        <p>(12 ratings)</p>
+    </div>
+    <div class="grid items-center grid-flow-col mt-2.5 gap-x-3 w-max">
+        <p class="text-lg font-medium text-gray-900">71 %</p>
+        <p class="font-medium text-gray-900 sm:text-lg">Recommended</p>
+        <p class="text-sm sm:text-base">(5 of 7 customers)</p>
+    </div>
+    <div class="mt-5 grid gap-y-2.5 w-full sm:w-[78%]">
+        
+        <div class="flex items-center space-x-3">
+            <div>
+                
+                    
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 100%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+                
+            </div>
+            <div class="relative w-full h-1 overflow-hidden bg-gray-300 rounded">
+                <span class="absolute inset-y-0 left-0 bg-blue-800"
+                    style="width: NaN%;"></span>
+            </div>
+            <p>5</p>
+        </div>
+        
+        <div class="flex items-center space-x-3">
+            <div>
+                
+                    
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 80%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+                
+            </div>
+            <div class="relative w-full h-1 overflow-hidden bg-gray-300 rounded">
+                <span class="absolute inset-y-0 left-0 bg-blue-800"
+                    style="width: NaN%;"></span>
+            </div>
+            <p>2</p>
+        </div>
+        
+        <div class="flex items-center space-x-3">
+            <div>
+                
+                    
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 60%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+                
+            </div>
+            <div class="relative w-full h-1 overflow-hidden bg-gray-300 rounded">
+                <span class="absolute inset-y-0 left-0 bg-blue-800"
+                    style="width: NaN%;"></span>
+            </div>
+            <p>2</p>
+        </div>
+        
+        <div class="flex items-center space-x-3">
+            <div>
+                
+                    
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 40%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+                
+            </div>
+            <div class="relative w-full h-1 overflow-hidden bg-gray-300 rounded">
+                <span class="absolute inset-y-0 left-0 bg-blue-800"
+                    style="width: NaN%;"></span>
+            </div>
+            <p>2</p>
+        </div>
+        
+        <div class="flex items-center space-x-3">
+            <div>
+                
+                    
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 20%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+                
+            </div>
+            <div class="relative w-full h-1 overflow-hidden bg-gray-300 rounded">
+                <span class="absolute inset-y-0 left-0 bg-blue-800"
+                    style="width: NaN%;"></span>
+            </div>
+            <p>1</p>
+        </div>
+        
+    </div>
+</div>
+
+                </div>
+                <button
+                    class="relative flex items-center justify-center h-12 font-medium text-blue-800 transition-colors duration-300 rounded outline-none mt-7 hover:text-white hover:bg-blue-700 active:ring-blue-900 active:text-white active:bg-blue-900 active:outline-none hover:ring-blue-700 focus:outline focus:outline-blue-800 focus:bg-blue-800 focus:text-white focus:outline-offset-2 w-60 ring-1 ring-blue-800">
+                    <a href="#" class="before:absolute before:inset-0">Write a review</a>
+                </button>
+            </div>
+            <div class="flex justify-between w-full text-gray-600">
+                <p>12 reviews</p>
+                <button class="flex items-center space-x-2">
+                    <p>Sort by:</p>
+                    <p>Newest to oldest</p>
+                    <svg class="w-5 h-5">
+                        <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="grid gap-y-5">
+                
+                
+                
+<div class="w-full">
+    <div class="grid items-center grid-flow-col w-max gap-x-1 md:gap-x-4">
+        <img class="object-cover rounded-full w-9 h-9 md:w-12 md:h-12" src="https://thispersondoesnotexist.com/image" alt="Жопий Иванович">
+        <div>
+            <div class="grid grid-flow-col gap-x-2">
+                <p class="font-medium text-gray-900">Жопий Иванович</p>
+                <p class="text-gray-600">23.16.2632</p>
+            </div>
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 100%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="font-medium text-gray-900">
+        <span>Жопий recommended this item</span>
+    </div>
+    
+    <div class="mt-1 text-sm md:text-base">
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi.</span>
+    </div>
+</div>
+
+                
+                
+                
+                
+<div class="w-full">
+    <div class="grid items-center grid-flow-col w-max gap-x-1 md:gap-x-4">
+        <img class="object-cover rounded-full w-9 h-9 md:w-12 md:h-12" src="https://thispersondoesnotexist.com/image" alt="Жопий Иванович">
+        <div>
+            <div class="grid grid-flow-col gap-x-2">
+                <p class="font-medium text-gray-900">Жопий Иванович</p>
+                <p class="text-gray-600">23.16.2632</p>
+            </div>
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 100%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="mt-1 text-sm md:text-base">
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi.</span>
+    </div>
+</div>
+
+                
+                
+                
+                
+                
+                
+<div class="w-full">
+    <div class="grid items-center grid-flow-col w-max gap-x-1 md:gap-x-4">
+        <img class="object-cover rounded-full w-9 h-9 md:w-12 md:h-12" src="https://thispersondoesnotexist.com/image" alt="Шлюшка Вадимовна">
+        <div>
+            <div class="grid grid-flow-col gap-x-2">
+                <p class="font-medium text-gray-900">Шлюшка Вадимовна</p>
+                <p class="text-gray-600">09.12.1356</p>
+            </div>
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 40%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="mt-1 text-sm md:text-base">
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi.</span>
+    </div>
+</div>
+
+                
+                
+                
+                
+<div class="w-full">
+    <div class="grid items-center grid-flow-col w-max gap-x-1 md:gap-x-4">
+        <img class="object-cover rounded-full w-9 h-9 md:w-12 md:h-12" src="https://thispersondoesnotexist.com/image" alt="Шалава Тупкина">
+        <div>
+            <div class="grid grid-flow-col gap-x-2">
+                <p class="font-medium text-gray-900">Шалава Тупкина</p>
+                <p class="text-gray-600">09.12.1353</p>
+            </div>
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 60%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="font-medium text-gray-900">
+        <span>Шалава recommended this item</span>
+    </div>
+    
+    <div class="mt-1 text-sm md:text-base">
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi.</span>
+    </div>
+</div>
+
+                
+                
+                
+                
+<div class="w-full">
+    <div class="grid items-center grid-flow-col w-max gap-x-1 md:gap-x-4">
+        <img class="object-cover rounded-full w-9 h-9 md:w-12 md:h-12" src="https://thispersondoesnotexist.com/image" alt="Гадя Петрович">
+        <div>
+            <div class="grid grid-flow-col gap-x-2">
+                <p class="font-medium text-gray-900">Гадя Петрович</p>
+                <p class="text-gray-600">03.01.998</p>
+            </div>
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 20%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="mt-1 text-sm md:text-base">
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi.</span>
+    </div>
+</div>
+
+                
+                
+                
+                
+<div class="w-full">
+    <div class="grid items-center grid-flow-col w-max gap-x-1 md:gap-x-4">
+        <img class="object-cover rounded-full w-9 h-9 md:w-12 md:h-12" src="https://thispersondoesnotexist.com/image" alt="Жопий Иванович">
+        <div>
+            <div class="grid grid-flow-col gap-x-2">
+                <p class="font-medium text-gray-900">Жопий Иванович</p>
+                <p class="text-gray-600">23.16.2632</p>
+            </div>
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 100%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="font-medium text-gray-900">
+        <span>Жопий recommended this item</span>
+    </div>
+    
+    <div class="mt-1 text-sm md:text-base">
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi.</span>
+    </div>
+</div>
+
+                
+                
+                
+                
+<div class="w-full">
+    <div class="grid items-center grid-flow-col w-max gap-x-1 md:gap-x-4">
+        <img class="object-cover rounded-full w-9 h-9 md:w-12 md:h-12" src="https://thispersondoesnotexist.com/image" alt="Жопий Иванович">
+        <div>
+            <div class="grid grid-flow-col gap-x-2">
+                <p class="font-medium text-gray-900">Жопий Иванович</p>
+                <p class="text-gray-600">23.16.2632</p>
+            </div>
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 100%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="mt-1 text-sm md:text-base">
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi.</span>
+    </div>
+</div>
+
+                
+                
+                
+                
+                
+                
+<div class="w-full">
+    <div class="grid items-center grid-flow-col w-max gap-x-1 md:gap-x-4">
+        <img class="object-cover rounded-full w-9 h-9 md:w-12 md:h-12" src="https://thispersondoesnotexist.com/image" alt="Шлюшка Вадимовна">
+        <div>
+            <div class="grid grid-flow-col gap-x-2">
+                <p class="font-medium text-gray-900">Шлюшка Вадимовна</p>
+                <p class="text-gray-600">09.12.1356</p>
+            </div>
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 40%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="mt-1 text-sm md:text-base">
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi.</span>
+    </div>
+</div>
+
+                
+                
+                
+                
+<div class="w-full">
+    <div class="grid items-center grid-flow-col w-max gap-x-1 md:gap-x-4">
+        <img class="object-cover rounded-full w-9 h-9 md:w-12 md:h-12" src="https://thispersondoesnotexist.com/image" alt="Шалава Тупкина">
+        <div>
+            <div class="grid grid-flow-col gap-x-2">
+                <p class="font-medium text-gray-900">Шалава Тупкина</p>
+                <p class="text-gray-600">09.12.1353</p>
+            </div>
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 60%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    
+    <div class="font-medium text-gray-900">
+        <span>Шалава recommended this item</span>
+    </div>
+    
+    <div class="mt-1 text-sm md:text-base">
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum labore libero adipisci fuga aliquam! Iste, molestias? Voluptatem neque unde recusandae provident aperiam corrupti optio reprehenderit, dolorum, voluptate necessitatibus molestias sequi.</span>
+    </div>
+</div>
+
+                
+                
+                
+                
+                <button
+                    class="relative flex items-center justify-center h-12 mt-8 font-medium text-blue-800 transition-colors duration-300 rounded outline-none hover:text-white hover:bg-blue-700 active:ring-blue-900 active:text-white active:bg-blue-900 active:outline-none hover:ring-blue-700 focus:outline focus:outline-blue-800 focus:bg-blue-800 focus:text-white focus:outline-offset-2 w-60 ring-1 ring-blue-800">
+                    <span>Read more</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div :class="{ 'invisible opacity-0' : !writeReviews}"
+        class="transition-all fixed inset-0 invisible opacity-0 hidden z-[99] md:block bg-black/30">
+    </div>
+    <div :class="{'' : writeReviews, '-translate-y-full md:-translate-y-0 md:translate-x-full' : !writeReviews}"
+        class="md:right-0 top-0 px-4 md:py-10 md:pl-10 md:pr-20 z-[60] -translate-y-full md:-translate-y-0 md:translate-x-full border-gray-200 transition-all duration-500 bg-white md:z-[100] h-full md:w-1/2 fixed inset-x-0 md:left-auto overflow-y-auto">
+        <div class="grid gap-y-5">
+            <div class="flex justify-between w-full text-gray-900">
+                <p class="text-2xl font-medium uppercase">review add</p>
+                <button type="button" @click="writeReviews = !writeReviews"
+                    class="w-8 h-8 transition-colors duration-500 rounded hover:bg-gray-200">
+                    <svg class="w-8 h-8">
+                        <use xlink:href="/images/all-icons.svg#close"></use>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex space-x-6">
+                
+                <img class="w-[92px] object-cover h-[92px] rounded" src="/images/image/oval-mirror.jpeg" alt="#">
+                
+                <div>
+                    <p>Oval hanging mirror</p>
+                    <p>Model number: 501480005082</p>
+                </div>
+            </div>
+            <form class="grid gap-y-6 form-review" action="" method="post">
+                <fieldset class="grid gap-y-2 form-review__rating">
+                    <legend class="font-medium">Rate this product</legend>
+                    <div class="outline-offset-2 focus-within:outline focus-within:outline-2 focus-within:outline-blue-800 relative h-8 rating md:h-6 aspect-[5.5/1] bg-contain rating__group" style="background-image: url(/images/icons/rating-off.svg);">
+                        
+                            <input
+                                class="absolute inset-0 h-full bg-contain outline-none opacity-0 appearance-none cursor-pointer checked:opacity-100 hover:opacity-100 rating__star"
+                                type="radio"
+                                name="rating"
+                                aria-label="one"
+                                value="1"
+                                style="background-image: url(/images/icons/rating-on.svg); width: calc((100% / 5) * 1);"
+                            >
+                        
+                            <input
+                                class="absolute inset-0 h-full bg-contain outline-none opacity-0 appearance-none cursor-pointer checked:opacity-100 hover:opacity-100 rating__star"
+                                type="radio"
+                                name="rating"
+                                aria-label="one"
+                                value="2"
+                                style="background-image: url(/images/icons/rating-on.svg); width: calc((100% / 5) * 2);"
+                            >
+                        
+                            <input
+                                class="absolute inset-0 h-full bg-contain outline-none opacity-0 appearance-none cursor-pointer checked:opacity-100 hover:opacity-100 rating__star"
+                                type="radio"
+                                name="rating"
+                                aria-label="one"
+                                value="3"
+                                style="background-image: url(/images/icons/rating-on.svg); width: calc((100% / 5) * 3);"
+                            >
+                        
+                            <input
+                                class="absolute inset-0 h-full bg-contain outline-none opacity-0 appearance-none cursor-pointer checked:opacity-100 hover:opacity-100 rating__star"
+                                type="radio"
+                                name="rating"
+                                aria-label="one"
+                                value="4"
+                                style="background-image: url(/images/icons/rating-on.svg); width: calc((100% / 5) * 4);"
+                            >
+                        
+                            <input
+                                class="absolute inset-0 h-full bg-contain outline-none opacity-0 appearance-none cursor-pointer checked:opacity-100 hover:opacity-100 rating__star"
+                                type="radio"
+                                name="rating"
+                                aria-label="one"
+                                value="5"
+                                style="background-image: url(/images/icons/rating-on.svg); width: calc((100% / 5) * 5);"
+                            >
+                        
+                    </div>
+                </fieldset>
+                <label class="grid gap-y-2">
+                    <span class="font-medium">Would you recommend this product?</span>
+                    <div class="grid grid-flow-col label__buttons gap-x-7 w-max">
+                        <div class="flex items-center space-x-2">
+                            <label class="relative flex group">
+                                <input class="appearance-none sr-only peer" name="recommended" type="radio">
+                                <span
+                                    class="block w-4 h-4 transition-all duration-300 rounded-full cursor-pointer peer-disabled:shadow-none peer-disabled:cursor-default input_radio ring-2 group-hover:shadow-md peer-checked:ring-blue-800 peer-checked:bg-white ring-gray-600 before:bg-blue-800 peer-checked:before:w-2 peer-checked:before:h-2 before:transition-all before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:absolute before:duration-300 before:rounded-full"></span>
+                            </label>
+                            <span class="text-gray-600">Yes</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <label class="relative flex group">
+                                <input class="appearance-none sr-only peer" name="recommended" type="radio">
+                                <span
+                                    class="block w-4 h-4 transition-all duration-300 rounded-full cursor-pointer peer-disabled:shadow-none peer-disabled:cursor-default input_radio ring-2 group-hover:shadow-md peer-checked:ring-blue-800 peer-checked:bg-white ring-gray-600 before:bg-blue-800 peer-checked:before:w-2 peer-checked:before:h-2 before:transition-all before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:absolute before:duration-300 before:rounded-full"></span>
+                            </label>
+                            <span class="text-gray-600">No</span>
+                        </div>
+                    </div>
+                </label>
+                <label class="grid gap-y-2">
+                    <span class="font-medium">Share your experience</span>
+                    <textarea name="form-review__review" id="review" cols="80" rows="5" class="w-full px-4 py-3 rounded outline-none resize-none ring-2 ring-gray-400" placeholder="What do you like or dislike? What shouls other shoppers know before buying?"></textarea>
+                </label>
+            </form>
+            <button class="flex items-center justify-center h-12 mt-5 font-medium text-white bg-blue-800 rounded focus-within:outline focus-within:outline-blue-800 focus-within:outline-2 active:bg-blue-900 active:outline-none focus-within:outline-offset-2 w-60">
+                <span>Submit review </span>
+            </button>
+        </div>
+    </div>
+</div>
+
+            
+<div class="py-3 mt-4 lg:-mt-3">
+    <h2 class="mb-5 text-2xl font-medium uppercase whitespace-nowrap">Customer ratings</h2>
+    <div class="flex items-center space-x-3">
+        <p class="text-lg font-medium text-gray-900">3.7</p>
+        <div class="w-max">
+            
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 74%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+        </div>
+        <p>(12 ratings)</p>
+    </div>
+    <div class="grid items-center grid-flow-col mt-2.5 gap-x-3 w-max">
+        <p class="text-lg font-medium text-gray-900">71 %</p>
+        <p class="font-medium text-gray-900 sm:text-lg">Recommended</p>
+        <p class="text-sm sm:text-base">(5 of 7 customers)</p>
+    </div>
+    <div class="mt-5 grid gap-y-2.5 w-full sm:w-[78%]">
+        
+        <div class="flex items-center space-x-3">
+            <div>
+                
+                    
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 100%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+                
+            </div>
+            <div class="relative w-full h-1 overflow-hidden bg-gray-300 rounded">
+                <span class="absolute inset-y-0 left-0 bg-blue-800"
+                    style="width: NaN%;"></span>
+            </div>
+            <p>5</p>
+        </div>
+        
+        <div class="flex items-center space-x-3">
+            <div>
+                
+                    
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 80%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+                
+            </div>
+            <div class="relative w-full h-1 overflow-hidden bg-gray-300 rounded">
+                <span class="absolute inset-y-0 left-0 bg-blue-800"
+                    style="width: NaN%;"></span>
+            </div>
+            <p>2</p>
+        </div>
+        
+        <div class="flex items-center space-x-3">
+            <div>
+                
+                    
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 60%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+                
+            </div>
+            <div class="relative w-full h-1 overflow-hidden bg-gray-300 rounded">
+                <span class="absolute inset-y-0 left-0 bg-blue-800"
+                    style="width: NaN%;"></span>
+            </div>
+            <p>2</p>
+        </div>
+        
+        <div class="flex items-center space-x-3">
+            <div>
+                
+                    
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 40%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+                
+            </div>
+            <div class="relative w-full h-1 overflow-hidden bg-gray-300 rounded">
+                <span class="absolute inset-y-0 left-0 bg-blue-800"
+                    style="width: NaN%;"></span>
+            </div>
+            <p>2</p>
+        </div>
+        
+        <div class="flex items-center space-x-3">
+            <div>
+                
+                    
+<div class="relative grid items-center grid-cols-5 w-max gap-x-1">
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-gray-300">
+        <use xlink:href="/images/all-icons.svg#star"></use>
+    </svg>
+    
+    <div class="absolute top-0 bottom-0 left-0 overflow-hidden" style="width: 20%;">
+        <div class="grid items-center grid-cols-5 gap-x-1 w-max">
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+            <svg class="w-4.5 h-4.5 md:w-6 md:h-6 text-yellow-500">
+                <use xlink:href="/images/all-icons.svg#star"></use>
+            </svg>
+            
+        </div>
+    </div>
+</div>
+
+                
+            </div>
+            <div class="relative w-full h-1 overflow-hidden bg-gray-300 rounded">
+                <span class="absolute inset-y-0 left-0 bg-blue-800"
+                    style="width: NaN%;"></span>
+            </div>
+            <p>1</p>
+        </div>
+        
+    </div>
+</div>
+
+        </div>
+    </div>
+</section>
+<section class="overflow-hidden section-recomended">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-full mt-7 gap-y-4">
+            <div class="py-3">
+                <h2 class="text-2xl font-medium text-gray-900">You might also like</h2>
+                <div class="w-full mt-4 overflow-visible sm:mt-5 swiper swiper-from-recomended">
+                    <div class="grid grid-flow-col swiper-wrapper gap-x-2 sm:gap-x-0">
+                        
+                        <div class="swiper-slide w-[160px] sm:w-full">
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/backlit-mirror.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Backlit mirror</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€15.00
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                        
+                        <div class="swiper-slide w-[160px] sm:w-full">
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/mirror-dark-frame.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Mirror in a dark frame</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€19.99
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                        
+                        <div class="swiper-slide w-[160px] sm:w-full">
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/mirror-wood-trim.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Round mirror with wood trim</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€52.50
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                        
+                        <div class="swiper-slide w-[160px] sm:w-full">
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/round-black-mirror.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Huge round black mirror</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€62.50
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="py-3">
+                <h2 class="text-2xl font-medium text-gray-900">Recently Viewed</h2>
+                <div class="w-full mt-4 overflow-visible sm:mt-5 swiper swiper-from-recomended">
+                    <div class="grid grid-flow-col swiper-wrapper gap-x-2 sm:gap-x-0">
+                        
+                        <div class="swiper-slide w-[160px] sm:w-full">
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/cups.png');">
+        </div>
+        
+        <button
+            class="absolute top-0 left-0 flex items-center justify-center transition-all duration-500 bg-green-900 rounded-tl rounded-br lg:group-focus-within:top-0 lg:group-focus-within:left-0 lg:group-hover:top-0 lg:group-hover:left-0 lg:-top-5 lg:-left-12 w-[52px] h-[22px] sm:w-15 sm:h-9">
+            <p class="text-sm text-gray-100 sm:font-medium">New</p>
+        </button>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Pair of ceramic cups</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€14.99
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                        
+                        <div class="swiper-slide w-[160px] sm:w-full">
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/candles.png');">
+        </div>
+        
+        <button
+            class="absolute top-0 left-0 flex items-center justify-center transition-all duration-500 bg-red-700 rounded-tl rounded-br lg:group-focus-within:top-0 lg:group-focus-within:left-0 lg:group-hover:top-0 lg:group-hover:left-0 lg:-top-5 lg:-left-12 w-[52px] h-[22px] sm:w-15 sm:h-9">
+            <p class="text-sm text-gray-100 sm:font-medium">Sale</p>
+        </button>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Aroma candle</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€7.56
+            </p>
+            
+            <p class="text-gray-600 line-through transition-all duration-300 group-active:text-blue-900">
+                €13.99
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                        
+                        <div class="swiper-slide w-[160px] sm:w-full">
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/linen-towels.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Set of linen towels</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€32.97
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                        
+                        <div class="swiper-slide w-[160px] sm:w-full">
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/square-black-mirror.png');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Square black mirror</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€57.99
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    </main>
+    <footer class="grid-in-footer mt-12 border-t-[1px] bg-gray-100 border-gray-300">
+        <section class="section-footer">
+            <div class="container mx-auto mt-10">
+                <div class="grid grid-cols-1 sm:flex sm:justify-between section-footer_contact__information">
+                    <div>
+                        <div class="grid grid-cols-2 gap-x-2 sm:gap-x-20">
+                            <div>
+                                <h3 class="mb-6 text-lg font-medium text-gray-900 uppercase sm:text-xl">Information</h3>
+                                <ul class="grid text-gray-600 gap-y-4">
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">About us</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">Customer Service</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">News</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">FAQ</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">Contact us</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="mb-6 text-lg font-medium text-gray-900 uppercase sm:text-xl ">Service</h3>
+                                <ul class="grid text-gray-600 gap-y-4">
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">Shipping Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">Payment Method</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">Terms & Conditions</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">Privacy Policy</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap mt-6">
+                            
+                                <button class="my-1.5  w-14  mr-2 transition-all duration-500 outline-2 outline-transparent outline-dotted focus:outline-blue-900 rounded overflow-hidden group">
+                                    <svg class="text-gray-200 transition-colors duration-300 h-9 group-hover:text-gray-300 group-active:text-gray-400">
+                                        <use xlink:href="/images/all-icons.svg#visa"></use>
+                                    </svg>
+                                </button>
+                            
+                                <button class="my-1.5  w-15  mr-2 transition-all duration-500 outline-2 outline-transparent outline-dotted focus:outline-blue-900 rounded overflow-hidden group">
+                                    <svg class="text-gray-200 transition-colors duration-300 h-9 group-hover:text-gray-300 group-active:text-gray-400">
+                                        <use xlink:href="/images/all-icons.svg#paypal"></use>
+                                    </svg>
+                                </button>
+                            
+                                <button class="my-1.5  w-14  mr-2 transition-all duration-500 outline-2 outline-transparent outline-dotted focus:outline-blue-900 rounded overflow-hidden group">
+                                    <svg class="text-gray-200 transition-colors duration-300 h-9 group-hover:text-gray-300 group-active:text-gray-400">
+                                        <use xlink:href="/images/all-icons.svg#mastercard"></use>
+                                    </svg>
+                                </button>
+                            
+                                <button class="my-1.5  w-14  mr-2 transition-all duration-500 outline-2 outline-transparent outline-dotted focus:outline-blue-900 rounded overflow-hidden group">
+                                    <svg class="text-gray-200 transition-colors duration-300 h-9 group-hover:text-gray-300 group-active:text-gray-400">
+                                        <use xlink:href="/images/all-icons.svg#maestro"></use>
+                                    </svg>
+                                </button>
+                            
+                        </div>
+                    </div>
+                    <div class="border-t-[1px] mt-6 sm:m-0 sm:border-0 border-gray-300">
+                        <h3 class="uppercase mt-6 sm:m-0 font-medium text-lg text-gray-800 leading-[22px]">atmosphere</h3>
+                        <p class="mt-4 text-sm text-gray-600">Online store of decor and household goods.</p>
+                        <a class="mt-4 text-blue-700 underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-800 focus:text-blue-900 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline" href="/">+760(455)610-84-42923</a>
+                        <br>
+                        <a class="mt-2 text-blue-700 underline transition-all duration-300 outline-none outline-transparent focus:outline-blue-800 hover:text-blue-800 focus:text-blue-900 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline" href="/">househildprod@yahoo.com</a>
+                        <p class="mt-2 text-river-bed">472 Friesen Isle</p>
+                        <div class="grid grid-cols-4 mt-4 gap-x-4 w-max social_link">
+                            <a href="/" class="transition-all duration-500 outline-none active:outline-none focus:rounded-lg group focus:outline-dotted focus:outline-blue-900">
+                                <svg width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M32.5 40h-25A7.5 7.5 0 0 1 0 32.5v-25A7.5 7.5 0 0 1 7.5 0h25A7.5 7.5 0 0 1 40 7.5v25a7.5 7.5 0 0 1-7.5 7.5Z" class="text-gray-200 transition-all duration-300 group-hover:text-blue-700 group-active:text-blue-900" fill="currentColor"/>
+                                    <path d="M23.409 13.321h1.825v-3.18c-.314-.043-1.398-.141-2.66-.141-2.632 0-4.434 1.656-4.434 4.699V17.5h-2.905v3.555h2.905V30l3.561.001v-8.945h2.788l.442-3.555H21.7v-2.449c.001-1.027.277-1.73 1.709-1.73Z" class="text-gray-400 transition-all duration-300 group-hover:text-white group-active:text-white group-focus:text-blue-800" fill="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="/" class="transition-all duration-500 outline-none focus:rounded-lg group focus:outline-dotted focus:outline-blue-900">
+                                <svg width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M32.5 40h-25A7.5 7.5 0 0 1 0 32.5v-25A7.5 7.5 0 0 1 7.5 0h25A7.5 7.5 0 0 1 40 7.5v25a7.5 7.5 0 0 1-7.5 7.5Z" class="text-gray-200 group-hover:text-blue-700 group-active:text-blue-900" fill="currentColor"/>
+                                    <path d="M20.004 14.865a5.13 5.13 0 1 0 0 10.263 5.13 5.13 0 1 0 0-10.263Zm0 8.463a3.331 3.331 0 1 1 0-6.662 3.331 3.331 0 0 1 0 6.662Z" class="text-gray-400 transition-all duration-300 group-hover:text-white group-active:text-white group-focus:text-blue-800" fill="currentColor"/>
+                                    <path d="M24.124 10.063c-1.84-.087-6.398-.083-8.24 0-1.619.076-3.046.467-4.197 1.617-1.923 1.924-1.677 4.515-1.677 8.316 0 3.89-.216 6.423 1.678 8.317 1.93 1.93 4.56 1.677 8.316 1.677 4.604 0 9.641.441 9.933-5.874.087-1.84.083-6.397 0-8.238-.165-3.512-2.05-5.64-5.813-5.815Zm2.911 16.977c-1.261 1.261-3.01 1.149-7.058 1.149-4.166 0-5.837.061-7.057-1.161-1.405-1.398-1.15-3.643-1.15-7.044 0-8.313.476-8.206 8.195-8.206l.038.025c8.277 0 8.192.536 8.192 8.193.001 4.118.08 5.8-1.16 7.044Z" class="text-gray-400 transition-all duration-300 group-hover:text-white group-active:text-white group-focus:text-blue-800" fill="currentColor"/>
+                                    <path d="M25.339 15.861a1.199 1.199 0 1 0 0-2.397 1.199 1.199 0 0 0 0 2.397Z" class="text-gray-400 transition-all duration-300 group-hover:text-white group-active:text-white group-focus:text-blue-800" fill="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="/" class="transition-all duration-500 outline-none focus:rounded-lg group focus:outline-dotted focus:outline-blue-900">
+                                <svg width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M32.5 40h-25A7.5 7.5 0 0 1 0 32.5v-25A7.5 7.5 0 0 1 7.5 0h25A7.5 7.5 0 0 1 40 7.5v25a7.5 7.5 0 0 1-7.5 7.5Z" class="text-gray-200 transition-all duration-300 group-hover:text-blue-700 group-active:text-blue-900" fill="currentColor"/>
+                                    <path d="m29.558 14.941.024.163a2.537 2.537 0 0 0-1.723-1.76l-.018-.004c-1.559-.424-7.832-.424-7.832-.424s-6.259-.007-7.833.424a2.534 2.534 0 0 0-1.736 1.746l-.004.018c-.582 3.042-.586 6.697.027 9.956l-.027-.165a2.537 2.537 0 0 0 1.724 1.76l.018.004c1.557.424 7.832.424 7.832.424s6.257 0 7.832-.424a2.534 2.534 0 0 0 1.737-1.746l.003-.018c.267-1.415.418-3.043.418-4.706l-.001-.184.001-.192c0-1.665-.151-3.293-.442-4.872Zm-11.552 8.101v-6.077l5.223 3.044-5.223 3.034Z" class="text-gray-400 transition-all duration-300 group-hover:text-white group-active:text-white group-focus:text-blue-800" fill="CurrentColor"/>
+                                </svg>
+                            </a>
+                            <a href="/" class="transition-all duration-500 outline-none focus:rounded-lg group focus:outline-dotted focus:outline-blue-900">
+                                <svg width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M32.5 40h-25A7.5 7.5 0 0 1 0 32.5v-25A7.5 7.5 0 0 1 7.5 0h25A7.5 7.5 0 0 1 40 7.5v25a7.5 7.5 0 0 1-7.5 7.5Z" class="text-gray-200 transition-all duration-300 group-hover:text-blue-700 group-active:text-blue-900" fill="currentColor"/>
+                                    <path d="M20.271 10c-5.481.001-8.396 3.514-8.396 7.344 0 1.776.992 3.991 2.582 4.694.454.203.394-.046.784-1.537a.354.354 0 0 0-.085-.347c-2.272-2.628-.444-8.029 4.793-8.029 7.577 0 6.162 10.485 1.318 10.485-1.248 0-2.178-.98-1.883-2.192.356-1.444 1.055-2.997 1.055-4.038 0-2.624-3.908-2.234-3.908 1.241 0 1.074.38 1.799.38 1.799l-1.491 6.029c-.395 1.606.054 4.207.092 4.431.024.124.163.163.24.061.124-.162 1.644-2.331 2.07-3.898.155-.572.792-2.888.792-2.888.418.756 1.627 1.39 2.915 1.39 3.83 0 6.599-3.366 6.599-7.544C28.11 12.996 24.683 10 20.27 10Z" class="text-gray-400 transition-all duration-300 group-hover:text-white group-active:text-white group-focus:text-blue-800" fill="currentColor"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="mt-6">
+            <div class="mx-auto section-footer_footer__information">
+                <div class="flex items-center justify-center w-full bg-gray-200 h-9">
+                    <p class="text-sm leading-4 text-gray-700">© 2021 Atmosphere. All rights reserved.</p>
+                </div>
+            </div>
+        </section>
+    </footer>
+    <script src="/Atmosphere/assets/main.js"></script>
+</body>
+</html>

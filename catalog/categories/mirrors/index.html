@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Atmosphere/assets/main.css"/>
+    <title>Atmosphere</title>
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico" type="image/x-icon">
+    <script src="//unpkg.com/alpinejs" defer></script>
+</head>
+<body class="grid min-h-screen bg-gray-50 grid-areas-layout grid-cols-full grid-rows-layout">
+    <section
+        x-data="{ showBanner: true }"
+        class="grid-in-sale overflow-hidden relative z-[51] md:z-0 transition-all duration-500 bg-gray-100"
+        :class="showBanner ? 'max-h-screen' : 'max-h-0'"
+    >
+        <div class="container flex items-center justify-between w-full mx-auto section-sale__block">
+            <p>Let's celebrate <b>Black Friday</b> together! From <b>Nov.27th</b> to <b>Dec.3rd</b>, use the <b>BF2020</b> coupon to get a <b>50% discount</b> on all products.</p>
+            <button @click="showBanner = !showBanner" class="w-5 h-5 transition-all duration-300 outline-none closure focus:outline-none focus:text-blue-800 active:text-blue-800 hover:text-blue-700">
+                <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m5 5 10 10M5 15 15 5 5 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+        </div>
+</section>
+    <header class="grid-in-header sticky top-0 z-50 after:absolute border-b border-gray-200 after:inset-0 after:z-[-1] after:bg-white">
+        <div class="pl-2 pr-4 mx-auto md:container">
+            <div x-data="{ openMenu: false , searchMenu: false }" class="flex items-center justify-between w-full section-header h-15">
+                <div class="flex items-center justify-center w-10 h-10 transition-colors duration-300 rounded-sm md:hidden hover:bg-gray-200">
+                    <button @click="openMenu = !openMenu" class=" header__burger" :class="{'header__burger-open' : openMenu}">
+                        <span></span>
+                    </button>
+                </div>
+                <a href="/" class="font-medium transition-all duration-300 outline-none focus:outline-none hover:text-blue-400 focus:text-blue-800 active:text-blue-800 leading-5 nav_link tracking-[0.16em]">ATMOSPHERE</a>
+                <div :class="{ 'invisible opacity-0' : !searchMenu}" class="transition-all fixed inset-0 invisible opacity-0 hidden z-[99] md:block bg-black/30"></div>
+                <nav :class="{'' : searchMenu, '-translate-y-full md:-translate-y-0 md:translate-x-full' : !searchMenu}" class="md:right-0 md:top-0 search-menu px-4 md:py-10 md:pl-10 md:pr-20 z-[-1] -translate-y-full md:-translate-y-0 md:translate-x-full border-t md:border-0 border-gray-200 top-full transition-all duration-500 bg-white md:z-[100] h-[calc(100vh-60px)] md:h-full md:w-1/2 absolute md:fixed inset-x-0 md:inset-auto">
+                    <div class="flex justify-between w-full text-gray-900 ">
+                        <p class="text-2xl font-medium uppercase">search</p>
+                        <button type="button" @click="searchMenu = !searchMenu" class="hidden w-8 h-8 transition-colors duration-500 rounded md:block hover:bg-gray-200">
+                            <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m8 8 16 16M8 24 24 8 8 24Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </div>
+                    <form method="get" action="#" x-ref="searchForm" class="relative flex items-center justify-center w-full mt-4 rounded h-11 ring-1 ring-gray-400 search-field">
+                        <svg class="absolute inset-y-0 left-0 p-3 pointer-events-none w-11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m17.5 17.5-5-5 5 5Zm-3.333-9.167a5.833 5.833 0 1 1-11.666 0 5.833 5.833 0 0 1 11.666 0Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <input class="w-full pr-4 pl-11 peer focus:outline-none search-input" type="text" placeholder="Search" name="search">
+                        <button type="button" x-on:click="$refs.searchForm.reset()" class="absolute inset-y-0 right-0 p-3 transition-all peer-placeholder-shown:invisible peer-placeholder-shown:opacity-0 w-11">
+                            <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m5 5 10 10M5 15 15 5 5 15Z" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                    </form>
+                </nav>
+                <nav :class="{'' : openMenu, '-translate-y-full md:-translate-y-0' : !openMenu}" class="z-[-1] border-t md:border-0 border-gray-200 md:flex top-full md:top-auto items-center header-menu transition-all duration-500 bg-white md:z-0 h-[calc(100vh-60px)] absolute md:static md:h-auto  inset-x-0">
+                    <ul class="grid px-2 md:gap-x-10 lg:gap-x-15 header-list xl:gap-x-[88px] md md:max-w-full mx-auto section-header_menu md:grid-cols-4 text-gray-900">
+                        
+                        <li class="px-4 py-3 border-b border-gray-200 md:p-0 md:border-0 md:hidden">
+                            <a href="/" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">Home</a>
+                        </li>
+                        
+                        <li class="px-4 py-3 border-b border-gray-200 md:p-0 md:border-0 ">
+                            <a href="/catalog/" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">Catalog</a>
+                        </li>
+                        
+                        <li class="px-4 py-3 border-b border-gray-200 md:p-0 md:border-0 ">
+                            <a href="/news/" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">News</a>
+                        </li>
+                        
+                        <li class="px-4 py-3 border-b border-gray-200 md:p-0 md:border-0 ">
+                            <a href="/" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">Wish list</a>
+                        </li>
+                        
+                        <li class="px-4 py-3 border-b border-gray-200 md:p-0 md:border-0 ">
+                            <a href="/" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">Contact us</a>
+                        </li>
+                        
+                    </ul>
+                    <div class="container mx-auto mt-7 md:hidden">
+                        <h2 class="text-lg px-0.5 font-medium leading-6 mb-4 text-gray-900 uppercase">my account</h2>
+                        <a href="/" class="flex items-center justify-center w-full text-white bg-blue-800 rounded h-11">
+                            <p class="text-lg font-medium leading-6">Sign in</p>
+                        </a>
+                        <div class="flex justify-center mt-4">
+                            <p class="text-gray-600">Don't have an account?</p>
+                            <a href="/" class="ml-1 text-blue-800 underline">Sign up</a>
+                        </div>
+                    </div>
+                </nav>
+                <div class="grid items-center grid-cols-3 md:grid-cols-4 justify-items-center">
+                    <button @click="searchMenu = !searchMenu" class="flex items-center justify-center text-gray-900 p-0.5 md:p-0 transition-all duration-300 rounded outline-none search__button active:bg-gray-200 w-7 h-7 focus:outline-none md:hover:bg-gray-200 md:focus:text-blue-800 active:text-blue-800 md:hover:text-blue-700">
+                        <svg class="w-full h-full md:stroke-2">
+                            <use xlink:href="/images/all-icons.svg#search"></use>
+                        </svg>
+                    </button>
+                    <a href="/" class="flex items-center justify-center text-gray-900 p-0.5 md:p-0 transition-all duration-300 rounded outline-none active:bg-gray-200 w-7 h-7 focus:outline-none md:hover:bg-gray-200 md:focus:text-blue-800 active:text-blue-800 md:hover:text-blue-700">
+                        <svg class="w-full h-full md:stroke-2">
+                            <use xlink:href="/images/all-icons.svg#account"></use>
+                        </svg>
+                    </a>
+                    <a href="/" class="flex items-center justify-center text-gray-900 p-0.5 md:p-0 transition-all duration-300 rounded outline-none active:bg-gray-200 w-7 h-7 focus:outline-none md:hover:bg-gray-200 md:focus:text-blue-800 active:text-blue-800 md:hover:text-blue-700">
+                        <svg class="w-full h-full md:stroke-2">
+                            <use xlink:href="/images/all-icons.svg#cart"></use>
+                        </svg>
+                    </a>
+                    <a class="hidden font-medium text-blue-400 transition-all duration-300 outline-none md:block focus:outline-none hover:text-blue-500 whitespace-nowrap focus:text-blue-800 active:text-blue-800" href="/">Sign in</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="grid-in-main">
+        
+
+
+<section class="section-catalog">
+    <div class="container mx-auto">
+        <div class="flex items-center mt-6 space-x-2 text-gray-600 news-landmark__pages">
+    <a href="/" class="underline outline-none focus:text-blue-800 active:text-blue-900 focus:no-underline focus:outline focus:outline-blue-800">Home</a>
+    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.834 11.766a.8.8 0 0 1 0-1.132L8.47 8 5.834 5.366a.8.8 0 0 1 1.132-1.132l3.2 3.2a.8.8 0 0 1 0 1.132l-3.2 3.2a.8.8 0 0 1-1.132 0Z" fill="currentColor"/>
+    </svg>
+    <span>Mirrors</span>
+</div>
+        <div x-data="{ openCategory: false, openFilter: false}" class="mt-4">
+            <h1 class="mt-3 text-3xl font-medium text-gray-900 uppercase">Mirrors</h1>
+            <div class="flex w-full mt-4 space-x-2 text-gray-600 sm:hidden h-11">
+                <button @click="openCategory = !openCategory"
+                    class="flex items-center w-1/2 h-full p-3 transition-colors duration-500 rounded hover:ring-transparent hover:text-white active:text-white active:ring-transparent hover:bg-blue-800 group active:bg-blue-900 ring-1 ring-gray-200">
+                    <svg class="mr-3 text-gray-600 group-hover:text-white group-active:text-white" width="20"
+                        height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10 13.333c.916 0 1.666.75 1.666 1.667s-.75 1.667-1.666 1.667c-.917 0-1.667-.75-1.667-1.667s.75-1.667 1.667-1.667Zm0-5c.916 0 1.666.75 1.666 1.667s-.75 1.667-1.666 1.667c-.917 0-1.667-.75-1.667-1.667S9.083 8.333 10 8.333Zm0-5c.916 0 1.666.75 1.666 1.667S10.916 6.667 10 6.667c-.917 0-1.667-.75-1.667-1.667S9.083 3.333 10 3.333Zm-5 10c.916 0 1.666.75 1.666 1.667S5.916 16.667 5 16.667c-.917 0-1.667-.75-1.667-1.667s.75-1.667 1.667-1.667Zm0-5c.916 0 1.666.75 1.666 1.667S5.916 11.667 5 11.667c-.917 0-1.667-.75-1.667-1.667S4.083 8.333 5 8.333Zm0-5c.916 0 1.666.75 1.666 1.667S5.916 6.667 5 6.667c-.917 0-1.667-.75-1.667-1.667S4.083 3.333 5 3.333Zm10 10c.916 0 1.666.75 1.666 1.667s-.75 1.667-1.666 1.667c-.917 0-1.667-.75-1.667-1.667s.75-1.667 1.667-1.667Zm0-5c.916 0 1.666.75 1.666 1.667s-.75 1.667-1.666 1.667c-.917 0-1.667-.75-1.667-1.667s.75-1.667 1.667-1.667Zm0-5c.916 0 1.666.75 1.666 1.667S15.916 6.667 15 6.667c-.917 0-1.667-.75-1.667-1.667s.75-1.667 1.667-1.667Z"
+                            fill="currentColor" />
+                    </svg>
+                    <p>Category</p>
+                </button>
+                <button @click="openFilter = !openFilter"
+                    class="flex items-center w-1/2 h-full p-3 transition-colors duration-500 rounded hover:ring-transparent hover:text-white active:text-white active:ring-transparent hover:bg-blue-800 group active:bg-blue-900 ring-1 ring-gray-200">
+                    <svg class="mr-3 text-gray-600 group-hover:text-white group-active:text-white" width="20"
+                        height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="5" width="16" height="1.4" rx=".7" fill="currentColor" />
+                        <rect x="4" y="9" width="12" height="1.4" rx=".7" fill="currentColor" />
+                        <rect x="6" y="13" width="8" height="1.4" rx=".7" fill="currentColor" />
+                    </svg>
+                    <p>Filter</p>
+                </button>
+            </div>
+            <div
+                class="flex items-center justify-between w-full mt-3 mb-5 space-x-2 text-gray-700 sm:justify-start sm:mt-4 sm:ml-auto sm:mr-0 sm:w-max">
+                <div class="flex">
+                    <p class="mr-2">Sort by:</p>
+                    <p>Price Low to High</p>
+                </div>
+                <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 0 1 1.414 0L10 10.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414Z"
+                        fill="#374151" />
+                </svg>
+            </div>
+            <div class="flex justify-between mt-4">
+                <div class="left-menu sm:w-[21%]">
+    <div class="categories-menu container sm:p-0 fixed top-0 left-0 z-[100] w-full h-full sm:h-auto py-8 text-gray-900 transition-all duration-500 -translate-y-full bg-gray-50 sm:static sm:translate-y-0 sm:bg-transparent"
+        :class="{'' : openCategory, '-translate-y-full sm:translate-y-0' : !openCategory}">
+        <div class="flex justify-between w-full">
+            <h2 class="text-xl font-medium text-gray-900">Categories </h2>
+            <button class="transition-colors duration-500 rounded sm:hidden hover:bg-gray-200"
+                @click="openCategory = false">
+                <svg class="w-8 h-8">
+                    <use xlink:href="/images/all-icons.svg#close"></use>
+                </svg>
+            </button>
+        </div>
+        <ul class="grid mt-3 text-blue-800 gap-y-3">
+            
+            <li
+                class="relative flex items-center w-full h-12 bg-white rounded-sm sm:h-auto group ring-1 active:ring-blue-800 ring-gray-200 sm:ring-0 sm:bg-transparent">
+                <div class="flex items-center justify-center w-12 h-12 bg-gray-200 sm:hidden group-active:bg-blue-800">
+                    <svg class="w-6 h-6 text-blue-800 group-active:text-white">
+                        <use xlink:href="/images/all-icons.svg#eco-friendly"></use>
+                    </svg>
+                </div>
+                <a href="/Atmosphere/catalog/categories/eco-friendly/"
+                    class="p-4 font-medium text-blue-800 outline-none sm:p-0 group-active:text-blue-900 before:absolute before:inset-0 hover:underline focus:outline-dotted focus:outline-blue-800 hover:text-blue-700 active:text-blue-900 active:underline active:outline-none">Eco Friendly</a>
+            </li>
+            
+            <li
+                class="relative flex items-center w-full h-12 bg-white rounded-sm sm:h-auto group ring-1 active:ring-blue-800 ring-gray-200 sm:ring-0 sm:bg-transparent">
+                <div class="flex items-center justify-center w-12 h-12 bg-gray-200 sm:hidden group-active:bg-blue-800">
+                    <svg class="w-6 h-6 text-blue-800 group-active:text-white">
+                        <use xlink:href="/images/all-icons.svg#furniture"></use>
+                    </svg>
+                </div>
+                <a href="/Atmosphere/catalog/categories/furniture/"
+                    class="p-4 font-medium text-blue-800 outline-none sm:p-0 group-active:text-blue-900 before:absolute before:inset-0 hover:underline focus:outline-dotted focus:outline-blue-800 hover:text-blue-700 active:text-blue-900 active:underline active:outline-none">Furniture</a>
+            </li>
+            
+            <li
+                class="relative flex items-center w-full h-12 bg-white rounded-sm sm:h-auto group ring-1 active:ring-blue-800 ring-gray-200 sm:ring-0 sm:bg-transparent">
+                <div class="flex items-center justify-center w-12 h-12 bg-gray-200 sm:hidden group-active:bg-blue-800">
+                    <svg class="w-6 h-6 text-blue-800 group-active:text-white">
+                        <use xlink:href="/images/all-icons.svg#home-decor"></use>
+                    </svg>
+                </div>
+                <a href="/Atmosphere/catalog/categories/home-decor/"
+                    class="p-4 font-medium text-blue-800 outline-none sm:p-0 group-active:text-blue-900 before:absolute before:inset-0 hover:underline focus:outline-dotted focus:outline-blue-800 hover:text-blue-700 active:text-blue-900 active:underline active:outline-none">Home decor</a>
+            </li>
+            
+            <li
+                class="relative flex items-center w-full h-12 bg-white rounded-sm sm:h-auto group ring-1 active:ring-blue-800 ring-gray-200 sm:ring-0 sm:bg-transparent">
+                <div class="flex items-center justify-center w-12 h-12 bg-gray-200 sm:hidden group-active:bg-blue-800">
+                    <svg class="w-6 h-6 text-blue-800 group-active:text-white">
+                        <use xlink:href="/images/all-icons.svg#home-textiles"></use>
+                    </svg>
+                </div>
+                <a href="/Atmosphere/catalog/categories/home-textiles/"
+                    class="p-4 font-medium text-blue-800 outline-none sm:p-0 group-active:text-blue-900 before:absolute before:inset-0 hover:underline focus:outline-dotted focus:outline-blue-800 hover:text-blue-700 active:text-blue-900 active:underline active:outline-none">Home Textiles</a>
+            </li>
+            
+            <li
+                class="relative flex items-center w-full h-12 bg-white rounded-sm sm:h-auto group ring-1 active:ring-blue-800 ring-gray-200 sm:ring-0 sm:bg-transparent">
+                <div class="flex items-center justify-center w-12 h-12 bg-gray-200 sm:hidden group-active:bg-blue-800">
+                    <svg class="w-6 h-6 text-blue-800 group-active:text-white">
+                        <use xlink:href="/images/all-icons.svg#kitchenware"></use>
+                    </svg>
+                </div>
+                <a href="/Atmosphere/catalog/categories/kitchenware/"
+                    class="p-4 font-medium text-blue-800 outline-none sm:p-0 group-active:text-blue-900 before:absolute before:inset-0 hover:underline focus:outline-dotted focus:outline-blue-800 hover:text-blue-700 active:text-blue-900 active:underline active:outline-none">Kitchenware</a>
+            </li>
+            
+            <li
+                class="relative flex items-center w-full h-12 bg-white rounded-sm sm:h-auto group ring-1 active:ring-blue-800 ring-gray-200 sm:ring-0 sm:bg-transparent">
+                <div class="flex items-center justify-center w-12 h-12 bg-gray-200 sm:hidden group-active:bg-blue-800">
+                    <svg class="w-6 h-6 text-blue-800 group-active:text-white">
+                        <use xlink:href="/images/all-icons.svg#lighting"></use>
+                    </svg>
+                </div>
+                <a href="/Atmosphere/catalog/categories/lighting/"
+                    class="p-4 font-medium text-blue-800 outline-none sm:p-0 group-active:text-blue-900 before:absolute before:inset-0 hover:underline focus:outline-dotted focus:outline-blue-800 hover:text-blue-700 active:text-blue-900 active:underline active:outline-none">Lighting</a>
+            </li>
+            
+            <li
+                class="relative flex items-center w-full h-12 bg-white rounded-sm sm:h-auto group ring-1 active:ring-blue-800 ring-gray-200 sm:ring-0 sm:bg-transparent">
+                <div class="flex items-center justify-center w-12 h-12 bg-gray-200 sm:hidden group-active:bg-blue-800">
+                    <svg class="w-6 h-6 text-blue-800 group-active:text-white">
+                        <use xlink:href="/images/all-icons.svg#mirrors"></use>
+                    </svg>
+                </div>
+                <a href="/Atmosphere/catalog/categories/mirrors/"
+                    class="p-4 font-medium text-blue-800 outline-none sm:p-0 group-active:text-blue-900 before:absolute before:inset-0 hover:underline focus:outline-dotted focus:outline-blue-800 hover:text-blue-700 active:text-blue-900 active:underline active:outline-none">Mirrors</a>
+            </li>
+            
+            <li
+                class="relative flex items-center w-full h-12 bg-white rounded-sm sm:h-auto group ring-1 active:ring-blue-800 ring-gray-200 sm:ring-0 sm:bg-transparent">
+                <div class="flex items-center justify-center w-12 h-12 bg-gray-200 sm:hidden group-active:bg-blue-800">
+                    <svg class="w-6 h-6 text-blue-800 group-active:text-white">
+                        <use xlink:href="/images/all-icons.svg#plants"></use>
+                    </svg>
+                </div>
+                <a href="/Atmosphere/catalog/categories/plants/"
+                    class="p-4 font-medium text-blue-800 outline-none sm:p-0 group-active:text-blue-900 before:absolute before:inset-0 hover:underline focus:outline-dotted focus:outline-blue-800 hover:text-blue-700 active:text-blue-900 active:underline active:outline-none">Plants</a>
+            </li>
+            
+            <li
+                class="relative flex items-center w-full h-12 bg-white rounded-sm sm:h-auto group ring-1 active:ring-blue-800 ring-gray-200 sm:ring-0 sm:bg-transparent">
+                <div class="flex items-center justify-center w-12 h-12 bg-gray-200 sm:hidden group-active:bg-blue-800">
+                    <svg class="w-6 h-6 text-blue-800 group-active:text-white">
+                        <use xlink:href="/images/all-icons.svg#storage"></use>
+                    </svg>
+                </div>
+                <a href="/Atmosphere/catalog/categories/storage/"
+                    class="p-4 font-medium text-blue-800 outline-none sm:p-0 group-active:text-blue-900 before:absolute before:inset-0 hover:underline focus:outline-dotted focus:outline-blue-800 hover:text-blue-700 active:text-blue-900 active:underline active:outline-none">Storage</a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="container overflow-y-auto sm:mt-7 sm:p-0 fixed top-0 left-0 z-[100] w-full h-full sm:h-auto py-8 text-gray-900 transition-all duration-500 -translate-y-full bg-gray-50 sm:static sm:translate-y-0 sm:bg-transparent"
+        :class="{'' : openFilter, '-translate-y-full sm:translate-y-0' : !openFilter}">
+        <div class="flex justify-between w-full">
+            <h2 class="text-xl font-medium text-gray-900">Filters</h2>
+            <button class="transition-colors duration-500 rounded sm:hidden hover:bg-gray-200"
+                @click="openFilter = false">
+                <svg class="w-8 h-8">
+                    <use xlink:href="/images/all-icons.svg#close"></use>
+                </svg>
+            </button>
+        </div>
+        <button class="flex my-5 ml-auto mr-0 w-max sm:hidden">
+            <p class="text-gray-600 underline">Reset all</p>
+        </button>
+        <ul class="grid -mx-4 sm:m-0">
+            <li x-data="{ open: false}"
+                class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button @click="open = !open" class="flex items-center justify-between w-full price__button">
+                        <p class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Price</p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}"
+                            class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                        :class="{'max-h-screen' : open, 'max-h-0 invisible opacity-0' : !open}">
+                        <div class="flex justify-between w-full">
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>min</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>max</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                        </div>
+                        <div class="flex items-center mt-4">
+                            <label class="relative flex w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </span>
+                            </label>
+                            <p class="ml-2 text-xs text-gray-600 md:text-sm lg:text-base">Show only discount products
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li x-data="{ open: false}"
+                class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button @click="open = !open" class="flex items-center justify-between w-full width__button">
+                        <p :class="{'text-gray-900' : open}"
+                            class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Width</p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}"
+                            class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                        :class="{'max-h-screen' : open, 'max-h-0 invisible opacity-0' : !open}">
+                        <div class="flex justify-between w-full">
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>min</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>max</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li x-data="{ open: false}"
+                class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button @click="open = !open" class="flex items-center justify-between w-full height__button">
+                        <p :class="{'text-gray-900' : open}"
+                            class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Height</p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}"
+                            class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                        :class="{'max-h-screen' : open, 'max-h-0 invisible opacity-0' : !open}">
+                        <div class="flex justify-between w-full">
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>min</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>max</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li x-data="{ open: false}"
+                class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button @click="open = !open" class="flex items-center justify-between w-full depth__button">
+                        <p :class="{'text-gray-900' : open}"
+                            class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Depth</p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}"
+                            class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                        :class="{'max-h-screen' : open, 'max-h-0 invisible opacity-0' : !open}">
+                        <div class="flex justify-between w-full">
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>min</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>max</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li x-data="{ open: false}"
+                class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button @click="open = !open" class="flex items-center justify-between w-full weight__button">
+                        <p :class="{'text-gray-900' : open}"
+                            class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Weight</p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}"
+                            class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                        :class="{'max-h-screen' : open, 'max-h-0 invisible opacity-0' : !open}">
+                        <div class="flex justify-between w-full">
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>min</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                            <label class=" text-gray-600 w-[48%]">
+                                <p>max</p>
+                                <input class="w-full h-12 rounded ring-1 ring-gray-400 bg-gray-50" type="number">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li x-data="{ open: false}"
+                class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button @click="open = !open" class="flex items-center justify-between w-full materials__button">
+                        <p :class="{'text-gray-900' : open}"
+                            class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Materials
+                        </p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}"
+                            class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                        :class="{'max-h-screen' : open, 'max-h-0 invisible opacity-0' : !open}">
+                        <div class="grid mt-4 gap-y-4">
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Glass</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Metal</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Aluminium</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Wood</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Plastic</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Fabric</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Cotton</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Polyester</p>
+                            </label>
+                            <label class="relative flex items-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="peer-checked:ring-blue-800 transition-all group-focus:ring-blue-800 group-focus:ring-1 group-hover:shadow-md flex items-center justify-center peer-checked:bg-blue-800 h-[14px] w-[14px] rounded-sm cursor-pointer ring-1 ring-gray-400">
+                                    <svg class="text-gray-50" width="10" height="8" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m1 3 3 3 5-5" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </span>
+                                <p class="ml-2.5 text-gray-600 peer-checked:text-gray-900">Wool</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li x-data="{ open: false}"
+                class="block bg-white border-t border-b border-gray-200 sm:overflow-hidden sm:border-0 sm:bg-transparent">
+                <div class="px-5 py-3 sm:py-1.5 sm:px-0">
+                    <button @click="open = !open" class="flex items-center justify-between w-full colors__button">
+                        <p :class="{'text-gray-900' : open}"
+                            class="font-medium text-blue-800 transition-colors duration-500 sm:text-gray-900">Colors</p>
+                        <svg :class="{'rotate-180 sm:text-blue-800' : open}"
+                            class="w-5 h-5 text-blue-800 transition duration-500 sm:text-gray-900">
+                            <use xlink:href="/images/all-icons.svg#arrow-top"></use>
+                        </svg>
+                    </button>
+                    <div class="p-0.5 invisible w-full overflow-hidden transition-all duration-500 opacity-0 max-h-0"
+                        :class="{'max-h-screen' : open , 'max-h-0 invisible opacity-0' : !open }">
+                        <div class="grid mt-3 text-xs grid-cols-[repeat(auto-fit,minmax(36px,1fr))] gap-x-3 gap-y-4">
+                            <label class="relative h-14 w-9 group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="flex items-center justify-center text-white transition-all rounded cursor-pointer peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 bg-white/40 group-hover:shadow-md h-9 w-9 ring-1 ring-gray-300 peer-checked:text-black">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                <p
+                                    class="absolute bottom-0 text-gray-600 -translate-x-1/2 left-1/2 peer-checked:text-gray-900">
+                                    White</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="flex items-center justify-center text-gray-300 transition-all bg-gray-300 rounded cursor-pointer peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 peer-checked:text-white group-hover:shadow-md h-9 w-9 ring-1 ring-gray-300">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Gray</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="flex items-center justify-center text-black transition-all bg-black rounded cursor-pointer peer-checked:text-white peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 group-hover:shadow-md h-9 w-9 ring-1 ring-black">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Black</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="flex items-center justify-center text-purple-900 transition-all bg-purple-900 rounded cursor-pointer peer-checked:text-white peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 group-hover:shadow-md h-9 w-9 ring-1 ring-purple-900">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Purple</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="flex items-center justify-center text-blue-900 transition-all bg-blue-900 rounded cursor-pointer peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-8000 group-hover:shadow-md h-9 peer-checked:text-white w-9 ring-1 ring-blue-900">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Blue</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="flex items-center justify-center text-yellow-300 transition-all bg-yellow-300 rounded cursor-pointer peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 group-hover:shadow-md h-9 w-9 peer-checked:text-white ring-1 ring-yellow-300">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Blue</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="flex items-center justify-center text-yellow-600 transition-all bg-yellow-600 rounded cursor-pointer peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 group-hover:shadow-md peer-checked:text-white h-9 w-9 ring-1 ring-yellow-600">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Orange</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="flex items-center justify-center text-red-700 transition-all bg-red-700 rounded cursor-pointer peer-checked:text-white peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 group-hover:shadow-md h-9 w-9 ring-1 ring-red-700">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Red</p>
+                            </label>
+                            <label class="relative text-center w-max group">
+                                <input class="appearance-none sr-only peer" type="checkbox">
+                                <span
+                                    class="flex items-center justify-center text-yellow-900 transition-all bg-yellow-900 rounded cursor-pointer peer-checked:text-white peer-focus:outline-2 peer-focus:outline-offset-2 peer-focus:outline peer-focus:outline-blue-800 group-hover:shadow-md h-9 w-9 ring-1 ring-yellow-900">
+                                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                <p class="mt-1 text-gray-600 peer-checked:text-gray-900">Brown</p>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+                <div class="content-block w-full sm:w-[74%]">
+                    <div class="grid grid-cols-2 gap-y-4 gap-x-2 lg:grid-cols-3 lg:gap-x-4">
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/oval-mirror.jpeg');">
+        </div>
+        
+        <button
+            class="absolute top-0 left-0 flex items-center justify-center transition-all duration-500 bg-red-700 rounded-tl rounded-br lg:group-focus-within:top-0 lg:group-focus-within:left-0 lg:group-hover:top-0 lg:group-hover:left-0 lg:-top-5 lg:-left-12 w-[52px] h-[22px] sm:w-15 sm:h-9">
+            <p class="text-sm text-gray-100 sm:font-medium">Sale</p>
+        </button>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="/catalog/categories/mirrors/products/oval-hanging-mirror/"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Oval hanging mirror</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€74.56
+            </p>
+            
+            <p class="text-gray-600 line-through transition-all duration-300 group-active:text-blue-900">
+                €113.99
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/large-mirror.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none"> Large simple mirror </a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€14.60
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/decorative-mirror.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Decorative mirror</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€14.99
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/backlit-mirror.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Backlit mirror</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€15.00
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/golden-mirror.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Golden mirror</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€18.50
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/mirror-dark-frame.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Mirror in a dark frame</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€19.99
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/table-makeup-mirror.jpg');">
+        </div>
+        
+        <button
+            class="absolute top-0 left-0 flex items-center justify-center transition-all duration-500 bg-red-700 rounded-tl rounded-br lg:group-focus-within:top-0 lg:group-focus-within:left-0 lg:group-hover:top-0 lg:group-hover:left-0 lg:-top-5 lg:-left-12 w-[52px] h-[22px] sm:w-15 sm:h-9">
+            <p class="text-sm text-gray-100 sm:font-medium">Sale</p>
+        </button>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Table makeup mirror</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€30.99
+            </p>
+            
+            <p class="text-gray-600 line-through transition-all duration-300 group-active:text-blue-900">
+                €53.99
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/antique-mirrors.jpeg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Antique mirrors</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€32.97
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/oval-bathroom-mirrors.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Pair of oval bathroom mirrors</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€42.25
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/large-mirror-stand.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Large mirror with stand</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€43.00
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/mirror-wood-trim.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Round mirror with wood trim</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€52.50
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/square-black-mirror.png');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Square black mirror</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€57.99
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/mirror-wooden-frame.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Round mirror in a wooden frame</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€60.00
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/round-black-mirror.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Huge round black mirror</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€62.50
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                            
+<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+    <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
+        <div class="absolute inset-0 w-full h-full"
+            style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('/images/image/rectanguler-mirror-frame.jpg');">
+        </div>
+        
+        <button x-data="{ favorites : false }" @click="favorites = !favorites"
+            class="absolute top-0 right-0 flex items-center justify-center transition-all duration-500 rounded-tr rounded-bl w-11 h-11 lg:w-12 lg:h-12 bg-gray-400/40 lg:-top-8 lg:-right-8 lg:group-hover:top-0 lg:group-focus-within:top-0 lg:group-focus-within:right-0 lg:group-hover:right-0">
+            <svg :class="{'text-red-800' : favorites, 'text-white' : !favorites}"
+                class="text-white transition-all" width="20"
+                height="17" style="fill:transparent"
+                :style="favorites ? { fill: 'currentColor' } : { fill: 'transparent' }"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M2.318 2.318a4.5 4.5 0 0 0 0 6.364L10 16.364l7.682-7.682a4.5 4.5 0 1 0-6.364-6.364L10 3.636 8.682 2.318a4.5 4.5 0 0 0-6.364 0v0Z"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+        <a href="#"
+            class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">Rectanguler mirror in frame</a>
+        <div class="flex space-x-2 font-medium md:text-lg ">
+            <p class="transition-all duration-300 group-active:text-blue-900">€69.99
+            </p>
+            
+        </div>
+    </div>
+</div>
+
+                        
+                    </div>
+                    <div
+                        class="grid items-center justify-center grid-cols-6 mx-auto mt-10 text-gray-600 news-page_pagination gap-x-2 sm:gap-x-5 max-w-max">
+                        <button
+                            class="relative pagination-active__button w-6 sm:w-10 hover:bg-blue-700 h-6 sm:h-10 flex transition-all duration-300 justify-center items-center text-white bg-blue-800 rounded-sm active:bg-blue-900 group outline-none focus:rounded-[1px] focus:outline focus:outline-blue-800">
+                            <a href="/news.html"
+                                class="font-medium outline-none before:absolute group-focus:outline-none before:inset-0">1</a>
+                        </button>
+                        <button
+                            class="transition-all duration-300 relative w-6 sm:w-10 h-6 sm:h-10 rounded-[1px] outline-none group focus:outline focus:outline-blue-800 active:text-blue-900 active:underline hover:text-blue-700 hover:underline">
+                            <a href="/catalog_2.html"
+                                class="font-medium outline-none before:absolute group-focus:outline-none group-focus:text-blue-800 before:inset-0">2</a>
+                        </button>
+                        <button
+                            class="transition-all duration-300 relative w-6 sm:w-10 h-6 sm:h-10 rounded-[1px] outline-none group focus:outline focus:outline-blue-800 active:text-blue-900 active:underline hover:text-blue-700 hover:underline">
+                            <a href="/catalog_3.html"
+                                class="font-medium outline-none before:absolute group-focus:outline-none group-focus:text-blue-800 before:inset-0">3</a>
+                        </button>
+                        <button
+                            class="transition-all duration-300 relative w-6 sm:w-10 h-6 sm:h-10 rounded-[1px] outline-none group focus:outline focus:outline-blue-800">
+                            <a href="/catalog.html"
+                                class="font-medium outline-none before:absolute group-focus:outline-none group-focus:text-blue-800 before:inset-0">...</a>
+                        </button>
+                        <button
+                            class="transition-all duration-300 relative w-6 sm:w-10 h-6 sm:h-10 rounded-[1px] outline-none group focus:outline focus:outline-blue-800 active:text-blue-900 active:underline hover:text-blue-700 hover:underline">
+                            <a href="/catalog.html"
+                                class="font-medium outline-none before:absolute group-focus:outline-none group-focus:text-blue-800 before:inset-0">12</a>
+                        </button>
+                        <button
+                            class="transition-all duration-300 relative rounded-[1px] outline-none group focus:ring-2 focus:ring-blue-800">
+                            <a href="/catalog_2.html" class="before:absolute before:inset-0"></a>
+                            <svg class="sm:hidden" width="24" height="24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 2a2 2 0 0 1 2-2h20a2 2 0 0 1 2 2v20a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2Z"
+                                    fill="#E5E7EB" />
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M9.834 15.766a.8.8 0 0 1 0-1.132L12.47 12 9.834 9.366a.8.8 0 0 1 1.132-1.132l3.2 3.2a.8.8 0 0 1 0 1.132l-3.2 3.2a.8.8 0 0 1-1.132 0Z"
+                                    class="text-gray-600 group-focus:text-blue-800 group-active:text-blue-900"
+                                    fill="currentColor" />
+                            </svg>
+                            <svg class="hidden sm:block" width="40" height="40" viewBox="0 0 40 40" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect width="40" height="40" rx="2" fill="#E5E7EB" />
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M17.293 24.707C17.1056 24.5195 17.0002 24.2652 17.0002 24C17.0002 23.7349 17.1056 23.4806 17.293 23.293L20.586 20L17.293 16.707C17.1109 16.5184 17.0101 16.2658 17.0124 16.0036C17.0146 15.7414 17.1198 15.4906 17.3052 15.3052C17.4906 15.1198 17.7414 15.0146 18.0036 15.0124C18.2658 15.0101 18.5184 15.1109 18.707 15.293L22.707 19.293C22.8945 19.4806 22.9998 19.7349 22.9998 20C22.9998 20.2652 22.8945 20.5195 22.707 20.707L18.707 24.707C18.5195 24.8945 18.2652 24.9998 18 24.9998C17.7349 24.9998 17.4806 24.8945 17.293 24.707Z"
+                                    class="text-gray-600 transition-colors duration-300 group-hover:text-blue-700 group-focus:text-blue-800 group-active:text-blue-900"
+                                    fill="currentColor" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    </main>
+    <footer class="grid-in-footer mt-12 border-t-[1px] bg-gray-100 border-gray-300">
+        <section class="section-footer">
+            <div class="container mx-auto mt-10">
+                <div class="grid grid-cols-1 sm:flex sm:justify-between section-footer_contact__information">
+                    <div>
+                        <div class="grid grid-cols-2 gap-x-2 sm:gap-x-20">
+                            <div>
+                                <h3 class="mb-6 text-lg font-medium text-gray-900 uppercase sm:text-xl">Information</h3>
+                                <ul class="grid text-gray-600 gap-y-4">
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">About us</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">Customer Service</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">News</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">FAQ</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">Contact us</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="mb-6 text-lg font-medium text-gray-900 uppercase sm:text-xl ">Service</h3>
+                                <ul class="grid text-gray-600 gap-y-4">
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">Shipping Policy</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">Payment Method</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">Terms & Conditions</a>
+                                    </li>
+                                    <li>
+                                        <a href="/" class="underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-700 focus:text-blue-800 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline">Privacy Policy</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap mt-6">
+                            
+                                <button class="my-1.5  w-14  mr-2 transition-all duration-500 outline-2 outline-transparent outline-dotted focus:outline-blue-900 rounded overflow-hidden group">
+                                    <svg class="text-gray-200 transition-colors duration-300 h-9 group-hover:text-gray-300 group-active:text-gray-400">
+                                        <use xlink:href="/images/all-icons.svg#visa"></use>
+                                    </svg>
+                                </button>
+                            
+                                <button class="my-1.5  w-15  mr-2 transition-all duration-500 outline-2 outline-transparent outline-dotted focus:outline-blue-900 rounded overflow-hidden group">
+                                    <svg class="text-gray-200 transition-colors duration-300 h-9 group-hover:text-gray-300 group-active:text-gray-400">
+                                        <use xlink:href="/images/all-icons.svg#paypal"></use>
+                                    </svg>
+                                </button>
+                            
+                                <button class="my-1.5  w-14  mr-2 transition-all duration-500 outline-2 outline-transparent outline-dotted focus:outline-blue-900 rounded overflow-hidden group">
+                                    <svg class="text-gray-200 transition-colors duration-300 h-9 group-hover:text-gray-300 group-active:text-gray-400">
+                                        <use xlink:href="/images/all-icons.svg#mastercard"></use>
+                                    </svg>
+                                </button>
+                            
+                                <button class="my-1.5  w-14  mr-2 transition-all duration-500 outline-2 outline-transparent outline-dotted focus:outline-blue-900 rounded overflow-hidden group">
+                                    <svg class="text-gray-200 transition-colors duration-300 h-9 group-hover:text-gray-300 group-active:text-gray-400">
+                                        <use xlink:href="/images/all-icons.svg#maestro"></use>
+                                    </svg>
+                                </button>
+                            
+                        </div>
+                    </div>
+                    <div class="border-t-[1px] mt-6 sm:m-0 sm:border-0 border-gray-300">
+                        <h3 class="uppercase mt-6 sm:m-0 font-medium text-lg text-gray-800 leading-[22px]">atmosphere</h3>
+                        <p class="mt-4 text-sm text-gray-600">Online store of decor and household goods.</p>
+                        <a class="mt-4 text-blue-700 underline transition-all duration-300 outline-none focus:outline focus:outline-blue-800 hover:text-blue-800 focus:text-blue-900 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline" href="/">+760(455)610-84-42923</a>
+                        <br>
+                        <a class="mt-2 text-blue-700 underline transition-all duration-300 outline-none outline-transparent focus:outline-blue-800 hover:text-blue-800 focus:text-blue-900 active:text-blue-900 focus:no-underline active:no-underline hover:no-underline" href="/">househildprod@yahoo.com</a>
+                        <p class="mt-2 text-river-bed">472 Friesen Isle</p>
+                        <div class="grid grid-cols-4 mt-4 gap-x-4 w-max social_link">
+                            <a href="/" class="transition-all duration-500 outline-none active:outline-none focus:rounded-lg group focus:outline-dotted focus:outline-blue-900">
+                                <svg width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M32.5 40h-25A7.5 7.5 0 0 1 0 32.5v-25A7.5 7.5 0 0 1 7.5 0h25A7.5 7.5 0 0 1 40 7.5v25a7.5 7.5 0 0 1-7.5 7.5Z" class="text-gray-200 transition-all duration-300 group-hover:text-blue-700 group-active:text-blue-900" fill="currentColor"/>
+                                    <path d="M23.409 13.321h1.825v-3.18c-.314-.043-1.398-.141-2.66-.141-2.632 0-4.434 1.656-4.434 4.699V17.5h-2.905v3.555h2.905V30l3.561.001v-8.945h2.788l.442-3.555H21.7v-2.449c.001-1.027.277-1.73 1.709-1.73Z" class="text-gray-400 transition-all duration-300 group-hover:text-white group-active:text-white group-focus:text-blue-800" fill="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="/" class="transition-all duration-500 outline-none focus:rounded-lg group focus:outline-dotted focus:outline-blue-900">
+                                <svg width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M32.5 40h-25A7.5 7.5 0 0 1 0 32.5v-25A7.5 7.5 0 0 1 7.5 0h25A7.5 7.5 0 0 1 40 7.5v25a7.5 7.5 0 0 1-7.5 7.5Z" class="text-gray-200 group-hover:text-blue-700 group-active:text-blue-900" fill="currentColor"/>
+                                    <path d="M20.004 14.865a5.13 5.13 0 1 0 0 10.263 5.13 5.13 0 1 0 0-10.263Zm0 8.463a3.331 3.331 0 1 1 0-6.662 3.331 3.331 0 0 1 0 6.662Z" class="text-gray-400 transition-all duration-300 group-hover:text-white group-active:text-white group-focus:text-blue-800" fill="currentColor"/>
+                                    <path d="M24.124 10.063c-1.84-.087-6.398-.083-8.24 0-1.619.076-3.046.467-4.197 1.617-1.923 1.924-1.677 4.515-1.677 8.316 0 3.89-.216 6.423 1.678 8.317 1.93 1.93 4.56 1.677 8.316 1.677 4.604 0 9.641.441 9.933-5.874.087-1.84.083-6.397 0-8.238-.165-3.512-2.05-5.64-5.813-5.815Zm2.911 16.977c-1.261 1.261-3.01 1.149-7.058 1.149-4.166 0-5.837.061-7.057-1.161-1.405-1.398-1.15-3.643-1.15-7.044 0-8.313.476-8.206 8.195-8.206l.038.025c8.277 0 8.192.536 8.192 8.193.001 4.118.08 5.8-1.16 7.044Z" class="text-gray-400 transition-all duration-300 group-hover:text-white group-active:text-white group-focus:text-blue-800" fill="currentColor"/>
+                                    <path d="M25.339 15.861a1.199 1.199 0 1 0 0-2.397 1.199 1.199 0 0 0 0 2.397Z" class="text-gray-400 transition-all duration-300 group-hover:text-white group-active:text-white group-focus:text-blue-800" fill="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="/" class="transition-all duration-500 outline-none focus:rounded-lg group focus:outline-dotted focus:outline-blue-900">
+                                <svg width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M32.5 40h-25A7.5 7.5 0 0 1 0 32.5v-25A7.5 7.5 0 0 1 7.5 0h25A7.5 7.5 0 0 1 40 7.5v25a7.5 7.5 0 0 1-7.5 7.5Z" class="text-gray-200 transition-all duration-300 group-hover:text-blue-700 group-active:text-blue-900" fill="currentColor"/>
+                                    <path d="m29.558 14.941.024.163a2.537 2.537 0 0 0-1.723-1.76l-.018-.004c-1.559-.424-7.832-.424-7.832-.424s-6.259-.007-7.833.424a2.534 2.534 0 0 0-1.736 1.746l-.004.018c-.582 3.042-.586 6.697.027 9.956l-.027-.165a2.537 2.537 0 0 0 1.724 1.76l.018.004c1.557.424 7.832.424 7.832.424s6.257 0 7.832-.424a2.534 2.534 0 0 0 1.737-1.746l.003-.018c.267-1.415.418-3.043.418-4.706l-.001-.184.001-.192c0-1.665-.151-3.293-.442-4.872Zm-11.552 8.101v-6.077l5.223 3.044-5.223 3.034Z" class="text-gray-400 transition-all duration-300 group-hover:text-white group-active:text-white group-focus:text-blue-800" fill="CurrentColor"/>
+                                </svg>
+                            </a>
+                            <a href="/" class="transition-all duration-500 outline-none focus:rounded-lg group focus:outline-dotted focus:outline-blue-900">
+                                <svg width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M32.5 40h-25A7.5 7.5 0 0 1 0 32.5v-25A7.5 7.5 0 0 1 7.5 0h25A7.5 7.5 0 0 1 40 7.5v25a7.5 7.5 0 0 1-7.5 7.5Z" class="text-gray-200 transition-all duration-300 group-hover:text-blue-700 group-active:text-blue-900" fill="currentColor"/>
+                                    <path d="M20.271 10c-5.481.001-8.396 3.514-8.396 7.344 0 1.776.992 3.991 2.582 4.694.454.203.394-.046.784-1.537a.354.354 0 0 0-.085-.347c-2.272-2.628-.444-8.029 4.793-8.029 7.577 0 6.162 10.485 1.318 10.485-1.248 0-2.178-.98-1.883-2.192.356-1.444 1.055-2.997 1.055-4.038 0-2.624-3.908-2.234-3.908 1.241 0 1.074.38 1.799.38 1.799l-1.491 6.029c-.395 1.606.054 4.207.092 4.431.024.124.163.163.24.061.124-.162 1.644-2.331 2.07-3.898.155-.572.792-2.888.792-2.888.418.756 1.627 1.39 2.915 1.39 3.83 0 6.599-3.366 6.599-7.544C28.11 12.996 24.683 10 20.27 10Z" class="text-gray-400 transition-all duration-300 group-hover:text-white group-active:text-white group-focus:text-blue-800" fill="currentColor"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="mt-6">
+            <div class="mx-auto section-footer_footer__information">
+                <div class="flex items-center justify-center w-full bg-gray-200 h-9">
+                    <p class="text-sm leading-4 text-gray-700">© 2021 Atmosphere. All rights reserved.</p>
+                </div>
+            </div>
+        </section>
+    </footer>
+    <script src="/Atmosphere/assets/main.js"></script>
+</body>
+</html>
