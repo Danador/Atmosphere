@@ -5,7 +5,7 @@
             <div class="grid w-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
                 <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
                     <div class="absolute inset-0 w-full h-full">
-                        <img class="object-cover w-full h-full mb-2 rounded-t" src="{{ item.image }}" alt="#">
+                        <img class="object-cover w-full h-full mb-2 rounded-t" src="{{ item.image | url }}" alt="#">
                     </div>
                     {% if item.oldPrice %}
                         <button class="absolute top-0 left-0 flex items-center justify-center transition-all duration-500 bg-red-700 rounded-tl rounded-br lg:group-focus-within:top-0 lg:group-focus-within:left-0 lg:group-hover:top-0 lg:group-hover:left-0 lg:-top-5 lg:-left-12 w-[52px] h-[22px] sm:w-15 sm:h-9">

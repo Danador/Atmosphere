@@ -3,10 +3,11 @@
     <div class="grid mt-10 lg:grid-cols-6 sm:justify-items-center sm:grid-cols-2 md:grid-cols-3 gap-y-2 lg:gap-y-0 gap-x-2">
         {% for item in categories.categoriesIndex %}
             <div class="relative flex flex-row-reverse items-center w-full bg-white rounded ring-1 ring-gray-200 sm:text-center sm:flex-col-reverse">
-                <a href="{{ item.link }}" class="w-full px-4 font-medium text-blue-800 outline-none peer sm:px-0 sm:py-4 before:absolute before:inset-0">{{ item.name }}</a>
+                <a href="{{ item.link | url }}" class="w-full px-4 font-medium text-blue-800 outline-none peer sm:px-0 sm:py-4 before:absolute before:inset-0">{{ item.name }}</a>
                 <div class="bg-gray-200 transition-all duration-300 peer-hover:bg-blue-800 peer-hover:text-white peer-focus:bg-blue-800 peer-focus-within:text-white peer-active:bg-blue-900 peer-active:text-white peer-active:outline-none flex justify-center items-center h-12 w-12 rounded-tl rounded-bl sm:rounded-none text-blue-800 sm:h-[200px] sm:w-full">
                     <svg class="w-6 h-6 sm:w-20 sm:h-20">
-                        <use xlink:href="{{ '/images/all-icons.svg#' ~ item.icon | url }}"></use>
+                        {% set icon = '/images/all-icons.svg#' ~ item.icon %}
+                        <use xlink:href="{{ icon | url }}"></use>
                     </svg>
                 </div>
             </div>
