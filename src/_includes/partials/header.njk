@@ -39,7 +39,7 @@
                     <ul class="grid px-2 md:gap-x-10 lg:gap-x-15 header-list xl:gap-x-[88px] md md:max-w-full mx-auto section-header_menu md:grid-cols-4 text-gray-900">
                         {% for item in menu.menu %}
                         <li class="px-4 py-3 border-b border-gray-200 md:p-0 md:border-0 {% if item.onlyMobile %}md:hidden{% endif %}">
-                            <a href="{{ item.link }}" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">{{ item.name }}</a>
+                            <a href="{{ item.link | url }}" class="text-sm font-medium leading-4 text-blue-800 md:text-gray-900 md:transition-all md:duration-300 md:outline-none md:focus:outline-none md:hover:text-blue-400 md:focus:text-blue-800 md:active:text-blue-800 whitespace-nowrap">{{ item.name }}</a>
                         </li>
                         {% endfor %}
                     </ul>

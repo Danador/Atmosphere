@@ -10,11 +10,11 @@
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 <body class="grid min-h-screen bg-gray-50 grid-areas-layout grid-cols-full grid-rows-layout">
-    {% include 'partials/header.htm' %}
+    {% include 'partials/header.njk' %}
     <main class="grid-in-main">
         {{ content | safe }}
     </main>
-    {% include 'partials/footer.htm' %}
+    {% include 'partials/footer.njk' %}
     <script src="{{ '/assets/main.js' | url }}"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@ layout: layout/index.njk
 {{ content|safe }}
 <section class="section-catalog">
     <div class="container mx-auto">
-        {% include "partials/breadcrumbs.htm" %}
+        {% include "partials/breadcrumbs.njk" %}
         <div x-data="{ openCategory: false, openFilter: false}" class="mt-4">
             <h1 class="mt-3 text-3xl font-medium text-gray-900 uppercase">{{h1}}</h1>
             <div class="flex w-full mt-4 space-x-2 text-gray-600 sm:hidden h-11">
@@ -44,7 +44,7 @@ layout: layout/index.njk
                 </svg>
             </div>
             <div class="flex justify-between mt-4">
-                {% include 'partials/left-menu.htm' %}
+                {% include 'partials/left-menu.njk' %}
                 <div class="content-block w-full sm:w-[74%]">
                     <div class="grid grid-cols-2 gap-y-4 gap-x-2 lg:grid-cols-3 lg:gap-x-4">
                         {% for item in catalog %}
