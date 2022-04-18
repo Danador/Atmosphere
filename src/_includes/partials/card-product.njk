@@ -1,5 +1,5 @@
 {% macro cardProduct(image, new, favorites, link, name, price, oldPrice) %}
-<div class="grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+<div class="relative grid w-full h-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
     <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
         <div class="absolute inset-0 w-full h-full"
             style="background-size: 100% 101%; background-position: center; background-repeat: no-repeat; background-image: url('{{ image | url }}');">
@@ -28,7 +28,7 @@
             </svg>
         </button>
     </div>
-    <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+    <div class="grid gap-2 p-2 grid-rows-1a md:gap-3">
         <a href="{{ link | url }}"
             class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">{{
             name }}</a>

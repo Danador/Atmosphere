@@ -2,7 +2,7 @@
     <h2 class="text-xl font-medium uppercase sm:text-3xl">popular products</h2>
     <div class="grid grid-cols-2 mt-10 gap-y-4 gap-x-2 lg:grid-cols-4 lg:gap-x-4">
         {% for item in indexCatalog.Index %}
-            <div class="grid w-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
+            <div class="relative grid w-full overflow-hidden bg-white rounded group ring-1 ring-gray-200 grid-rows-a1">
                 <div class="relative pt-[76%] transition-all duration-300 rounded-t group-active:opacity-80">
                     <div class="absolute inset-0 w-full h-full">
                         <img class="object-cover w-full h-full mb-2 rounded-t" src="{{ item.image | url }}" alt="#">
@@ -26,7 +26,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="relative grid gap-2 p-2 grid-rows-1a md:gap-3">
+                <div class="grid gap-2 p-2 grid-rows-1a md:gap-3">
                     <a href="{{ item.link }}" class="font-medium text-gray-900 transition-all duration-300 outline-none before:absolute before:inset-0 lg:text-xl lg:group-hover:underline lg:focus:underline group-active:text-blue-900 focus:outline-none">{{ item.name }}</a>
                     <div class="flex space-x-2 font-medium md:text-lg ">
                         <p class="transition-all duration-300 group-active:text-blue-900">€{{ item.price }}</p>
